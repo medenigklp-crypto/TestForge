@@ -838,12 +838,20 @@ ${qHtmlAll}${teacher?`<div class="sig">${teacher}</div>`:''}${akHtml}
 }
 
 function doPrint(){
-  const w=window.open('','_blank');
-  if(!w){alert('Popup engelleyici açık olabilir. Lütfen izin verin.');return;}
-  w.document.write(currentHtml);
-  w.document.close();
-  w.focus();
-  setTimeout(()=>w.print(),600);
+  // Gizli iframe ile yazdır - Safari popup sorununu çözer
+  let iframe=document.getElementById('print-iframe');
+  if(iframe) iframe.remove();
+  iframe=document.createElement('iframe');
+  iframe.id='print-iframe';
+  iframe.style.cssText='position:fixed;top:-9999px;left:-9999px;width:210mm;height:297mm;border:none;';
+  document.body.appendChild(iframe);
+  iframe.onload=()=>{
+    setTimeout(()=>{
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    },500);
+  };
+  iframe.srcdoc=currentHtml;
 }
 
 async function sharePDF(){
