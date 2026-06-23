@@ -811,39 +811,56 @@ function generateTest(){
   if(subject) document.getElementById('sm-subject').value=subject;
   if(topic) document.getElementById('sm-topic').value=topic;
   if(testno||title) document.getElementById('sm-title').value=testno||title||'Test';
-  let groups=[];
-  if(perpage==='auto'){groups=[selectedQuestions];}
-  else{const pp=parseInt(perpage);for(let i=0;i<selectedQuestions.length;i+=pp)groups.push(selectedQuestions.slice(i,i+pp));}
+  // Sayfa başına max soru hesapla
+  let qPerPage;
+  if(perpage==='auto'){
+    qPerPage=cols===2?8:4; // otomatik tahmin
+  } else {
+    qPerPage=parseInt(perpage);
+  }
+
+  // Soruları sayfalara böl
+  const pages=[];
+  for(let i=0;i<selectedQuestions.length;i+=qPerPage){
+    pages.push(selectedQuestions.slice(i,i+qPerPage));
+  }
+
+  const qBox=(q,num)=>`<div style="page-break-inside:avoid;break-inside:avoid;margin-bottom:10px;overflow:hidden;">
+    <div style="font-weight:700;font-size:9pt;margin-bottom:3px;display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding-bottom:2px;">
+      <span>${num}. Soru</span>${showPt?`<span style="font-size:8pt;color:#888;">${pt} p</span>`:''}
+    </div>
+    <img src="${q.dataUrl}" style="width:100%;display:block;"/>
+    ${solSpace?`<div style="min-height:${solHeight}px;"></div>`:''}
+    ${ansKey?`<div style="margin-top:4px;border:1px solid #ccc;border-radius:3px;height:22px;display:flex;align-items:center;padding:0 8px;font-size:9pt;color:#aaa;">Cevap: ____</div>`:''}
+  </div>`;
+
   let globalOffset=0,qHtmlAll='';
-  groups.forEach((grp,pi)=>{
+  pages.forEach((grp,pi)=>{
     const pb=pi>0?'page-break-before:always;break-before:page;':'';
-    const qBox=(q,num)=>`<div style="page-break-inside:avoid;break-inside:avoid;break-before:avoid;page-break-before:avoid;margin-bottom:8px;overflow:hidden;display:table;width:100%;">
-      <div style="font-weight:700;font-size:9pt;margin-bottom:3px;display:flex;justify-content:space-between;">
-        <span>${num}. Soru</span>${showPt?`<span style="font-size:8pt;color:#888;">${pt} puan</span>`:''}
-      </div>
-      <img src="${q.dataUrl}" style="width:100%;display:block;border-radius:2px;"/>
-      ${solSpace?`<div style="min-height:${solHeight}px;"></div>`:''}
-      ${ansKey?`<div style="margin-top:4px;border:1px solid #ccc;border-radius:3px;height:22px;display:flex;align-items:center;padding:0 8px;font-size:9pt;color:#aaa;">Cevap: ____</div>`:''}
-    </div>`;
     const pageAnsKey=Object.keys(answerKey).length>0&&!ansPage?
       grp.map((_,i)=>{const num=globalOffset+i+1;const ans=answerKey[num-1];return ans?`${num}-${ans}`:''}).filter(Boolean).join(' &nbsp; '):'';
     const pageAnsHtml=pageAnsKey?`<div style="text-align:right;font-size:9pt;color:#555;margin-top:8px;font-weight:600;border-top:1px solid #eee;padding-top:4px;">${pageAnsKey}</div>`:'';
+
     if(cols===2){
-      const left=grp.filter((_,i)=>i%2===0);const right=grp.filter((_,i)=>i%2===1);
+      // DİKEY numaralandırma: sol=ilk yarı, sağ=ikinci yarı
+      const half=Math.ceil(grp.length/2);
+      const leftQ=grp.slice(0,half);
+      const rightQ=grp.slice(half);
       let lH='',rH='';
-      left.forEach((q,i)=>{lH+=qBox(q,globalOffset+i*2+1);});
-      right.forEach((q,i)=>{rH+=qBox(q,globalOffset+i*2+2);});
-      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'8mm':'0'}">
-        <table style="width:100%;border-collapse:separate;border-spacing:8px 0;table-layout:fixed;">
+      leftQ.forEach((q,i)=>{lH+=qBox(q,globalOffset+i+1);});
+      rightQ.forEach((q,i)=>{rH+=qBox(q,globalOffset+half+i+1);});
+      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'6mm':'0'}">
+        <table style="width:100%;border-collapse:collapse;table-layout:fixed;">
           <tr style="vertical-align:top;">
-            <td style="width:50%;padding:0;">${lH}</td>
-            <td style="width:50%;padding:0;">${rH}</td>
+            <td style="width:49%;padding-right:6px;">${lH}</td>
+            <td style="width:2%;border-left:1px solid #eee;padding:0;"></td>
+            <td style="width:49%;padding-left:6px;">${rH}</td>
           </tr>
         </table>
       </div>${pageAnsHtml}`;
     } else {
       let cH='';grp.forEach((q,i)=>{cH+=qBox(q,globalOffset+i+1);});
-      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'8mm':'0'}">${cH}</div>${pageAnsHtml}`;
+      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'6mm':'0'}">${cH}</div>${pageAnsHtml}`;
     }
     globalOffset+=grp.length;
   });
@@ -867,20 +884,77 @@ ${showNote?`<div class="note">Not: Her soru ${pt} puandır. Toplam ${selectedQue
 ${qHtmlAll}${teacher?`<div class="sig">${teacher}</div>`:''}${akHtml}
 </div>${showQr?`<script>if(typeof QRCode!=='undefined'){new QRCode(document.getElementById('qrcode-div'),{text:'${location.origin}',width:80,height:80});}<\/script>`:''}
 </body></html>`;
-  // iframe yerine div içine HTML göster
+  // A4 sayfa görünümü önizleme
+  buildPreview();
+  showPreview();
+}
+
+function buildPreview(){
   const pf=document.getElementById('preview-frame');
   pf.innerHTML='';
-  const shadow=pf.attachShadow?null:null; // normal innerHTML
-  // HTML'den body içeriğini çıkar
+  if(!currentHtml)return;
+  // A4 oranı: 210x297mm = 1:1.414
+  const pageW=pf.offsetWidth||window.innerWidth-24;
+  const pageH=Math.round(pageW*297/210);
+  // HTML parse et
   const parser=new DOMParser();
   const doc=parser.parseFromString(currentHtml,'text/html');
-  const style=document.createElement('style');
-  style.textContent=doc.querySelector('style')?doc.querySelector('style').textContent:'';
-  const bodyDiv=document.createElement('div');
-  bodyDiv.innerHTML=doc.body.innerHTML;
-  pf.appendChild(style);
-  pf.appendChild(bodyDiv);
-  showPreview();
+  const styleEl=doc.querySelector('style');
+  const bodyContent=doc.body?doc.body.innerHTML:'';
+  // Wrapper div - gri arka plan
+  const wrap=document.createElement('div');
+  wrap.style.cssText='background:#666;padding:12px;border-radius:12px;';
+  // A4 sayfa
+  const page=document.createElement('div');
+  page.style.cssText=`background:#fff;width:100%;min-height:${pageH}px;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:16px;font-family:Times New Roman,serif;font-size:11pt;color:#111;overflow:hidden;`;
+  // Style inject
+  if(styleEl){
+    const s=document.createElement('style');
+    s.textContent=styleEl.textContent;
+    page.appendChild(s);
+  }
+  // Content
+  const div=document.createElement('div');
+  div.innerHTML=bodyContent;
+  // page-break elementleri A4 sayfa olarak göster
+  div.querySelectorAll('[style*="page-break-before"]').forEach(el=>{
+    // Bu elementi yeni A4 sayfaya taşı
+    el.setAttribute('data-newpage','1');
+  });
+  page.appendChild(div);
+  wrap.appendChild(page);
+  // page-break'leri gerçek sayfalara böl
+  const allEls=Array.from(div.children);
+  let pages=[[]], curPage=0;
+  allEls.forEach(el=>{
+    if(el.getAttribute('data-newpage')==='1'){
+      curPage++;
+      pages[curPage]=[];
+      el.removeAttribute('data-newpage');
+    }
+    pages[curPage].push(el);
+  });
+  if(pages.length>1){
+    // Çok sayfalı - yeniden oluştur
+    pf.innerHTML='';
+    const multiWrap=document.createElement('div');
+    multiWrap.style.cssText='background:#666;padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:12px;';
+    pages.forEach((pageEls,pi)=>{
+      const pg=document.createElement('div');
+      pg.style.cssText=`background:#fff;width:100%;min-height:${pageH}px;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:16px;font-family:'Times New Roman',serif;font-size:11pt;color:#111;position:relative;`;
+      // Sayfa numarası
+      const pgNum=document.createElement('div');
+      pgNum.style.cssText='position:absolute;bottom:8px;right:12px;font-size:9pt;color:#aaa;font-family:sans-serif;';
+      pgNum.textContent=(pi+1)+' / '+pages.length;
+      if(styleEl){const s=document.createElement('style');s.textContent=styleEl.textContent;pg.appendChild(s);}
+      pageEls.forEach(el=>pg.appendChild(el.cloneNode(true)));
+      pg.appendChild(pgNum);
+      multiWrap.appendChild(pg);
+    });
+    pf.appendChild(multiWrap);
+    return;
+  }
+  pf.appendChild(wrap);
 }
 
 let prvScale=1;
@@ -978,15 +1052,7 @@ function loadLibrary(){
 
 function openLibTest(key){
   try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;currentHtml=item.html;
-    const pf2=document.getElementById('preview-frame');
-    pf2.innerHTML='';
-    const parser2=new DOMParser();
-    const doc2=parser2.parseFromString(currentHtml,'text/html');
-    const style2=document.createElement('style');
-    style2.textContent=doc2.querySelector('style')?doc2.querySelector('style').textContent:'';
-    const bodyDiv2=document.createElement('div');
-    bodyDiv2.innerHTML=doc2.body.innerHTML;
-    pf2.appendChild(style2);pf2.appendChild(bodyDiv2);
+    buildPreview();
     showPreview();document.getElementById('tab-upload').classList.add('active');document.getElementById('tab-library').classList.remove('active');}catch(e){alert('Test açılamadı.');}
 }
 function exportLibTest(key){try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;exportToFiles(item.html,item.title+'.html');}catch(e){alert('Dışa aktarma başarısız.');}}
