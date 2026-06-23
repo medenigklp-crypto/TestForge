@@ -6,9 +6,39 @@
   <meta name="theme-color" content="#E8973A"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-title" content="TestForge"/>
-  <link rel="manifest" href="manifest.json"/>
-  <link rel="apple-touch-icon" href="icon-192.png"/>
   <title>TestForge</title>
+  <script>
+  (function(){
+    const c=document.createElement('canvas');
+    c.width=192;c.height=192;
+    const ctx=c.getContext('2d');
+    const r=38;
+    ctx.beginPath();
+    ctx.moveTo(r,0);ctx.lineTo(192-r,0);ctx.quadraticCurveTo(192,0,192,r);
+    ctx.lineTo(192,192-r);ctx.quadraticCurveTo(192,192,192-r,192);
+    ctx.lineTo(r,192);ctx.quadraticCurveTo(0,192,0,192-r);
+    ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);
+    ctx.closePath();
+    ctx.fillStyle='#E8973A';ctx.fill();
+    ctx.fillStyle='#fff';
+    ctx.font='bold 108px -apple-system,BlinkMacSystemFont,sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('T',96,108);
+    const url=c.toDataURL('image/png');
+    const a=document.createElement('link');a.rel='apple-touch-icon';a.href=url;
+    document.head.appendChild(a);
+    const f=document.createElement('link');f.rel='icon';f.type='image/png';f.href=url;
+    document.head.appendChild(f);
+    // manifest inline
+    const m={name:'TestForge',short_name:'TestForge',start_url:'.',display:'standalone',
+      background_color:'#F0F1F5',theme_color:'#E8973A',
+      icons:[{src:url,sizes:'192x192',type:'image/png'}]};
+    const mb=document.createElement('link');mb.rel='manifest';
+    mb.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(m));
+    document.head.appendChild(mb);
+  })();
+  </script>
+
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
     :root{
@@ -792,13 +822,13 @@ function generateTest(){
   let globalOffset=0,qHtmlAll='';
   groups.forEach((grp,pi)=>{
     const pb=pi>0?'page-break-before:always;break-before:page;':'';
-    const qBox=(q,num)=>`<div style="padding:8px 0;page-break-inside:avoid;break-inside:avoid;margin-bottom:16px;overflow:hidden;">
-      <div style="font-weight:700;font-size:10pt;margin-bottom:5px;display:flex;justify-content:space-between;">
+    const qBox=(q,num)=>`<div style="page-break-inside:avoid;break-inside:avoid;margin-bottom:8px;overflow:hidden;">
+      <div style="font-weight:700;font-size:9pt;margin-bottom:3px;display:flex;justify-content:space-between;">
         <span>${num}. Soru</span>${showPt?`<span style="font-size:8pt;color:#888;">${pt} puan</span>`:''}
       </div>
       <img src="${q.dataUrl}" style="width:100%;display:block;border-radius:2px;"/>
-      ${solSpace?`<div style="margin-top:8px;min-height:${solHeight}px;"></div>`:''}
-      ${ansKey?`<div style="margin-top:6px;border:1px solid #ccc;border-radius:3px;height:26px;display:flex;align-items:center;padding:0 8px;font-size:9pt;color:#aaa;">Cevap: ____</div>`:''}
+      ${solSpace?`<div style="min-height:${solHeight}px;"></div>`:''}
+      ${ansKey?`<div style="margin-top:4px;border:1px solid #ccc;border-radius:3px;height:22px;display:flex;align-items:center;padding:0 8px;font-size:9pt;color:#aaa;">Cevap: ____</div>`:''}
     </div>`;
     const pageAnsKey=Object.keys(answerKey).length>0&&!ansPage?
       grp.map((_,i)=>{const num=globalOffset+i+1;const ans=answerKey[num-1];return ans?`${num}-${ans}`:''}).filter(Boolean).join(' &nbsp; '):'';
@@ -808,13 +838,13 @@ function generateTest(){
       let lH='',rH='';
       left.forEach((q,i)=>{lH+=qBox(q,globalOffset+i*2+1);});
       right.forEach((q,i)=>{rH+=qBox(q,globalOffset+i*2+2);});
-      qHtmlAll+=`<div style="${pb}display:table;width:100%;table-layout:fixed;padding-top:${pi>0?'3cm':'0'}">
-        <div style="display:table-cell;width:49%;vertical-align:top;padding-right:4px;">${lH}</div>
-        <div style="display:table-cell;width:49%;vertical-align:top;padding-left:4px;">${rH}</div>
+      qHtmlAll+=`<div style="${pb}display:table;width:100%;table-layout:fixed;padding-top:${pi>0?'8mm':'0'}">
+        <div style="display:table-cell;width:49%;vertical-align:top;padding-right:5px;">${lH}</div>
+        <div style="display:table-cell;width:49%;vertical-align:top;padding-left:5px;">${rH}</div>
       </div>${pageAnsHtml}`;
     } else {
       let cH='';grp.forEach((q,i)=>{cH+=qBox(q,globalOffset+i+1);});
-      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'3cm':'0'}">${cH}</div>${pageAnsHtml}`;
+      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'8mm':'0'}">${cH}</div>${pageAnsHtml}`;
     }
     globalOffset+=grp.length;
   });
@@ -822,7 +852,12 @@ function generateTest(){
   const akHtml=ansPage?`<div style="page-break-before:always;padding-top:10mm;"><h2 style="text-align:center;font-size:13pt;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:12px;">CEVAP ANAHTARI</h2><div style="display:flex;flex-wrap:wrap;gap:8px;">${akItems}</div></div>`:'';
   const qrHtml=showQr?`<div id="qr-placeholder" style="margin-top:10px;text-align:right;"><div id="qrcode-div" style="display:inline-block;"></div><div style="font-size:8pt;color:#888;margin-top:2px;">Test QR Kodu</div></div>`:'';
   currentHtml=`<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"/>
-<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Times New Roman',serif;font-size:11pt;color:#111}.page{width:210mm;min-height:297mm;margin:0 auto;padding:12mm 16mm}.header{border-bottom:2px solid #000;padding-bottom:8px;margin-bottom:8px}.header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}.school{font-size:12pt;font-weight:700}.title{font-size:11pt;margin:2px 0}.meta{font-size:10pt;color:#333}.badge{background:#E8973A;color:#fff;border-radius:4px;padding:2px 10px;font-size:11pt;font-weight:700;}.info-t{width:100%;border-collapse:collapse;margin:6px 0;font-size:10pt}.info-t td{border:1px solid #000;padding:4px 8px}.info-t .lb{font-weight:700;width:80px}.note{font-size:9pt;font-style:italic;margin:3px 0 8px}.sig{margin-top:16px;text-align:right;font-size:10pt}@media print{body{background:#fff}.page{padding:10mm 14mm}img{max-width:100%!important;}}</style></head><body><div class="page">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Times New Roman',serif;font-size:11pt;color:#111}.page{width:210mm;min-height:297mm;margin:0 auto;padding:8mm 12mm}.header{border-bottom:2px solid #000;padding-bottom:8px;margin-bottom:8px}.header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}.school{font-size:12pt;font-weight:700}.title{font-size:11pt;margin:2px 0}.meta{font-size:10pt;color:#333}.badge{background:#E8973A;color:#fff;border-radius:4px;padding:2px 10px;font-size:11pt;font-weight:700;}.info-t{width:100%;border-collapse:collapse;margin:6px 0;font-size:10pt}.info-t td{border:1px solid #000;padding:4px 8px}.info-t .lb{font-weight:700;width:80px}.note{font-size:9pt;font-style:italic;margin:3px 0 8px}.sig{margin-top:16px;text-align:right;font-size:10pt}@media print{
+  @page{margin:8mm 12mm;size:A4;}
+  body{background:#fff;-webkit-print-color-adjust:exact;}
+  .page{padding:0;margin:0;}
+  img{max-width:100%!important;}
+}</style></head><body><div class="page">
 <div class="header"><div class="header-top"><div>
 ${school?`<div class="school">${school}</div>`:''}
 ${title?`<div class="title">${title}</div>`:''}
