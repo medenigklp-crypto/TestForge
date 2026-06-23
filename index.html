@@ -178,6 +178,17 @@
     .ans-opt.selected{background:var(--or);color:#fff;border-color:var(--or);}
 
     #btn-clear-storage{width:100%;background:#fee2e2;border:1px solid #fca5a5;border-radius:12px;padding:10px;color:#dc2626;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:10px;}
+    /* PUAN MATRİSİ */
+    #points-summary{display:flex;justify-content:space-between;align-items:center;background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:13px;font-weight:700;}
+    #points-total-val{font-size:15px;color:#D97706;}
+    #points-total-val.ok{color:#16A34A;}
+    .matrix-wrap{background:var(--w);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+    .matrix-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--bg);}
+    .matrix-row:last-child{border-bottom:none;}
+    .matrix-thumb{width:48px;height:48px;object-fit:contain;background:var(--bg);border-radius:6px;border:1px solid var(--bd);flex-shrink:0;}
+    .matrix-num{font-weight:700;font-size:12px;color:var(--t2);min-width:28px;}
+    .matrix-pt{width:60px;padding:6px 8px;border:1.5px solid var(--bd);border-radius:8px;text-align:center;font-weight:700;font-size:13px;outline:none;}
+    .matrix-pt:focus{border-color:var(--or);}
   </style>
 </head>
 <body>
@@ -292,8 +303,11 @@
         <option value="B KİTAPÇIĞI">B KİTAPÇIĞI</option>
       </select>
     </div>
-    <div class="field"><label>Soru Puanı</label><input id="f-point" placeholder="Otomatik" type="number"/></div>
+    <div class="field"><label>Genel Puan (tüm sorular)</label><input id="f-point" placeholder="Otomatik" type="number" oninput="applyGlobalPoint()"/></div>
   </div>
+  <div class="sec-title">🎯 Soru Bazlı Puan Matrisi</div>
+  <div id="points-summary"><span>Toplam Puan:</span><span id="points-total-val">0 / 100</span></div>
+  <div class="matrix-wrap" id="matrix-container"></div>
   <div class="sec-title">📐 Düzen</div>
   <div class="field-row">
     <div class="field"><label>Sütun</label>
@@ -400,6 +414,26 @@
   document.head.appendChild(s);
 })();
 
+/* ── IndexedDB Motor (localStorage yerine, sınırsız alan) ── */
+const TFDB={
+  dbName:'TestForgeDB',ver:2,
+  open(){
+    return new Promise((res,rej)=>{
+      const r=indexedDB.open(this.dbName,this.ver);
+      r.onupgradeneeded=e=>{
+        const db=e.target.result;
+        if(!db.objectStoreNames.contains('tests')) db.createObjectStore('tests',{keyPath:'key'});
+      };
+      r.onsuccess=e=>res(e.target.result);
+      r.onerror=e=>rej(e.target.error);
+    });
+  },
+  async save(item){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('tests','readwrite');tx.objectStore('tests').put(item);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});},
+  async getAll(){const db=await this.open();return new Promise((res,rej)=>{const r=db.transaction('tests','readonly').objectStore('tests').getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});},
+  async delete(key){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('tests','readwrite');tx.objectStore('tests').delete(key);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});},
+  async clearAll(){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('tests','readwrite');tx.objectStore('tests').clear();tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}
+};
+
 /* ── State ── */
 let pdfDoc=null,currentPage=1,totalPages=0;
 let currentScale=1,baseScale=1;
@@ -448,6 +482,11 @@ function goSettings(){
   document.getElementById('f-date').value=new Date().toLocaleDateString('tr-TR');
   if(document.getElementById('f-subject').value) document.getElementById('sm-subject').value=document.getElementById('f-subject').value;
   if(document.getElementById('f-topic').value) document.getElementById('sm-topic').value=document.getElementById('f-topic').value;
+  // Puan başlatma: f-point değeri varsa uygula, yoksa 100/n
+  const ptVal=parseInt(document.getElementById('f-point').value)||0;
+  const autoP=Math.round(100/Math.max(selectedQuestions.length,1));
+  selectedQuestions.forEach(q=>{if(!q.point) q.point=ptVal||autoP;});
+  buildMatrix();
   showSettings();
 }
 function startNew(){selectedQuestions=[];answerKey={};pdfDoc=null;updateQList();showScreen('upload-screen');}
@@ -644,9 +683,42 @@ function updateQList(){
     const div=document.createElement('div');div.className='q-thumb';
     const img=document.createElement('img');img.src=q.dataUrl;
     const btn=document.createElement('button');btn.className='del';btn.textContent='✕';
-    btn.onclick=ev=>{ev.stopPropagation();selectedQuestions.splice(i,1);updateQList();showViewer();};
+    btn.onclick=ev=>{ev.stopPropagation();selectedQuestions.splice(i,1);updateQList();
+      if(document.getElementById('settings-screen').classList.contains('active')) buildMatrix();
+      else showViewer();
+    };
     div.append(img,btn);list.appendChild(div);
   });
+}
+
+/* ── Puan Matrisi ── */
+function buildMatrix(){
+  const wrap=document.getElementById('matrix-container');
+  if(!wrap)return;
+  wrap.innerHTML='';
+  selectedQuestions.forEach((q,i)=>{
+    const row=document.createElement('div');row.className='matrix-row';
+    const img=document.createElement('img');img.className='matrix-thumb';img.src=q.dataUrl;
+    const num=document.createElement('span');num.className='matrix-num';num.textContent=(i+1)+'.';
+    const inp=document.createElement('input');inp.type='number';inp.className='matrix-pt';
+    inp.value=q.point||0;inp.min=0;inp.max=100;
+    inp.oninput=()=>{q.point=parseInt(inp.value)||0;calcTotalPoints();};
+    row.append(img,num,inp);wrap.appendChild(row);
+  });
+  calcTotalPoints();
+}
+function applyGlobalPoint(){
+  const v=parseInt(document.getElementById('f-point').value);
+  if(!v||v<=0) return;
+  selectedQuestions.forEach(q=>q.point=v);
+  buildMatrix();
+}
+function calcTotalPoints(){
+  const sum=selectedQuestions.reduce((a,q)=>a+(q.point||0),0);
+  const el=document.getElementById('points-total-val');
+  if(!el)return;
+  el.textContent=sum+' / 100';
+  el.className=sum===100?'ok':'';
 }
 
 /* ── Answer Key Modal ── */
@@ -713,25 +785,46 @@ function generateTest(){
   if(topic)   document.getElementById('sm-topic').value=topic;
   document.getElementById('sm-title').value=testno||title||'Test';
 
-  /* ── Sayfalama ── */
+  /* ── Sayfalama ──
+     2 sütun modunda her sayfada ÇİFT sayıda soru olmalı (1,2 / 3,4 / ...)
+     auto modda: sorular yaklaşık eşit sayfalara bölünür,
+     sayfa başına düşen soru sayısı çift yapılır.
+  ── */
   let qPerPage;
   if(perpage==='auto'){
-    qPerPage = selectedQuestions.length; // tarayıcı page-break ile böler
+    // Ortalama soru yüksekliğine göre sayfa başına tahmin
+    // Varsayılan: 2 sütun → sayfa başı 4 soru (küçük), 
+    // çözüm alanı varsa 2-3, yoksa 4-6
+    const basePerPage = cols===2
+      ? (solSpace ? (solHeightPx>=100?2:4) : 6)
+      : (solSpace ? (solHeightPx>=100?1:2) : 4);
+    // Toplam soru sayısına göre dengeli böl
+    const totalQ = selectedQuestions.length;
+    // Sayfa sayısını hesapla - her sayfa en az 2 soru
+    const pageCount = Math.max(1, Math.ceil(totalQ / basePerPage));
+    qPerPage = Math.ceil(totalQ / pageCount);
+    // 2 sütun modunda sayfa başı soru sayısı çift olmalı
+    if(cols===2 && qPerPage%2!==0) qPerPage++;
   } else {
     qPerPage = parseInt(perpage);
+    // 2 sütun modunda çift sayıya yuvarla
+    if(cols===2 && qPerPage%2!==0) qPerPage++;
   }
 
-  /* ── Soru kutusu HTML (yazdırma için mm cinsinden) ── */
-  const qBox=(q,num)=>`
+  /* ── Soru kutusu HTML (q.point varsa onu kullan) ── */
+  const qBox=(q,num)=>{
+    const qPt = q.point !== undefined ? q.point : pt;
+    return `
 <div class="q-block">
   <div class="q-header">
     <span>${num}. Soru</span>
-    ${showPt?`<span class="q-pt">${pt} p</span>`:''}
+    ${showPt?`<span class="q-pt">${qPt} p</span>`:''}
   </div>
   <img src="${q.dataUrl}" class="q-img"/>
   ${solSpace?`<div class="sol-space" style="min-height:${solHeightPx}px;"></div>`:''}
   ${ansKey?`<div class="ans-box">Cevap: ___</div>`:''}
 </div>`;
+  };
 
   /* ── Sayfa gruplarını oluştur ── */
   const pages=[];
@@ -979,25 +1072,21 @@ async function shareTest(){
 /* ── Save Modal ── */
 function openSaveModal(){document.getElementById('save-modal').classList.add('open');}
 function closeSaveModal(){document.getElementById('save-modal').classList.remove('open');}
-function saveToLibrary(){
+async function saveToLibrary(){
   const subject=document.getElementById('sm-subject').value.trim()||'Genel';
   const topic=document.getElementById('sm-topic').value.trim()||'Konu';
   const title=document.getElementById('sm-title').value.trim()||'Test';
   const key='lib_'+Date.now();
   const item={key,subject,topic,title,date:new Date().toLocaleDateString('tr-TR'),html:currentHtml};
-  try{localStorage.setItem(key,JSON.stringify(item));closeSaveModal();alert('✅ "'+title+'" kaydedildi!');}
-  catch(e){localStorage.clear();try{localStorage.setItem(key,JSON.stringify(item));closeSaveModal();alert('✅ Kaydedildi!');}catch(e2){alert('Depolama doldu.');}}
+  try{
+    await TFDB.save(item);
+    closeSaveModal();alert('✅ "'+title+'" kaydedildi!');
+  }catch(e){alert('Kayıt hatası: '+e.message);}
 }
 
 /* ── Library ── */
-function loadLibrary(){
-  const search=(document.getElementById('lib-search').value||'').toLowerCase();
+function renderLibrary(items, search){
   const content=document.getElementById('lib-content');
-  const items=[];
-  for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);if(!k||!k.startsWith('lib_'))continue;
-    try{const v=JSON.parse(localStorage.getItem(k));if(v)items.push(v);}catch(_){}
-  }
   if(!items.length){content.innerHTML='<div id="lib-empty">Henüz kayıtlı test yok.<br/>Test oluşturup 💾 Kaydet ile ekleyin.</div>';return;}
   const filtered=items.filter(v=>!search||v.subject.toLowerCase().includes(search)||v.topic.toLowerCase().includes(search)||v.title.toLowerCase().includes(search));
   if(!filtered.length){content.innerHTML='<div id="lib-empty">Sonuç bulunamadı.</div>';return;}
@@ -1006,9 +1095,9 @@ function loadLibrary(){
   let html='';
   Object.keys(grouped).sort().forEach(subj=>{
     html+=`<div class="subject-block"><div class="subject-header">📘 ${subj} <span>${Object.values(grouped[subj]).flat().length}</span></div><div class="subject-body">`;
-    Object.keys(grouped[subj]).sort().forEach(topic=>{
-      const tests=grouped[subj][topic];
-      html+=`<div><div class="topic-header">📌 ${topic} <span>${tests.length}</span></div>`;
+    Object.keys(grouped[subj]).sort().forEach(top=>{
+      const tests=grouped[subj][top];
+      html+=`<div><div class="topic-header">📌 ${top} <span>${tests.length}</span></div>`;
       tests.sort((a,b)=>a.title.localeCompare(b.title)).forEach(t=>{
         html+=`<div class="test-item"><div class="test-item-info"><div class="test-item-title">${t.title}</div><div class="test-item-meta">${t.date}</div></div>
           <div class="test-item-btns">
@@ -1023,20 +1112,44 @@ function loadLibrary(){
   });
   content.innerHTML=html;
 }
-function openLibTest(key){
-  try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;currentHtml=item.html;loadPreviewIframe();showPreview();document.getElementById('tab-upload').classList.add('active');document.getElementById('tab-library').classList.remove('active');}
-  catch(e){alert('Test açılamadı.');}
+async function loadLibrary(){
+  const search=(document.getElementById('lib-search').value||'').toLowerCase();
+  const content=document.getElementById('lib-content');
+  content.innerHTML='<div style="text-align:center;padding:20px;color:var(--t3);">Yükleniyor...</div>';
+  try{
+    const items=await TFDB.getAll();
+    renderLibrary(items,search);
+  }catch(e){content.innerHTML='<div id="lib-empty">Veritabanı hatası: '+e.message+'</div>';}
 }
-function exportLibTest(key){
-  try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;
+async function openLibTest(key){
+  try{
+    const items=await TFDB.getAll();
+    const item=items.find(v=>v.key===key);
+    if(!item)return;
+    currentHtml=item.html;loadPreviewIframe();showPreview();
+    document.getElementById('tab-upload').classList.add('active');
+    document.getElementById('tab-library').classList.remove('active');
+  }catch(e){alert('Test açılamadı.');}
+}
+async function exportLibTest(key){
+  try{
+    const items=await TFDB.getAll();
+    const item=items.find(v=>v.key===key);
+    if(!item)return;
     const blob=new Blob([item.html],{type:'text/html'});const url=URL.createObjectURL(blob);
     const a=document.createElement('a');a.href=url;a.download=(item.title||'test')+'.html';
     document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(url),5000);
   }catch(e){alert('Dışa aktarma başarısız.');}
 }
-function delLibTest(key){if(!confirm('Bu testi silmek istiyor musunuz?'))return;localStorage.removeItem(key);loadLibrary();}
-function clearStorage(){if(!confirm('Tüm veriler silinecek. Emin misiniz?'))return;localStorage.clear();alert('✅ Temizlendi!');loadLibrary();}
+async function delLibTest(key){
+  if(!confirm('Bu testi silmek istiyor musunuz?'))return;
+  await TFDB.delete(key);loadLibrary();
+}
+async function clearStorage(){
+  if(!confirm('Tüm veriler silinecek. Emin misiniz?'))return;
+  await TFDB.clearAll();alert('✅ Temizlendi!');loadLibrary();
+}
 
 if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(regs=>{regs.forEach(reg=>reg.unregister());});}
 </script>
