@@ -953,58 +953,49 @@ function buildPreview(){
   let curPage={left:[],right:[],leftH:headerH,rightH:headerH};
 
   if(cols===2){
-    let useLeft=true; // sıradaki soru sola mı sağa mı?
-    // Önce tüm soruları indeksleriyle bir kuyruğa koy
-    const half=Math.ceil(selectedQuestions.length/2);
-    // Dikey sıralama: 1..half sol, half+1..son sağ
-    // Ama sayfa sınırına göre böl
-    let leftIdx=0, rightIdx=0;
-    const leftQs=selectedQuestions.slice(0,Math.ceil(selectedQuestions.length/2));
-    const rightQs=selectedQuestions.slice(Math.ceil(selectedQuestions.length/2));
-    // Her iki listeyi de sayfalara böl
-    // Basit yaklaşım: toplam yüksekliklere göre her sayfaya sığanı koy
-    let pgLeft=[],pgRight=[],pgLeftH=headerH,pgRightH=headerH;
-    let li=0,ri=0;
-    
-    while(li<leftQs.length||ri<rightQs.length){
-      let added=false;
-      // Sol sütuna ekle
-      if(li<leftQs.length){
-        const qIdx=li; // leftQs içindeki index
-        const globalIdx=qIdx; // gerçek soru numarası indexi
-        const qH=qHeights[globalIdx]||120;
-        if(pgLeftH+qH<=usableH){
-          pgLeft.push({q:leftQs[qIdx],num:globalIdx+1});
-          pgLeftH+=qH;li++;added=true;
+    // Sorular sırayla: 1,2,3,4,5,6...
+    // Her sayfada: sol sütun üstten aşağı dolar, sonra sağ sütun üstten aşağı dolar
+    // Sol dolunca sağa geç, sağ dolunca yeni sayfa
+    let pgLeft=[],pgRight=[],pgLeftH=0,pgRightH=0;
+    let fillingLeft=true; // şu an sola mı sağa mı yazıyoruz
+    const firstPageExtra=headerH; // ilk sayfada header var
+    let isFirstPage=true;
+
+    for(let i=0;i<selectedQuestions.length;i++){
+      const qH=(qHeights[i]||120);
+      const extra=isFirstPage?firstPageExtra:0;
+
+      if(fillingLeft){
+        if(pgLeftH+qH+extra<=usableH){
+          pgLeft.push({q:selectedQuestions[i],num:i+1});
+          pgLeftH+=qH;
         } else {
-          // Sayfa doldu
+          // Sol doldu, sağa geç
+          fillingLeft=false;
+          if(pgRightH+qH+extra<=usableH){
+            pgRight.push({q:selectedQuestions[i],num:i+1});
+            pgRightH+=qH;
+          } else {
+            // Sağ da doldu, yeni sayfa
+            pages.push({left:pgLeft,right:pgRight});
+            pgLeft=[{q:selectedQuestions[i],num:i+1}];
+            pgRight=[];pgLeftH=qH;pgRightH=0;
+            fillingLeft=true;isFirstPage=false;
+          }
+        }
+      } else {
+        // Sağ sütunu dolduruyoruz
+        if(pgRightH+qH+extra<=usableH){
+          pgRight.push({q:selectedQuestions[i],num:i+1});
+          pgRightH+=qH;
+        } else {
+          // Sağ doldu, yeni sayfa
           pages.push({left:pgLeft,right:pgRight});
-          pgLeft=[{q:leftQs[qIdx],num:globalIdx+1}];
-          pgRight=[];
-          pgLeftH=qH;pgRightH=0;
-          li++;added=true;
-          // Sağ tarafı da sıfırla
-          continue;
+          pgLeft=[{q:selectedQuestions[i],num:i+1}];
+          pgRight=[];pgLeftH=qH;pgRightH=0;
+          fillingLeft=true;isFirstPage=false;
         }
       }
-      // Sağ sütuna ekle
-      if(ri<rightQs.length){
-        const qIdx=ri;
-        const globalIdx=Math.ceil(selectedQuestions.length/2)+qIdx;
-        const qH=qHeights[globalIdx]||120;
-        if(pgRightH+qH<=usableH){
-          pgRight.push({q:rightQs[qIdx],num:globalIdx+1});
-          pgRightH+=qH;ri++;added=true;
-        } else {
-          // Sağ doldu, sol da yeni sayfaya geç
-          pages.push({left:pgLeft,right:pgRight});
-          pgLeft=[];
-          pgRight=[{q:rightQs[qIdx],num:globalIdx+1}];
-          pgLeftH=0;pgRightH=qH;
-          ri++;added=true;
-        }
-      }
-      if(!added) break;
     }
     if(pgLeft.length||pgRight.length) pages.push({left:pgLeft,right:pgRight});
   } else {
