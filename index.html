@@ -188,7 +188,9 @@
     #btn-shuffle{background:#f59e0b;color:#fff;}
     #btn-back-preview{background:var(--bg);color:var(--t2);}
     #btn-new{background:var(--bg);color:var(--or);}
-    #preview-frame{width:100%;border:none;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.12);background:#fff;}
+    #preview-frame{width:100%;border:none;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.12);background:#fff;overflow:hidden;}
+    #preview-wrap{overflow:auto;-webkit-overflow-scrolling:touch;background:#555;border-radius:12px;padding:10px;}
+    #preview-inner{transform-origin:top left;transition:transform .2s;}
 
     /* LIBRARY */
     #library-screen{padding:14px;overflow-y:auto;max-height:calc(100vh - 108px);}
@@ -815,7 +817,7 @@ function generateTest(){
   let globalOffset=0,qHtmlAll='';
   groups.forEach((grp,pi)=>{
     const pb=pi>0?'page-break-before:always;break-before:page;':'';
-    const qBox=(q,num)=>`<div style="margin-bottom:8px;overflow:hidden;">
+    const qBox=(q,num)=>`<div style="page-break-inside:avoid;break-inside:avoid;break-before:avoid;page-break-before:avoid;margin-bottom:8px;overflow:hidden;display:table;width:100%;">
       <div style="font-weight:700;font-size:9pt;margin-bottom:3px;display:flex;justify-content:space-between;">
         <span>${num}. Soru</span>${showPt?`<span style="font-size:8pt;color:#888;">${pt} puan</span>`:''}
       </div>
@@ -831,9 +833,13 @@ function generateTest(){
       let lH='',rH='';
       left.forEach((q,i)=>{lH+=qBox(q,globalOffset+i*2+1);});
       right.forEach((q,i)=>{rH+=qBox(q,globalOffset+i*2+2);});
-      qHtmlAll+=`<div style="${pb}display:table;width:100%;table-layout:fixed;padding-top:${pi>0?'8mm':'0'}">
-        <div style="display:table-cell;width:49%;vertical-align:top;padding-right:5px;">${lH}</div>
-        <div style="display:table-cell;width:49%;vertical-align:top;padding-left:5px;">${rH}</div>
+      qHtmlAll+=`<div style="${pb}padding-top:${pi>0?'8mm':'0'}">
+        <table style="width:100%;border-collapse:separate;border-spacing:8px 0;table-layout:fixed;">
+          <tr style="vertical-align:top;">
+            <td style="width:50%;padding:0;">${lH}</td>
+            <td style="width:50%;padding:0;">${rH}</td>
+          </tr>
+        </table>
       </div>${pageAnsHtml}`;
     } else {
       let cH='';grp.forEach((q,i)=>{cH+=qBox(q,globalOffset+i+1);});
@@ -877,6 +883,13 @@ ${qHtmlAll}${teacher?`<div class="sig">${teacher}</div>`:''}${akHtml}
   showPreview();
 }
 
+let prvScale=1;
+function prvZoom(d){
+  prvScale=Math.max(0.4,Math.min(1.5,prvScale+d));
+  document.getElementById('preview-inner').style.transform='scale('+prvScale+')';
+  document.getElementById('preview-inner').style.width=(100/prvScale)+'%';
+  document.getElementById('prv-zoom-val').textContent=Math.round(prvScale*100)+'%';
+}
 function doPrint(){
   // Gizli iframe ile yazdır - Safari popup sorununu çözer
   let iframe=document.getElementById('print-iframe');
