@@ -347,7 +347,7 @@
 <div id="preview-screen" class="screen">
   <div id="preview-topbar">
     <button id="btn-back-preview" onclick="showSettings()">← Geri</button>
-    <button id="btn-print" onclick="doPrint()">🖨️ Yazdır</button>
+    <button id="btn-print" onclick="doPrint()" style="background:#E8973A;color:#fff;font-weight:800;">🖨️ Yazdır / PDF</button>
     <button id="btn-share-btn" onclick="shareTest()">📤 Paylaş</button>
     <button id="btn-save-lib" onclick="openSaveModal()">💾 Kaydet</button>
     <button id="btn-shuffle" onclick="shuffleAndRegen()">🔀</button>
@@ -992,8 +992,10 @@ function buildHeader(school,cls,title,subject,topic,testno,teacher,date,infoTbl,
 ══════════════════════════════════════════════ */
 function loadPreviewIframe(){
   const iframe=document.getElementById('preview-iframe');
-  // srcdoc kullan — Safari'de blob URL sorununu önler
   iframe.srcdoc=currentHtml;
+  // Yazdır butonu her zaman aktif
+  const btn=document.getElementById('btn-print');
+  if(btn) btn.disabled=false;
 }
 
 function onIframeLoad(iframe){
@@ -1041,17 +1043,32 @@ function applyPrvScale(){
 
 /* ── Print ── */
 function doPrint(){
-  // Gizli iframe ile yazdır
-  let pf=document.getElementById('print-iframe');
-  if(pf) pf.remove();
-  pf=document.createElement('iframe');
-  pf.id='print-iframe';
-  pf.style.cssText='position:fixed;top:-9999px;left:-9999px;width:210mm;height:297mm;border:none;';
-  document.body.appendChild(pf);
-  pf.addEventListener('load',()=>{
-    setTimeout(()=>{pf.contentWindow.focus();pf.contentWindow.print();},600);
-  });
-  pf.srcdoc=currentHtml;
+  // Yöntem 1: window.open ile yeni sekme (Safari dahil tüm tarayıcılarda çalışır)
+  try{
+    const win=window.open('','_blank');
+    if(win){
+      win.document.open();
+      win.document.write(currentHtml);
+      win.document.close();
+      // Tüm resimler yüklenince yazdır
+      win.addEventListener('load',()=>{
+        setTimeout(()=>{win.focus();win.print();},400);
+      });
+      // Fallback: load eventi çalışmazsa
+      setTimeout(()=>{if(!win.closed){win.focus();win.print();}},1200);
+      return;
+    }
+  }catch(e){}
+  // Yöntem 2: Blob URL (popup blocker varsa)
+  try{
+    const blob=new Blob([currentHtml],{type:'text/html'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download='test.html';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+    alert('Dosya indirildi. Açıp yazdırın (Ctrl+P / ⌘+P).');
+  }catch(e2){alert('Yazdırma başarısız: '+e2.message);}
 }
 
 /* ── Share ── */
