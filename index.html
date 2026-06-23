@@ -990,8 +990,13 @@ function buildHeader(school,cls,title,subject,topic,testno,teacher,date,infoTbl,
 ══════════════════════════════════════════════ */
 function loadPreviewIframe(){
   const iframe=document.getElementById('preview-iframe');
-  iframe.srcdoc=currentHtml;
-  // Yazdır butonu her zaman aktif
+  // Blob URL kullan: srcdoc büyük base64 verisiyle donabilir
+  // Önce eski blob'u temizle
+  if(iframe._blobUrl){try{URL.revokeObjectURL(iframe._blobUrl);}catch(_){}}
+  const blob = new Blob([currentHtml],{type:'text/html;charset=utf-8'});
+  const blobUrl = URL.createObjectURL(blob);
+  iframe._blobUrl = blobUrl;
+  iframe.src = blobUrl;
   const btn=document.getElementById('btn-print');
   if(btn) btn.disabled=false;
 }
@@ -1041,32 +1046,45 @@ function applyPrvScale(){
 
 /* ── Print ── */
 function doPrint(){
-  // Yöntem 1: window.open ile yeni sekme (Safari dahil tüm tarayıcılarda çalışır)
+  // Blob URL yöntemi — base64 resimler dahil tüm içerik için en güvenilir yöntem
+  // document.write() donma sorununu önler, popup blocker'ı atlar
   try{
-    const win=window.open('','_blank');
+    const blob = new Blob([currentHtml], {type:'text/html;charset=utf-8'});
+    const blobUrl = URL.createObjectURL(blob);
+    // Yeni sekme aç (blob URL Safari'de de çalışır)
+    const win = window.open(blobUrl, '_blank');
     if(win){
-      win.document.open();
-      win.document.write(currentHtml);
-      win.document.close();
-      // Tüm resimler yüklenince yazdır
-      win.addEventListener('load',()=>{
-        setTimeout(()=>{win.focus();win.print();},400);
-      });
-      // Fallback: load eventi çalışmazsa
-      setTimeout(()=>{if(!win.closed){win.focus();win.print();}},1200);
-      return;
+      // Sekme açıldıktan sonra yazdır dialogunu tetikle
+      // Blob URL'de load event çalışmayabilir, timeout kullan
+      setTimeout(()=>{
+        try{win.print();}catch(e){}
+        // Blob URL'yi temizle (biraz bekle ki tarayıcı yüklesin)
+        setTimeout(()=>URL.revokeObjectURL(blobUrl), 60000);
+      }, 1000);
+    } else {
+      // Popup blocker engelledi → İndir
+      URL.revokeObjectURL(blobUrl);
+      _downloadHtml();
     }
-  }catch(e){}
-  // Yöntem 2: Blob URL (popup blocker varsa)
+  }catch(e){
+    _downloadHtml();
+  }
+}
+
+function _downloadHtml(){
+  // Fallback: dosyayı indir, kullanıcı açıp yazdırsın
   try{
-    const blob=new Blob([currentHtml],{type:'text/html'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;a.download='test.html';
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url),5000);
-    alert('Dosya indirildi. Açıp yazdırın (Ctrl+P / ⌘+P).');
-  }catch(e2){alert('Yazdırma başarısız: '+e2.message);}
+    const blob = new Blob([currentHtml], {type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'TestForge-' + Date.now() + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 10000);
+    setTimeout(()=>alert('📥 Dosya indirildi!\n\nAçıp Yazdır (⌘P) ile yazdırın.'), 500);
+  }catch(e2){alert('Hata: '+e2.message);}
 }
 
 /* ── Share ── */
