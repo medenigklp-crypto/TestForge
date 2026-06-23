@@ -188,7 +188,7 @@
     #btn-shuffle{background:#f59e0b;color:#fff;}
     #btn-back-preview{background:var(--bg);color:var(--t2);}
     #btn-new{background:var(--bg);color:var(--or);}
-    #preview-frame{width:100%;height:65vh;border:none;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.12);}
+    #preview-frame{width:100%;border:none;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.12);background:#fff;}
 
     /* LIBRARY */
     #library-screen{padding:14px;overflow-y:auto;max-height:calc(100vh - 108px);}
@@ -344,7 +344,10 @@
 
 <!-- SETTINGS -->
 <div id="settings-screen" class="screen">
-  <button class="btn-secondary" onclick="showViewer()">← Geri</button>
+  <div style="display:flex;gap:8px;margin-bottom:10px">
+    <button class="btn-secondary" style="flex:1" onclick="showViewer()">← Geri</button>
+    <button class="btn-secondary" style="flex:1" onclick="switchTab('upload');showScreen('upload-screen')">🏠 Ana Sayfa</button>
+  </div>
   <h2>Test Ayarları</h2>
   <div class="sec-title">📋 Okul Bilgileri</div>
   <div class="field-row">
@@ -422,7 +425,7 @@
       <button id="btn-shuffle" onclick="shuffleAndRegen()">🔀</button>
       <button id="btn-new" onclick="startNew()">🔄 Yeni</button>
     </div>
-    <iframe id="preview-frame"></iframe>
+    <div id="preview-frame" style="width:100%;border:none;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.12);background:#fff;overflow:visible;"></div>
   </div>
 </div>
 
@@ -738,7 +741,13 @@ function updateQList(){
     const div=document.createElement('div');div.className='q-thumb';
     const img=document.createElement('img');img.src=q.dataUrl;
     const btn=document.createElement('button');btn.className='del';btn.textContent='✕';
-    btn.onclick=ev=>{ev.stopPropagation();selectedQuestions.splice(i,1);updateQList();};
+    btn.onclick=ev=>{
+      ev.stopPropagation();
+      selectedQuestions.splice(i,1);
+      updateQList();
+      // Viewer'a dön ve devam et
+      showViewer();
+    };
     div.append(img,btn);list.appendChild(div);
   });
 }
@@ -852,7 +861,19 @@ ${showNote?`<div class="note">Not: Her soru ${pt} puandır. Toplam ${selectedQue
 ${qHtmlAll}${teacher?`<div class="sig">${teacher}</div>`:''}${akHtml}
 </div>${showQr?`<script>if(typeof QRCode!=='undefined'){new QRCode(document.getElementById('qrcode-div'),{text:'${location.origin}',width:80,height:80});}<\/script>`:''}
 </body></html>`;
-  document.getElementById('preview-frame').srcdoc=currentHtml;
+  // iframe yerine div içine HTML göster
+  const pf=document.getElementById('preview-frame');
+  pf.innerHTML='';
+  const shadow=pf.attachShadow?null:null; // normal innerHTML
+  // HTML'den body içeriğini çıkar
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(currentHtml,'text/html');
+  const style=document.createElement('style');
+  style.textContent=doc.querySelector('style')?doc.querySelector('style').textContent:'';
+  const bodyDiv=document.createElement('div');
+  bodyDiv.innerHTML=doc.body.innerHTML;
+  pf.appendChild(style);
+  pf.appendChild(bodyDiv);
   showPreview();
 }
 
@@ -943,7 +964,17 @@ function loadLibrary(){
 }
 
 function openLibTest(key){
-  try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;currentHtml=item.html;document.getElementById('preview-frame').srcdoc=currentHtml;showPreview();document.getElementById('tab-upload').classList.add('active');document.getElementById('tab-library').classList.remove('active');}catch(e){alert('Test açılamadı.');}
+  try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;currentHtml=item.html;
+    const pf2=document.getElementById('preview-frame');
+    pf2.innerHTML='';
+    const parser2=new DOMParser();
+    const doc2=parser2.parseFromString(currentHtml,'text/html');
+    const style2=document.createElement('style');
+    style2.textContent=doc2.querySelector('style')?doc2.querySelector('style').textContent:'';
+    const bodyDiv2=document.createElement('div');
+    bodyDiv2.innerHTML=doc2.body.innerHTML;
+    pf2.appendChild(style2);pf2.appendChild(bodyDiv2);
+    showPreview();document.getElementById('tab-upload').classList.add('active');document.getElementById('tab-library').classList.remove('active');}catch(e){alert('Test açılamadı.');}
 }
 function exportLibTest(key){try{const item=JSON.parse(localStorage.getItem(key));if(!item)return;exportToFiles(item.html,item.title+'.html');}catch(e){alert('Dışa aktarma başarısız.');}}
 function delLibTest(key){if(!confirm('Bu testi silmek istediğinize emin misiniz?'))return;localStorage.removeItem(key);loadLibrary();}
