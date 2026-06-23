@@ -806,7 +806,7 @@ function generateTest(){
   let globalOffset=0,qHtmlAll='';
   groups.forEach((grp,pi)=>{
     const pb=pi>0?'page-break-before:always;break-before:page;':'';
-    const qBox=(q,num)=>`<div style="page-break-inside:avoid;break-inside:avoid;margin-bottom:8px;overflow:hidden;">
+    const qBox=(q,num)=>`<div style="margin-bottom:8px;overflow:hidden;">
       <div style="font-weight:700;font-size:9pt;margin-bottom:3px;display:flex;justify-content:space-between;">
         <span>${num}. Soru</span>${showPt?`<span style="font-size:8pt;color:#888;">${pt} puan</span>`:''}
       </div>
