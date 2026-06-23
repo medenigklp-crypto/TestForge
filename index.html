@@ -838,10 +838,12 @@ ${qHtmlAll}${teacher?`<div class="sig">${teacher}</div>`:''}${akHtml}
 }
 
 function doPrint(){
-  try{localStorage.removeItem('printHtml');localStorage.setItem('printHtml',currentHtml);}
-  catch(e){localStorage.clear();try{localStorage.setItem('printHtml',currentHtml);}catch(e2){}}
-  const base=location.href.split('?')[0].replace(/[^/]*$/,'');
-  location.href=base+'print.html';
+  const w=window.open('','_blank');
+  if(!w){alert('Popup engelleyici açık olabilir. Lütfen izin verin.');return;}
+  w.document.write(currentHtml);
+  w.document.close();
+  w.focus();
+  setTimeout(()=>w.print(),600);
 }
 
 async function sharePDF(){
