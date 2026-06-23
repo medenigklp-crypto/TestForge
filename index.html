@@ -811,10 +811,12 @@ function generateTest(){
   if(subject) document.getElementById('sm-subject').value=subject;
   if(topic) document.getElementById('sm-topic').value=topic;
   if(testno||title) document.getElementById('sm-title').value=testno||title||'Test';
-  // Sayfa başına max soru hesapla
+  // Sayfa başına max soru
+  // perpage=auto ise tüm sorular tek grup (tarayıcı kendi böler)
+  // perpage=sayı ise o kadar soru/sayfa
   let qPerPage;
   if(perpage==='auto'){
-    qPerPage=cols===2?8:4; // otomatik tahmin
+    qPerPage=selectedQuestions.length; // hepsini tek grupta ver, tarayıcı böler
   } else {
     qPerPage=parseInt(perpage);
   }
@@ -892,69 +894,195 @@ ${qHtmlAll}${teacher?`<div class="sig">${teacher}</div>`:''}${akHtml}
 function buildPreview(){
   const pf=document.getElementById('preview-frame');
   pf.innerHTML='';
-  if(!currentHtml)return;
-  // A4 oranı: 210x297mm = 1:1.414
+  if(!selectedQuestions.length)return;
+
+  const school=document.getElementById('f-school').value;
+  const cls=document.getElementById('f-class').value;
+  const title=document.getElementById('f-title').value;
+  const subject=document.getElementById('f-subject').value;
+  const topic=document.getElementById('f-topic').value;
+  const testno=document.getElementById('f-testno').value;
+  const date=document.getElementById('f-date').value;
+  const cols=parseInt(document.getElementById('f-cols').value)||2;
+  const pt=document.getElementById('f-point').value||Math.floor(100/(selectedQuestions.length||1));
+  const showPt=document.getElementById('f-showpt').checked;
+  const solSpace=document.getElementById('f-solspace').checked;
+  const solHeight=parseInt(document.getElementById('f-solheight').value)||80;
+  const infoTbl=document.getElementById('f-infotable').checked;
+
+  // A4 piksel hesabı: 96dpi → 1mm = 3.78px
+  // A4 = 297mm, padding 16mm her taraf → kullanılabilir = 265mm = ~1001px
+  // Ama telefon ekranı küçük olduğu için scale factor uygula
   const pageW=pf.offsetWidth||window.innerWidth-24;
+  const scale=pageW/794; // 794px = A4 genişliği 96dpi'da
   const pageH=Math.round(pageW*297/210);
-  // HTML parse et
-  const parser=new DOMParser();
-  const doc=parser.parseFromString(currentHtml,'text/html');
-  const styleEl=doc.querySelector('style');
-  const bodyContent=doc.body?doc.body.innerHTML:'';
-  // Wrapper div - gri arka plan
-  const wrap=document.createElement('div');
-  wrap.style.cssText='background:#666;padding:12px;border-radius:12px;';
-  // A4 sayfa
-  const page=document.createElement('div');
-  page.style.cssText=`background:#fff;width:100%;min-height:${pageH}px;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:16px;font-family:Times New Roman,serif;font-size:11pt;color:#111;overflow:hidden;`;
-  // Style inject
-  if(styleEl){
-    const s=document.createElement('style');
-    s.textContent=styleEl.textContent;
-    page.appendChild(s);
-  }
-  // Content
-  const div=document.createElement('div');
-  div.innerHTML=bodyContent;
-  // page-break elementleri A4 sayfa olarak göster
-  div.querySelectorAll('[style*="page-break-before"]').forEach(el=>{
-    // Bu elementi yeni A4 sayfaya taşı
-    el.setAttribute('data-newpage','1');
+  const usableH=Math.round(pageH*0.88); // padding çıkarınca
+
+  // Header yüksekliği tahmini
+  let headerH=60;
+  if(school||title) headerH+=20;
+  if(infoTbl) headerH+=35;
+
+  // Her sorunun yüksekliğini ölç - geçici container
+  const measure=document.createElement('div');
+  measure.style.cssText=`position:fixed;top:-9999px;left:0;width:${pageW/2-20}px;visibility:hidden;font-family:'Times New Roman',serif;font-size:${Math.round(11*scale)}pt;`;
+  document.body.appendChild(measure);
+
+  const qHeights=[];
+  selectedQuestions.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.style.cssText='margin-bottom:8px;overflow:hidden;';
+    div.innerHTML=`<div style="font-size:${Math.round(9*scale)}pt;margin-bottom:3px;">${i+1}. Soru</div>
+      <img src="${q.dataUrl}" style="width:100%;display:block;" onload="this.parentNode.setAttribute('data-loaded','1')">
+      ${solSpace?`<div style="min-height:${Math.round(solHeight*scale)}px;"></div>`:''}`;
+    measure.appendChild(div);
+    // Resim yüklendikten sonra yüksekliği al - ama sync olmadığı için img oranından hesapla
+    const img=new Image();
+    img.src=q.dataUrl;
+    // Genişlik/yükseklik oranından hesapla
+    const imgH=q.h&&q.w ? Math.round((pageW/2-20)*q.h/q.w) : 100;
+    const qH=20+imgH+(solSpace?Math.round(solHeight*scale):0)+10;
+    qHeights.push(qH);
+    measure.removeChild(div);
   });
-  page.appendChild(div);
-  wrap.appendChild(page);
-  // page-break'leri gerçek sayfalara böl
-  const allEls=Array.from(div.children);
-  let pages=[[]], curPage=0;
-  allEls.forEach(el=>{
-    if(el.getAttribute('data-newpage')==='1'){
-      curPage++;
-      pages[curPage]=[];
-      el.removeAttribute('data-newpage');
+  document.body.removeChild(measure);
+
+  // Soruları sayfalara böl - A4 mantığıyla
+  // 2 sütun: sol ve sağ eş zamanlı dolar
+  const pages=[];
+  let curPage={left:[],right:[],leftH:headerH,rightH:headerH};
+
+  if(cols===2){
+    let useLeft=true; // sıradaki soru sola mı sağa mı?
+    // Önce tüm soruları indeksleriyle bir kuyruğa koy
+    const half=Math.ceil(selectedQuestions.length/2);
+    // Dikey sıralama: 1..half sol, half+1..son sağ
+    // Ama sayfa sınırına göre böl
+    let leftIdx=0, rightIdx=0;
+    const leftQs=selectedQuestions.slice(0,Math.ceil(selectedQuestions.length/2));
+    const rightQs=selectedQuestions.slice(Math.ceil(selectedQuestions.length/2));
+    // Her iki listeyi de sayfalara böl
+    // Basit yaklaşım: toplam yüksekliklere göre her sayfaya sığanı koy
+    let pgLeft=[],pgRight=[],pgLeftH=headerH,pgRightH=headerH;
+    let li=0,ri=0;
+    
+    while(li<leftQs.length||ri<rightQs.length){
+      let added=false;
+      // Sol sütuna ekle
+      if(li<leftQs.length){
+        const qIdx=li; // leftQs içindeki index
+        const globalIdx=qIdx; // gerçek soru numarası indexi
+        const qH=qHeights[globalIdx]||120;
+        if(pgLeftH+qH<=usableH){
+          pgLeft.push({q:leftQs[qIdx],num:globalIdx+1});
+          pgLeftH+=qH;li++;added=true;
+        } else {
+          // Sayfa doldu
+          pages.push({left:pgLeft,right:pgRight});
+          pgLeft=[{q:leftQs[qIdx],num:globalIdx+1}];
+          pgRight=[];
+          pgLeftH=qH;pgRightH=0;
+          li++;added=true;
+          // Sağ tarafı da sıfırla
+          continue;
+        }
+      }
+      // Sağ sütuna ekle
+      if(ri<rightQs.length){
+        const qIdx=ri;
+        const globalIdx=Math.ceil(selectedQuestions.length/2)+qIdx;
+        const qH=qHeights[globalIdx]||120;
+        if(pgRightH+qH<=usableH){
+          pgRight.push({q:rightQs[qIdx],num:globalIdx+1});
+          pgRightH+=qH;ri++;added=true;
+        } else {
+          // Sağ doldu, sol da yeni sayfaya geç
+          pages.push({left:pgLeft,right:pgRight});
+          pgLeft=[];
+          pgRight=[{q:rightQs[qIdx],num:globalIdx+1}];
+          pgLeftH=0;pgRightH=qH;
+          ri++;added=true;
+        }
+      }
+      if(!added) break;
     }
-    pages[curPage].push(el);
-  });
-  if(pages.length>1){
-    // Çok sayfalı - yeniden oluştur
-    pf.innerHTML='';
-    const multiWrap=document.createElement('div');
-    multiWrap.style.cssText='background:#666;padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:12px;';
-    pages.forEach((pageEls,pi)=>{
-      const pg=document.createElement('div');
-      pg.style.cssText=`background:#fff;width:100%;min-height:${pageH}px;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:16px;font-family:'Times New Roman',serif;font-size:11pt;color:#111;position:relative;`;
-      // Sayfa numarası
-      const pgNum=document.createElement('div');
-      pgNum.style.cssText='position:absolute;bottom:8px;right:12px;font-size:9pt;color:#aaa;font-family:sans-serif;';
-      pgNum.textContent=(pi+1)+' / '+pages.length;
-      if(styleEl){const s=document.createElement('style');s.textContent=styleEl.textContent;pg.appendChild(s);}
-      pageEls.forEach(el=>pg.appendChild(el.cloneNode(true)));
-      pg.appendChild(pgNum);
-      multiWrap.appendChild(pg);
+    if(pgLeft.length||pgRight.length) pages.push({left:pgLeft,right:pgRight});
+  } else {
+    // 1 sütun
+    let pgQs=[],pgH=headerH;
+    selectedQuestions.forEach((q,i)=>{
+      const qH=qHeights[i]||120;
+      if(pgH+qH>usableH&&pgQs.length>0){
+        pages.push({single:pgQs});
+        pgQs=[{q,num:i+1}];pgH=qH;
+      } else {
+        pgQs.push({q,num:i+1});pgH+=qH;
+      }
     });
-    pf.appendChild(multiWrap);
-    return;
+    if(pgQs.length) pages.push({single:pgQs});
   }
-  pf.appendChild(wrap);
+
+  // Sayfaları render et
+  const outer=document.createElement('div');
+  outer.style.cssText='background:#555;padding:10px;border-radius:12px;display:flex;flex-direction:column;gap:10px;';
+
+  const headerHtml=`
+    <div style="border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          ${school?`<div style="font-weight:700;font-size:${Math.round(12*scale)}pt;">${school}</div>`:''}
+          ${title?`<div style="font-size:${Math.round(11*scale)}pt;">${title}</div>`:''}
+          <div style="font-size:${Math.round(9*scale)}pt;color:#333;">
+            ${subject?`<b>Ders:</b> ${subject}`:''}${topic?` | <b>Konu:</b> ${topic}`:''}${date?` | ${date}`:''}
+          </div>
+        </div>
+        ${testno?`<span style="background:#E8973A;color:#fff;border-radius:4px;padding:2px 8px;font-size:${Math.round(11*scale)}pt;font-weight:700;">${testno}</span>`:''}
+      </div>
+      ${infoTbl?`<table style="width:100%;border-collapse:collapse;margin-top:5px;font-size:${Math.round(9*scale)}pt;"><tr>
+        <td style="border:1px solid #000;padding:3px 6px;font-weight:700;">AD SOYAD</td><td style="border:1px solid #000;padding:3px 6px;width:35%;"></td>
+        <td style="border:1px solid #000;padding:3px 6px;font-weight:700;">SINIF</td><td style="border:1px solid #000;padding:3px 6px;width:15%;">${cls}</td>
+        <td style="border:1px solid #000;padding:3px 6px;font-weight:700;">PUAN</td><td style="border:1px solid #000;padding:3px 6px;"></td>
+      </tr></table>`:''}
+    </div>`;
+
+  const qBlockHtml=(item)=>`
+    <div style="margin-bottom:8px;overflow:hidden;">
+      <div style="font-weight:700;font-size:${Math.round(9*scale)}pt;margin-bottom:2px;border-bottom:1px solid #eee;padding-bottom:1px;display:flex;justify-content:space-between;">
+        <span>${item.num}. Soru</span>${showPt?`<span style="color:#888;">${pt}p</span>`:''}
+      </div>
+      <img src="${item.q.dataUrl}" style="width:100%;display:block;">
+      ${solSpace?`<div style="height:${Math.round(solHeight*scale)}px;"></div>`:''}
+    </div>`;
+
+  const totalPages=pages.length;
+  pages.forEach((pg,pi)=>{
+    const pageDiv=document.createElement('div');
+    pageDiv.style.cssText=`background:#fff;width:100%;min-height:${pageH}px;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:${Math.round(16*scale)}px;font-family:'Times New Roman',serif;font-size:${Math.round(11*scale)}pt;color:#111;position:relative;overflow:hidden;`;
+    
+    let html=pi===0?headerHtml:'';
+    
+    if(pg.single){
+      pg.single.forEach(item=>{html+=qBlockHtml(item);});
+    } else {
+      // 2 sütun
+      let lH='',rH='';
+      (pg.left||[]).forEach(item=>{lH+=qBlockHtml(item);});
+      (pg.right||[]).forEach(item=>{rH+=qBlockHtml(item);});
+      html+=`<table style="width:100%;border-collapse:collapse;table-layout:fixed;"><tr style="vertical-align:top;">
+        <td style="width:49%;padding-right:5px;">${lH}</td>
+        <td style="width:2%;border-left:1px solid #eee;"></td>
+        <td style="width:49%;padding-left:5px;">${rH}</td>
+      </tr></table>`;
+    }
+    
+    // Sayfa no
+    html+=`<div style="position:absolute;bottom:6px;right:10px;font-size:${Math.round(8*scale)}pt;color:#aaa;">${pi+1} / ${totalPages}</div>`;
+    
+    pageDiv.innerHTML=html;
+    outer.appendChild(pageDiv);
+  });
+
+  pf.appendChild(outer);
 }
 
 let prvScale=1;
