@@ -1,1260 +1,2017 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-  <meta name="theme-color" content="#E8973A"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-title" content="TestForge"/>
-  <title>TestForge</title>
-  <script>
-  (function(){
-    const url='data:image/jpeg;base64,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';
-    const a=document.createElement('link');a.rel='apple-touch-icon';a.href=url;document.head.appendChild(a);
-    const f=document.createElement('link');f.rel='icon';f.type='image/png';f.href=url;document.head.appendChild(f);
-    const m={name:'TestForge',short_name:'TestForge',start_url:'.',display:'standalone',background_color:'#F0F1F5',theme_color:'#E8973A',icons:[{src:url,sizes:'192x192',type:'image/jpeg'}]};
-    const mb=document.createElement('link');mb.rel='manifest';mb.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(m));document.head.appendChild(mb);
-  })();
-  </script>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0;}
-    :root{
-      --or:#E8973A;--or2:#d4852e;
-      --bg:#F0F1F5;--w:#ffffff;
-      --bd:#E4E6EC;--t1:#1A1A2E;--t2:#6B7280;--t3:#9CA3AF;
-      --safe:env(safe-area-inset-bottom,0px);
-    }
-    body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;background:var(--bg);min-height:100vh;color:var(--t1);}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Test Modülü - Ronya Kimya</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#16213e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- PDF.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 
-    #header{background:var(--w);border-bottom:1px solid var(--bd);padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top));display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:200;}
-    #header-logo{width:34px;height:34px;background:var(--or);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-    #header h1{font-size:17px;font-weight:800;flex:1;color:var(--t1);}
-    #header p{font-size:11px;color:var(--t2);}
-    .hbtn{background:var(--bg);color:var(--t1);border:1.5px solid var(--bd);border-radius:20px;padding:7px 14px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;}
-    .hbtn:active{background:var(--or);color:#fff;border-color:var(--or);}
+:root {
+  --bg: #08090f;
+  --sf: #0f1117;
+  --sf2: #161922;
+  --br: #1e2535;
+  --br2: #252d40;
+  --ac: #6366f1;
+  --ac2: #818cf8;
+  --gr: #22c55e;
+  --rd: #ef4444;
+  --yw: #f59e0b;
+  --cy: #06b6d4;
+  --tx: #f1f5f9;
+  --tx2: #94a3b8;
+  --tx3: #475569;
+  --r: 14px;
+  --rsm: 8px;
+  --rlg: 20px;
+}
 
-    #nav-tabs{display:flex;background:var(--w);border-bottom:1px solid var(--bd);}
-    .nav-tab{flex:1;padding:12px;text-align:center;font-size:13px;font-weight:600;color:var(--t3);cursor:pointer;border-bottom:2.5px solid transparent;transition:all .2s;}
-    .nav-tab.active{color:var(--or);border-bottom-color:var(--or);}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #08090f !important; color: var(--tx); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
 
-    .screen{display:none;}.screen.active{display:block;}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 56px;
+  border-bottom: 1px solid var(--br);
+  background: rgba(8,9,15,.95);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    /* UPLOAD */
-    #upload-screen{padding:14px;}
-    .upload-card{border:2px dashed var(--bd);border-radius:18px;padding:26px 16px;text-align:center;background:var(--w);cursor:pointer;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:border-color .2s;}
-    .upload-card:active{border-color:var(--or);}
-    .upload-card .icon{font-size:34px;margin-bottom:6px;}
-    .upload-card h2{font-size:15px;font-weight:700;color:var(--t1);margin-bottom:3px;}
-    .upload-card p{color:var(--t3);font-size:12px;}
-    .upload-card.primary{border-color:var(--or);}
-    .upload-card.primary h2{color:var(--or);}
-    #loading-bar{display:none;margin-top:14px;background:var(--w);border-radius:16px;padding:20px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06);}
-    #loading-bar p{color:var(--or);font-weight:600;margin-top:8px;font-size:13px;}
-    .spinner{width:30px;height:30px;border:3px solid var(--bd);border-top-color:var(--or);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto;}
-    @keyframes spin{to{transform:rotate(360deg);}}
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a5b4fc, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
 
-    /* VIEWER */
-    #viewer-screen{display:none;flex-direction:column;height:calc(100vh - 108px);}
-    #viewer-screen.active{display:flex;}
-    #viewer-toolbar{background:var(--w);border-bottom:1px solid var(--bd);display:flex;flex-direction:column;flex-shrink:0;}
-    .tb-row{display:flex;align-items:center;gap:5px;padding:7px 10px;}
-    .tb-row+.tb-row{border-top:1px solid var(--bg);}
-    #viewer-toolbar button{background:var(--bg);border:none;border-radius:10px;padding:8px 11px;cursor:pointer;font-size:13px;font-weight:700;color:var(--t2);white-space:nowrap;flex-shrink:0;}
-    #viewer-toolbar button.primary{background:var(--or);color:#fff;}
-    #viewer-toolbar button.warn{background:#f59e0b;color:#fff;}
-    #viewer-toolbar button.danger{background:#ef4444;color:#fff;}
-    #viewer-toolbar button:disabled{opacity:.35;cursor:default;}
-    #page-info{font-size:12px;color:var(--t2);flex:1;text-align:center;font-weight:700;}
-    #zoom-info{font-size:12px;color:var(--t2);font-weight:700;min-width:42px;text-align:center;background:var(--bg);border-radius:7px;padding:4px 6px;}
-    #canvas-wrap{flex:1;overflow:auto;background:#444;display:flex;justify-content:center;align-items:flex-start;padding:10px;-webkit-overflow-scrolling:touch;}
-    #canvas-container{position:relative;display:inline-block;align-self:flex-start;}
-    #pdf-canvas{display:block;}
-    #select-canvas{position:absolute;top:0;left:0;width:100%;height:100%;touch-action:none;}
-    #sel-box{position:absolute;border:2.5px solid var(--or);background:rgba(232,151,58,.15);pointer-events:none;display:none;border-radius:3px;}
+.back-btn {
+  background: var(--sf2);
+  border: 1px solid var(--br);
+  border-radius: var(--rsm);
+  padding: 8px 14px;
+  color: var(--tx2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 
-    /* PHOTO CROP */
-    #photo-crop-screen{display:none;flex-direction:column;height:calc(100vh - 108px);}
-    #photo-crop-screen.active{display:flex;}
-    #crop-toolbar{background:var(--w);border-bottom:1px solid var(--bd);padding:10px;display:flex;gap:8px;flex-shrink:0;}
-    #crop-toolbar button{flex:1;border:none;border-radius:12px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;}
-    #btn-crop-ok{background:var(--or);color:#fff;}
-    #btn-crop-cancel{background:var(--bg);color:var(--t2);}
-    #crop-info{font-size:12px;color:var(--t2);text-align:center;padding:6px;background:var(--bg);}
-    #crop-wrap{flex:1;overflow:auto;background:#444;display:flex;justify-content:center;align-items:flex-start;padding:8px;}
-    #crop-container{position:relative;display:inline-block;align-self:flex-start;}
-    #crop-img{display:block;max-width:100%;}
-    #crop-sel-box{position:absolute;border:2.5px solid var(--or);background:rgba(232,151,58,.15);pointer-events:none;display:none;}
-    #crop-canvas{position:absolute;top:0;left:0;width:100%;height:100%;touch-action:none;cursor:crosshair;}
+.pw { max-width: 700px; margin: 0 auto; padding: 30px 16px; }
 
-    /* Q BAR */
-    #questions-bar{background:var(--w);border-top:1px solid var(--bd);padding:8px 12px;max-height:120px;overflow-y:auto;flex-shrink:0;}
-    #questions-bar h3{font-size:11px;font-weight:700;color:var(--or);margin-bottom:5px;}
-    #q-list{display:flex;flex-wrap:wrap;gap:5px;min-height:14px;}
-    .q-thumb{position:relative;border:2px solid var(--or);border-radius:8px;overflow:hidden;}
-    .q-thumb img{display:block;height:52px;width:auto;max-width:110px;object-fit:contain;background:#fff;}
-    .q-thumb .del{position:absolute;top:2px;right:2px;background:rgba(220,38,38,.9);color:#fff;border:none;border-radius:50%;width:17px;height:17px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    #q-empty{color:var(--t3);font-size:11px;font-style:italic;}
+.test-baslik {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ac2);
+  margin-bottom: 8px;
+}
 
-    /* FAB */
-    #fab{position:fixed;bottom:calc(16px + var(--safe));right:16px;z-index:300;background:var(--or);color:#fff;border:none;border-radius:28px;padding:13px 18px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(232,151,58,.4);display:none;}
+.konu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-    /* SETTINGS */
-    #settings-screen{padding:14px;overflow-y:auto;max-height:calc(100vh - 108px);}
-    #settings-screen h2{font-size:18px;font-weight:800;color:var(--t1);margin-bottom:14px;letter-spacing:-.3px;}
-    .field{margin-bottom:10px;}
-    .field label{display:block;font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.02em;}
-    .field input,.field select{width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:12px;font-size:14px;outline:none;background:var(--w);color:var(--t1);-webkit-appearance:none;transition:border-color .2s;}
-    .field input:focus,.field select:focus{border-color:var(--or);}
-    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-    .check-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;padding:10px 12px;background:var(--w);border-radius:12px;border:1px solid var(--bd);}
-    .check-row input[type=checkbox]{width:20px;height:20px;accent-color:var(--or);cursor:pointer;flex-shrink:0;}
-    .check-row label{font-size:13px;font-weight:500;color:var(--t1);cursor:pointer;}
-    .sec-title{font-size:11px;font-weight:800;color:var(--or);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;}
-    .btn-primary{width:100%;background:var(--or);color:#fff;border:none;border-radius:14px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;margin-top:5px;}
-    .btn-primary:active{background:var(--or2);}
-    .btn-secondary{width:100%;background:var(--bg);border:1.5px solid var(--bd);border-radius:12px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:10px;color:var(--t2);}
-    .btn-row{display:flex;gap:8px;margin-top:8px;}
-    .btn-row button{flex:1;border:none;border-radius:14px;padding:14px;font-size:13px;font-weight:700;cursor:pointer;}
+.konu-btn {
+  padding: 14px;
+  border: 2px solid var(--br);
+  border-radius: var(--r);
+  background: var(--sf2);
+  color: var(--tx2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
 
-    /* PREVIEW - YENİ: iframe tabanlı A4 görünümü */
-    #preview-screen{display:flex;flex-direction:column;height:calc(100vh - 108px);}
-    #preview-screen.active{display:flex;}
-    #preview-topbar{background:var(--w);border-bottom:1px solid var(--bd);padding:8px 10px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;}
-    #preview-topbar button{flex:1;border:none;border-radius:10px;padding:10px 6px;font-size:12px;font-weight:700;cursor:pointer;min-width:54px;}
-    #btn-back-preview{background:var(--bg);color:var(--t2);}
-    #btn-print{background:var(--or);color:#fff;}
-    #btn-save-lib{background:#22c55e;color:#fff;}
-    #btn-share-btn{background:#8b5cf6;color:#fff;}
-    #btn-shuffle{background:#f59e0b;color:#fff;}
-    #btn-new{background:var(--bg);color:var(--or);}
-    #preview-zoom-bar{background:var(--bg);padding:6px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;border-bottom:1px solid var(--bd);}
-    #preview-zoom-bar button{border:none;background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:14px;cursor:pointer;font-weight:700;}
-    #prv-zoom-val{font-size:12px;font-weight:700;color:var(--t2);min-width:46px;text-align:center;}
-    #preview-iframe-wrap{flex:1;overflow:auto;background:#555;padding:10px;-webkit-overflow-scrolling:touch;}
-    #preview-iframe{width:210mm;border:none;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.35);border-radius:3px;display:block;transform-origin:top left;}
+.konu-btn:hover { border-color: var(--ac); color: var(--tx); }
+.konu-btn.secili { border-color: var(--ac); background: rgba(99,102,241,0.15); color: var(--ac2); }
 
-    /* LIBRARY */
-    #library-screen{padding:14px;overflow-y:auto;max-height:calc(100vh - 108px);}
-    #library-screen h2{font-size:18px;font-weight:800;color:var(--t1);margin-bottom:12px;letter-spacing:-.3px;}
-    .lib-search{width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:12px;font-size:13px;outline:none;background:var(--w);margin-bottom:10px;-webkit-appearance:none;}
-    .lib-search:focus{border-color:var(--or);}
-    .subject-block{margin-bottom:12px;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07);}
-    .subject-header{background:var(--or);color:#fff;padding:11px 14px;font-weight:700;font-size:13px;display:flex;justify-content:space-between;}
-    .subject-body{border:1px solid var(--bd);border-top:none;border-radius:0 0 14px 14px;overflow:hidden;background:var(--w);}
-    .topic-header{background:#FEF3C7;padding:8px 14px;font-weight:700;font-size:12px;color:#92400E;display:flex;justify-content:space-between;border-bottom:1px solid var(--bd);}
-    .test-item{display:flex;align-items:center;padding:9px 14px;gap:8px;border-bottom:1px solid var(--bg);}
-    .test-item:last-child{border-bottom:none;}
-    .test-item-info{flex:1;}
-    .test-item-title{font-weight:700;font-size:13px;color:var(--t1);}
-    .test-item-meta{font-size:11px;color:var(--t3);margin-top:1px;}
-    .test-item-btns{display:flex;gap:5px;}
-    .test-item-btns button{border:none;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;}
-    .btn-open{background:rgba(232,151,58,.12);color:var(--or);}
-    .btn-export{background:rgba(34,197,94,.12);color:#16a34a;}
-    .btn-del{background:#fee2e2;color:#dc2626;}
-    #lib-empty{text-align:center;padding:40px;color:var(--t3);font-size:13px;}
+.soru-sayisi {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
 
-    /* SAVE MODAL */
-    #save-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:500;align-items:flex-end;}
-    #save-modal.open{display:flex;}
-    #save-modal-inner{background:var(--w);width:100%;border-radius:22px 22px 0 0;padding:20px 16px;padding-bottom:calc(20px + var(--safe));}
-    #save-modal-inner h3{font-size:16px;font-weight:800;color:var(--t1);margin-bottom:14px;}
-    #save-modal-inner input{width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:12px;font-size:14px;outline:none;background:var(--bg);margin-bottom:8px;-webkit-appearance:none;}
-    #save-modal-inner input:focus{border-color:var(--or);}
-    .modal-btns{display:flex;gap:8px;margin-top:6px;}
-    .modal-btns button{flex:1;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;}
-    #btn-modal-save{background:var(--or);color:#fff;}
-    #btn-modal-cancel{background:var(--bg);color:var(--t2);}
+.soru-sayisi-btn {
+  flex: 1;
+  min-width: 60px;
+  padding: 10px;
+  border: 2px solid var(--br);
+  border-radius: var(--r);
+  background: var(--sf2);
+  color: var(--tx2);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
 
-    /* ANS KEY MODAL */
-    #anskey-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:500;align-items:flex-end;}
-    #anskey-modal.open{display:flex;}
-    #anskey-modal-inner{background:var(--w);width:100%;border-radius:22px 22px 0 0;padding:20px 16px;max-height:80vh;overflow-y:auto;padding-bottom:calc(20px + var(--safe));}
-    #anskey-modal-inner h3{font-size:16px;font-weight:800;color:var(--t1);margin-bottom:14px;}
-    .ans-item{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
-    .ans-item span{font-weight:700;font-size:13px;min-width:60px;color:var(--t2);}
-    .ans-opts{display:flex;gap:6px;}
-    .ans-opt{border:1.5px solid var(--bd);border-radius:10px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--t2);}
-    .ans-opt.selected{background:var(--or);color:#fff;border-color:var(--or);}
+.soru-sayisi-btn:hover { border-color: var(--ac); }
+.soru-sayisi-btn.secili { border-color: var(--ac); background: rgba(99,102,241,0.15); color: var(--ac2); }
 
-    #btn-clear-storage{width:100%;background:#fee2e2;border:1px solid #fca5a5;border-radius:12px;padding:10px;color:#dc2626;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:10px;}
-    /* PUAN MATRİSİ */
-    #points-summary{display:flex;justify-content:space-between;align-items:center;background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:13px;font-weight:700;}
-    #points-total-val{font-size:15px;color:#D97706;}
-    #points-total-val.ok{color:#16A34A;}
-    .matrix-wrap{background:var(--w);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:14px;}
-    .matrix-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--bg);}
-    .matrix-row:last-child{border-bottom:none;}
-    .matrix-thumb{width:48px;height:48px;object-fit:contain;background:var(--bg);border-radius:6px;border:1px solid var(--bd);flex-shrink:0;}
-    .matrix-num{font-weight:700;font-size:12px;color:var(--t2);min-width:28px;}
-    .matrix-pt{width:60px;padding:6px 8px;border:1.5px solid var(--bd);border-radius:8px;text-align:center;font-weight:700;font-size:13px;outline:none;}
-    .matrix-pt:focus{border-color:var(--or);}
-  </style>
+/* === ÖZEL SORU PANELİ === */
+.ozel-soru-panel {
+  background: var(--sf);
+  border: 1px solid var(--br);
+  border-radius: var(--rlg);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.panel-baslik {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-baslik .icon { font-size: 18px; }
+
+/* PDF/Galeri Yükleme Alanı */
+.yukleme-alani {
+  border: 2px dashed var(--br2);
+  border-radius: var(--r);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 16px;
+  background: var(--sf2);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.yukleme-alani:hover {
+  border-color: var(--ac);
+  background: rgba(99,102,241,0.05);
+}
+
+.yukleme-alani .yukle-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.yukleme-alani .yukle-baslik {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tx);
+  margin-bottom: 4px;
+}
+
+.yukleme-alani .yukle-aciklama {
+  font-size: 12px;
+  color: var(--tx3);
+}
+
+.yukleme-alani input[type="file"] {
+  display: none;
+}
+
+/* PDF Viewer */
+.pdf-viewer {
+  display: none;
+  margin-bottom: 16px;
+  background: var(--sf2);
+  border-radius: var(--r);
+  border: 1px solid var(--br);
+  overflow: hidden;
+}
+
+.pdf-viewer.active {
+  display: block;
+}
+
+.pdf-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--sf);
+  border-bottom: 1px solid var(--br);
+}
+
+.pdf-toolbar button {
+  background: var(--sf2);
+  border: 1px solid var(--br);
+  border-radius: var(--rsm);
+  padding: 6px 12px;
+  color: var(--tx);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pdf-toolbar button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pdf-toolbar .pdf-page-info {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--tx2);
+  font-weight: 600;
+}
+
+.pdf-canvas-wrap {
+  position: relative;
+  overflow: auto;
+  max-height: 400px;
+  background: #1a1a2e;
+}
+
+#pdf-render-canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+#pdf-select-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+}
+
+.pdf-sel-box {
+  position: absolute;
+  border: 2.5px solid var(--or);
+  background: rgba(232,151,58,0.15);
+  pointer-events: none;
+  display: none;
+  border-radius: 3px;
+}
+
+/* Resim Önizleme */
+.resim-onizleme {
+  position: relative;
+  margin-bottom: 16px;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 2px solid var(--br2);
+  display: none;
+}
+
+.resim-onizleme img {
+  width: 100%;
+  display: block;
+}
+
+.resim-onizleme .resim-kaldir {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--rd);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Kırpma Araçları */
+.kirpma-araclari {
+  display: none;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--sf2);
+  border-radius: var(--rsm);
+  border: 1px solid var(--br);
+}
+
+.kirpma-araclari .kirpma-bilgi {
+  font-size: 12px;
+  color: var(--tx2);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.kirpma-araclari .kirpma-butonlar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.kirpma-butonlar button {
+  padding: 8px 16px;
+  border-radius: var(--rsm);
+  border: 1px solid var(--br);
+  background: var(--sf);
+  color: var(--tx);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kirpma-butonlar button.onayla {
+  background: var(--gr);
+  color: #fff;
+  border-color: var(--gr);
+}
+
+.kirpma-butonlar button.iptal {
+  background: var(--rd);
+  color: #fff;
+  border-color: var(--rd);
+}
+
+.form-grup { margin-bottom: 12px; }
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tx3);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  background: var(--sf2);
+  border: 1px solid var(--br);
+  border-radius: var(--rsm);
+  padding: 10px 14px;
+  color: var(--tx);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+}
+
+.form-input:focus, .form-textarea:focus { border-color: var(--ac); }
+
+.form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 5 Şık Girişi */
+.siklar-input {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.sik-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sik-input .harf {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--br);
+  color: var(--tx2);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sik-input input {
+  flex: 1;
+  background: var(--sf2);
+  border: 1px solid var(--br);
+  border-radius: var(--rsm);
+  padding: 8px 12px;
+  color: var(--tx);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+}
+
+.dogru-cevap-secim {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dogru-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--br);
+  background: var(--sf2);
+  color: var(--tx2);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dogru-btn:hover { border-color: var(--gr); color: var(--gr); }
+.dogru-btn.secili { border-color: var(--gr); background: rgba(34,197,94,0.2); color: var(--gr); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--r);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  gap: 8px;
+}
+
+.btn-primary { background: var(--ac); color: #fff; }
+.btn-secondary { background: var(--sf2); color: var(--tx); border: 1px solid var(--br); }
+.btn-success { background: var(--gr); color: #fff; }
+.btn-warning { background: var(--yw); color: #000; }
+
+.basla-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* Eklenen Sorular Listesi */
+.eklenen-sorular {
+  margin-top: 16px;
+}
+
+.eklenen-sorular-baslik {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.eklenen-sorular-baslik .badge {
+  background: var(--ac);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.eklenen-soru {
+  background: var(--sf2);
+  border: 1px solid var(--br2);
+  border-radius: var(--rsm);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.eklenen-soru .soru-resim {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--rsm);
+  object-fit: cover;
+  border: 1px solid var(--br);
+  flex-shrink: 0;
+}
+
+.eklenen-soru .soru-bilgi {
+  flex: 1;
+  min-width: 0;
+}
+
+.eklenen-soru .soru-metin-kisa {
+  font-size: 12px;
+  color: var(--tx2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eklenen-soru .soru-kaynak {
+  font-size: 11px;
+  color: var(--tx3);
+  margin-top: 2px;
+}
+
+.eklenen-soru .soru-kaynak .kaynak-tipi {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.soru-kaynak .kaynak-tipi.pdf { background: var(--rd); color: #fff; }
+.soru-kaynak .kaynak-tipi.galeri { background: var(--cy); color: #fff; }
+.soru-kaynak .kaynak-tipi.elle { background: var(--yw); color: #000; }
+
+.soru-sil {
+  background: none;
+  border: none;
+  color: var(--rd);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+/* Test Ekranı */
+.test-card {
+  background: var(--sf);
+  border: 1px solid var(--br);
+  border-radius: var(--rlg);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.soru-metin {
+  font-size: 15px;
+  color: var(--tx);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.soru-resim-test {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 16px;
+  border-radius: var(--r);
+  border: 1px solid var(--br);
+}
+
+.siklar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sik {
+  padding: 14px 18px;
+  border: 2px solid var(--br);
+  border-radius: var(--r);
+  background: var(--sf2);
+  color: var(--tx);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.sik:hover { border-color: var(--ac); }
+.sik.dogru { border-color: var(--gr); background: rgba(34,197,94,0.1); }
+.sik.yanlis { border-color: var(--rd); background: rgba(239,68,68,0.1); }
+
+.harf { 
+  width: 32px; 
+  height: 32px; 
+  border-radius: 50%; 
+  background: var(--br); 
+  color: var(--tx2); 
+  font-weight: 700; 
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sik.dogru .harf { background: var(--gr); color: #fff; }
+.sik.yanlis .harf { background: var(--rd); color: #fff; }
+
+.stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1;
+  min-width: 70px;
+  background: var(--sf);
+  border: 1px solid var(--br);
+  border-radius: var(--r);
+  padding: 14px;
+  text-align: center;
+}
+
+.stat-deger {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ac2);
+}
+
+.stat-baslik {
+  font-size: 11px;
+  color: var(--tx3);
+  margin-top: 4px;
+}
+
+/* Sonuç Ekranı */
+.sonuc-ekrani {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.sonuc-emoji { font-size: 64px; margin-bottom: 16px; }
+.sonuc-baslik { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.sonuc-mesaj { color: var(--tx2); font-size: 14px; margin-bottom: 24px; }
+
+.sonuc-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto 24px;
+}
+
+.sonuc-stat {
+  background: var(--sf);
+  border: 1px solid var(--br);
+  border-radius: var(--r);
+  padding: 16px;
+}
+
+.sonuc-stat-deger {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ac2);
+}
+
+.sonuc-stat-baslik {
+  font-size: 11px;
+  color: var(--tx3);
+  margin-top: 4px;
+}
+
+.sonuc-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--sf2);
+  border-radius: 100px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.sonuc-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1s ease;
+}
+
+.sonuc-bar-fill.iyi { background: var(--gr); }
+.sonuc-bar-fill.orta { background: var(--yw); }
+.sonuc-bar-fill.kotu { background: var(--rd); }
+
+.klavye-bilgi {
+  text-align: center;
+  padding: 12px;
+  background: var(--sf2);
+  border-radius: var(--r);
+  margin-top: 15px;
+  font-size: 12px;
+  color: var(--tx3);
+}
+
+.klavye-bilgi span {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--br);
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--tx2);
+  margin: 0 2px;
+}
+
+.ses-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--sf2);
+  border: 1px solid var(--br);
+  color: var(--tx2);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.ses-toggle.acik { color: var(--ac2); border-color: var(--ac); }
+
+@media (max-width: 500px) {
+  .konu-grid { grid-template-columns: 1fr; }
+  .siklar-input { grid-template-columns: 1fr; }
+  .sonuc-stats { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-<div id="header">
-  <div id="header-logo">📄</div>
-  <div style="flex:1"><h1>TestForge</h1><p id="header-sub">PDF veya foto seç → A4 test oluştur</p></div>
-  <button class="hbtn" onclick="showUpload()">+ Yükle</button>
-  <button class="hbtn" onclick="switchTab('library');loadLibrary()">📚</button>
+
+<header>
+  <a href="index.html" class="back-btn">← Geri</a>
+  <div class="logo" onclick="location.href='index.html'">Ronya Kimya</div>
+  <div style="width: 60px;"></div>
+</header>
+
+<div class="pw">
+
+  <!-- KONU SEÇİMİ -->
+  <div id="konu-secimi">
+    <div class="test-baslik">📝 Konu Testi</div>
+    <p style="color: var(--tx2); font-size: 13px; margin-bottom: 16px;">Test yapmak istediğin konuyu seç:</p>
+    
+    <div class="konu-grid">
+      <button class="konu-btn" onclick="konuSec('atom', this)">⚛️ Atom ve Periyodik</button>
+      <button class="konu-btn" onclick="konuSec('mol', this)">⚖️ Mol ve Kimyasal</button>
+      <button class="konu-btn" onclick="konuSec('gaz', this)">💨 Gazlar</button>
+      <button class="konu-btn" onclick="konuSec('cozelti', this)">🧪 Çözeltiler</button>
+      <button class="konu-btn" onclick="konuSec('denge', this)">⚖️ Kimyasal Denge</button>
+      <button class="konu-btn" onclick="konuSec('asitbaz', this)">🧪 Asit-Baz</button>
+      <button class="konu-btn" onclick="konuSec('elektro', this)">⚡ Elektrokimya</button>
+      <button class="konu-btn" onclick="konuSec('organik', this)">🔬 Organik Kimya</button>
+    </div>
+
+    <div class="test-baslik" style="margin-top: 20px;">🔢 Soru Sayısı</div>
+    <div class="soru-sayisi">
+      <button class="soru-sayisi-btn secili" onclick="soruSayisiSec(10, this)">10</button>
+      <button class="soru-sayisi-btn" onclick="soruSayisiSec(20, this)">20</button>
+      <button class="soru-sayisi-btn" onclick="soruSayisiSec(30, this)">30</button>
+      <button class="soru-sayisi-btn" onclick="soruSayisiSec(40, this)">40</button>
+    </div>
+
+    <!-- ÖZEL SORU EKLEME -->
+    <div class="ozel-soru-panel">
+      <div class="panel-baslik">
+        <span class="icon">➕</span>
+        Özel Soru Ekle
+      </div>
+      
+      <!-- PDF/Galeri Yükleme -->
+      <div class="yukleme-alani" onclick="document.getElementById('dosya-input').click()">
+        <div class="yukle-icon">📎</div>
+        <div class="yukle-baslik">PDF veya Fotoğraf Yükle</div>
+        <div class="yukle-aciklama">PDF veya JPG/PNG dosyası seçin</div>
+      </div>
+      <input type="file" id="dosya-input" accept=".pdf,image/*" onchange="dosyaYukle(event)">
+      
+      <!-- PDF Viewer -->
+      <div class="pdf-viewer" id="pdf-viewer">
+        <div class="pdf-toolbar">
+          <button onclick="pdfPrevPage()" id="pdf-btn-prev" disabled>◀</button>
+          <span class="pdf-page-info" id="pdf-page-info">— / —</span>
+          <button onclick="pdfNextPage()" id="pdf-btn-next" disabled>▶</button>
+          <button onclick="pdfZoomOut()">−</button>
+          <button onclick="pdfZoomIn()">+</button>
+          <button onclick="pdfZoomReset()">↺</button>
+          <button onclick="pdfKapat()" style="background:var(--rd);color:#fff;">✕ Kapat</button>
+        </div>
+        <div class="pdf-canvas-wrap" id="pdf-canvas-wrap">
+          <canvas id="pdf-render-canvas"></canvas>
+          <canvas id="pdf-select-canvas"></canvas>
+          <div class="pdf-sel-box" id="pdf-sel-box"></div>
+        </div>
+        <div style="padding:10px 14px;background:var(--sf);border-top:1px solid var(--br);font-size:12px;color:var(--tx2);text-align:center;">
+          📐 PDF üzerinde sürükleyerek soru alanını seçin
+        </div>
+      </div>
+      
+      <!-- Resim Önizleme -->
+      <div class="resim-onizleme" id="resim-onizleme">
+        <img id="onizleme-img" src="" alt="Soru resmi">
+        <button class="resim-kaldir" onclick="resimKaldir()">✕</button>
+      </div>
+      
+      <!-- Kırpma Araçları -->
+      <div class="kirpma-araclari" id="kirpma-araclari">
+        <div class="kirpma-bilgi">📐 Kırpma modu: Resmin üzerinde sürükleyerek soru alanını seçin</div>
+        <div class="kirpma-butonlar">
+          <button class="iptal" onclick="kirpmaIptal()">İptal</button>
+          <button class="onayla" onclick="kirpmaOnayla()">✓ Kırp ve Ekle</button>
+        </div>
+      </div>
+      
+      <!-- Manuel Soru Metni -->
+      <div class="form-grup">
+        <label class="form-label">Soru Metni (Opsiyonel)</label>
+        <textarea class="form-textarea" id="ozel-soru-metni" placeholder="Soruyu buraya yazın veya PDF'den kopyala-yapıştır yapın..."></textarea>
+      </div>
+      
+      <!-- 5 Şık -->
+      <div class="form-grup">
+        <label class="form-label">Seçenekler (5 Şık)</label>
+        <div class="siklar-input">
+          <div class="sik-input">
+            <span class="harf">A</span>
+            <input type="text" id="sik-a" placeholder="A şıkkı">
+          </div>
+          <div class="sik-input">
+            <span class="harf">B</span>
+            <input type="text" id="sik-b" placeholder="B şıkkı">
+          </div>
+          <div class="sik-input">
+            <span class="harf">C</span>
+            <input type="text" id="sik-c" placeholder="C şıkkı">
+          </div>
+          <div class="sik-input">
+            <span class="harf">D</span>
+            <input type="text" id="sik-d" placeholder="D şıkkı">
+          </div>
+          <div class="sik-input" style="grid-column: 1 / -1;">
+            <span class="harf">E</span>
+            <input type="text" id="sik-e" placeholder="E şıkkı" style="flex:1;">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-grup">
+        <label class="form-label">Doğru Cevap</label>
+        <div class="dogru-cevap-secim">
+          <button class="dogru-btn" onclick="dogruSec(0, this)">A</button>
+          <button class="dogru-btn" onclick="dogruSec(1, this)">B</button>
+          <button class="dogru-btn" onclick="dogruSec(2, this)">C</button>
+          <button class="dogru-btn" onclick="dogruSec(3, this)">D</button>
+          <button class="dogru-btn" onclick="dogruSec(4, this)">E</button>
+        </div>
+      </div>
+      
+      <button class="btn btn-success" onclick="soruEkle()" style="width: 100%; margin-top: 8px;">
+        ✓ Soruyu Ekle
+      </button>
+      
+      <!-- Kalıcı Sorular Listesi -->
+      <div class="eklenen-sorular" id="eklenen-sorular"></div>
+    </div>
+
+    <button class="btn btn-primary basla-btn" onclick="baslatTest()">
+      ▶ Testi Başlat
+    </button>
+  </div>
+
+  <!-- TEST EKRANI -->
+  <div id="test-ekrani" style="display: none;">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-deger" id="soru-no">1/20</div>
+        <div class="stat-baslik">Soru</div>
+      </div>
+      <div class="stat">
+        <div class="stat-deger" id="dogru-sayisi">0</div>
+        <div class="stat-baslik">Doğru</div>
+      </div>
+      <div class="stat">
+        <div class="stat-deger" id="yanlis-sayisi">0</div>
+        <div class="stat-baslik">Yanlış</div>
+      </div>
+      <div class="stat">
+        <div class="stat-deger" id="skor">0</div>
+        <div class="stat-baslik">Skor</div>
+      </div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-baslik" id="konu-baslik">Atom ve Periyodik</div>
+      <img id="soru-resim" class="soru-resim-test" style="display: none;" src="" alt="Soru görseli">
+      <div class="soru-metin" id="soru-metin">Yükleniyor...</div>
+      <div class="siklar" id="siklar"></div>
+      <div class="klavye-bilgi">
+        Klavye: <span>A</span> <span>B</span> <span>C</span> <span>D</span> <span>E</span> ile cevaplayabilirsiniz
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button class="btn btn-secondary" onclick="testiBitir()">Testi Bitir</button>
+    </div>
+  </div>
+
+  <!-- SONUÇ EKRANI -->
+  <div id="sonuc-ekrani" style="display: none;">
+    <div class="sonuc-ekrani">
+      <div class="sonuc-emoji" id="sonuc-emoji">🎉</div>
+      <div class="sonuc-baslik" id="sonuc-baslik">Test Tamamlandı!</div>
+      <div class="sonuc-mesaj" id="sonuc-mesaj">Sonuçlarınızı aşağıda görebilirsiniz.</div>
+      
+      <div class="sonuc-bar">
+        <div class="sonuc-bar-fill" id="sonuc-bar" style="width: 0%"></div>
+      </div>
+      
+      <div class="sonuc-stats">
+        <div class="sonuc-stat">
+          <div class="sonuc-stat-deger" id="sonuc-dogru">0</div>
+          <div class="sonuc-stat-baslik">Doğru</div>
+        </div>
+        <div class="sonuc-stat">
+          <div class="sonuc-stat-deger" id="sonuc-yanlis">0</div>
+          <div class="sonuc-stat-baslik">Yanlış</div>
+        </div>
+        <div class="sonuc-stat">
+          <div class="sonuc-stat-deger" id="sonuc-skor">0</div>
+          <div class="sonuc-stat-baslik">Toplam Skor</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; color: var(--tx3); margin-bottom: 8px;">
+          En Yüksek Skor: <span id="en-yuksek-skor" style="color: var(--ac2); font-weight: 700;">0</span>
+        </div>
+        <div style="font-size: 12px; color: var(--tx3);">
+          Başarı Oranı: <span id="basari-orani" style="color: var(--ac2); font-weight: 700;">%0</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="yeniTest()" style="margin-right: 10px;">Yeni Test</button>
+      <button class="btn btn-secondary" onclick="location.href='index.html'">Ana Sayfa</button>
+    </div>
+  </div>
+
 </div>
 
-<div id="nav-tabs">
-  <div class="nav-tab active" id="tab-upload" onclick="switchTab('upload')">🏠 Ana Sayfa</div>
-  <div class="nav-tab" id="tab-library" onclick="switchTab('library');loadLibrary()">📚 Kütüphane</div>
-</div>
-
-<!-- UPLOAD -->
-<div id="upload-screen" class="screen active">
-  <div style="padding:14px;">
-    <div class="upload-card primary" onclick="document.getElementById('file-input').click()">
-      <div class="icon">📎</div><h2>PDF Yükle</h2><p>Tıkla — PDF dosyası seçin</p>
-    </div>
-    <input id="file-input" type="file" accept="application/pdf" style="display:none" onchange="loadPDF(this)"/>
-    <div class="upload-card" onclick="document.getElementById('photo-input').click()">
-      <div class="icon">🖼️</div><h2>Galeriden Fotoğraf Ekle</h2><p>PNG, JPG — seçip kırpabilirsiniz</p>
-    </div>
-    <input id="photo-input" type="file" accept="image/*" multiple style="display:none" onchange="loadPhotos(this)"/>
-    <div id="loading-bar"><div class="spinner"></div><p id="loading-text">PDF yükleniyor...</p></div>
-  </div>
-</div>
-
-<!-- VIEWER -->
-<div id="viewer-screen" class="screen">
-  <div id="viewer-toolbar">
-    <div class="tb-row">
-      <button id="btn-prev" onclick="changePage(-1)" disabled>◀</button>
-      <span id="page-info">— / —</span>
-      <button id="btn-next" onclick="changePage(1)" disabled>▶</button>
-      <button onclick="document.getElementById('file-input').click()">📎 Değiştir</button>
-      <button id="btn-undo" onclick="undoLast()" disabled class="danger">↩️ Geri Al</button>
-    </div>
-    <div class="tb-row">
-      <button onclick="zoomOut()" style="font-size:16px;padding:7px 14px;">−</button>
-      <span id="zoom-info">100%</span>
-      <button onclick="zoomIn()" style="font-size:16px;padding:7px 14px;">+</button>
-      <button onclick="zoomReset()">↺</button>
-      <button id="btn-mode" class="primary" onclick="toggleMode()">✂️ Seç</button>
-      <button id="btn-shuffle-q" onclick="shuffleQuestions()">🔀</button>
-      <button id="btn-go" class="warn" onclick="goSettings()" disabled>⚙️ (<span id="q-count">0</span>)</button>
-    </div>
-  </div>
-  <div id="canvas-wrap">
-    <div id="canvas-container">
-      <canvas id="pdf-canvas"></canvas>
-      <canvas id="select-canvas"></canvas>
-      <div id="sel-box"></div>
-    </div>
-  </div>
-  <div id="questions-bar">
-    <h3>Seçilen: <span id="q-count2">0</span> soru &nbsp;|&nbsp; ✂️ kare çiz · 🖐 kaydır</h3>
-    <div id="q-list"><span id="q-empty">Henüz soru seçilmedi</span></div>
-  </div>
-</div>
-
-<!-- PHOTO CROP -->
-<div id="photo-crop-screen" class="screen">
-  <div id="crop-toolbar">
-    <button id="btn-crop-cancel" onclick="cancelCrop()">✕ İptal</button>
-    <button id="btn-crop-ok" onclick="confirmCrop()">✓ Seç</button>
-  </div>
-  <div id="crop-info">Parmakla kare çizerek soruyu seçin</div>
-  <div id="crop-wrap">
-    <div id="crop-container">
-      <img id="crop-img" src=""/>
-      <div id="crop-sel-box"></div>
-      <canvas id="crop-canvas"></canvas>
-    </div>
-  </div>
-</div>
-
-<!-- SETTINGS -->
-<div id="settings-screen" class="screen">
-  <div style="display:flex;gap:8px;margin-bottom:10px">
-    <button class="btn-secondary" style="flex:1" onclick="showViewer()">← Geri</button>
-    <button class="btn-secondary" style="flex:1" onclick="switchTab('upload');showScreen('upload-screen')">🏠 Ana Sayfa</button>
-  </div>
-  <h2>Test Ayarları</h2>
-  <div class="sec-title">📋 Okul Bilgileri</div>
-  <div class="field-row">
-    <div class="field"><label>Okul Adı</label><input id="f-school" placeholder="Okul adı"/></div>
-    <div class="field"><label>Sınıf</label><input id="f-class" placeholder="9-A"/></div>
-  </div>
-  <div class="field-row">
-    <div class="field"><label>Öğretmen</label><input id="f-teacher" placeholder="Ad Soyad"/></div>
-    <div class="field"><label>Tarih</label><input id="f-date"/></div>
-  </div>
-  <div class="sec-title">📝 Test Bilgileri</div>
-  <div class="field"><label>Test Başlığı</label><input id="f-title" placeholder="Boş bırakırsanız başlık çıkmaz"/></div>
-  <div class="field-row">
-    <div class="field"><label>Ders Adı</label><input id="f-subject" placeholder="Kimya"/></div>
-    <div class="field"><label>Konu Adı</label><input id="f-topic" placeholder="Asit Baz"/></div>
-  </div>
-  <div class="field-row">
-    <div class="field"><label>Şablon</label>
-      <select id="f-testno">
-        <option value="">— Yok —</option>
-        <option value="TEST 1">TEST 1</option><option value="TEST 2">TEST 2</option>
-        <option value="TEST 3">TEST 3</option><option value="TEST 4">TEST 4</option>
-        <option value="TEST 5">TEST 5</option>
-        <option value="YAZILI SINAV">YAZILI SINAV</option>
-        <option value="QUIZ">QUIZ</option><option value="ÖDEV">ÖDEV</option>
-        <option value="A KİTAPÇIĞI">A KİTAPÇIĞI</option>
-        <option value="B KİTAPÇIĞI">B KİTAPÇIĞI</option>
-      </select>
-    </div>
-    <div class="field"><label>Genel Puan (tüm sorular)</label><input id="f-point" placeholder="Otomatik" type="number" oninput="applyGlobalPoint()"/></div>
-  </div>
-  <div class="sec-title">🎯 Soru Bazlı Puan Matrisi</div>
-  <div id="points-summary"><span>Toplam Puan:</span><span id="points-total-val">0 / 100</span></div>
-  <div class="matrix-wrap" id="matrix-container"></div>
-  <div class="sec-title">📐 Düzen</div>
-  <div class="field-row">
-    <div class="field"><label>Sütun</label>
-      <select id="f-cols"><option value="1">1 Sütun</option><option value="2" selected>2 Sütun</option></select>
-    </div>
-    <div class="field"><label>Sayfa Başı Max Soru</label>
-      <select id="f-perpage">
-        <option value="auto" selected>Otomatik</option>
-        <option value="2">2</option><option value="3">3</option>
-        <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-        <option value="8">8</option><option value="10">10</option>
-      </select>
-    </div>
-  </div>
-  <div class="check-row"><input type="checkbox" id="f-infotable" checked/><label for="f-infotable">Ad Soyad / Sınıf / Puan tablosu</label></div>
-  <div class="check-row"><input type="checkbox" id="f-shownote"/><label for="f-shownote">Not satırı (Her soru X puan...)</label></div>
-  <div class="check-row"><input type="checkbox" id="f-showpt"/><label for="f-showpt">Her soruda puan göster</label></div>
-  <div class="check-row"><input type="checkbox" id="f-anskey"/><label for="f-anskey">Her soruya cevap kutusu</label></div>
-  <div class="check-row"><input type="checkbox" id="f-solspace" checked/><label for="f-solspace">Çözüm alanı ekle</label></div>
-  <div class="field"><label>Çözüm Alanı Yüksekliği</label>
-    <select id="f-solheight">
-      <option value="30">Küçük (30px)</option>
-      <option value="60" selected>Orta (60px)</option>
-      <option value="100">Büyük (100px)</option>
-      <option value="140">Çok Büyük (140px)</option>
-    </select>
-  </div>
-  <div class="check-row"><input type="checkbox" id="f-anspage"/><label for="f-anspage">Sona ayrı cevap anahtarı sayfası</label></div>
-  <div class="check-row"><input type="checkbox" id="f-qrcode"/><label for="f-qrcode">QR Kod ekle</label></div>
-  <div class="btn-row">
-    <button style="background:#8b5cf6;color:#fff;" id="btn-anskey-toggle" onclick="toggleAnkeyModal()">📝 Cevap Anahtarı</button>
-    <button style="background:var(--or);color:#fff;" onclick="generateTest()">📄 Testi Oluştur</button>
-  </div>
-</div>
-
-<!-- PREVIEW - İFRAME TABANLI -->
-<div id="preview-screen" class="screen">
-  <div id="preview-topbar">
-    <button id="btn-back-preview" onclick="showSettings()">← Geri</button>
-    <button id="btn-print" onclick="doPrint()" style="background:#E8973A;color:#fff;font-weight:800;">🖨️ Yazdır / PDF</button>
-    <button id="btn-share-btn" onclick="shareTest()">📤 Paylaş</button>
-    <button id="btn-save-lib" onclick="openSaveModal()">💾 Kaydet</button>
-    <button id="btn-shuffle" onclick="shuffleAndRegen()">🔀</button>
-    <button id="btn-new" onclick="startNew()">🔄 Yeni</button>
-  </div>
-  <div id="preview-zoom-bar">
-    <button onclick="prvZoom(-0.1)">−</button>
-    <span id="prv-zoom-val">100%</span>
-    <button onclick="prvZoom(0.1)">+</button>
-    <button onclick="prvZoomFit()" style="font-size:11px;">↺ Sığdır</button>
-    <span style="flex:1;font-size:11px;color:var(--t3);text-align:right;" id="prv-page-count"></span>
-  </div>
-  <div id="preview-iframe-wrap">
-    <iframe id="preview-iframe" scrolling="no" onload="onIframeLoad(this)"></iframe>
-  </div>
-</div>
-
-<!-- LIBRARY -->
-<div id="library-screen" class="screen">
-  <h2>📚 Test Kütüphanesi</h2>
-  <input class="lib-search" id="lib-search" placeholder="🔍 Ara..." oninput="loadLibrary()"/>
-  <button id="btn-clear-storage" onclick="clearStorage()">🗑️ Depolamayı Temizle</button>
-  <div id="lib-content"><div id="lib-empty">Henüz kayıtlı test yok.</div></div>
-</div>
-
-<!-- SAVE MODAL -->
-<div id="save-modal">
-  <div id="save-modal-inner">
-    <h3>💾 Kütüphaneye Kaydet</h3>
-    <input id="sm-subject" placeholder="Ders (örn: Kimya)"/>
-    <input id="sm-topic" placeholder="Konu (örn: Asit-Baz)"/>
-    <input id="sm-title" placeholder="Test adı (örn: TEST 1)"/>
-    <div class="modal-btns">
-      <button id="btn-modal-cancel" onclick="closeSaveModal()">İptal</button>
-      <button id="btn-modal-save" onclick="saveToLibrary()">Kaydet</button>
-    </div>
-  </div>
-</div>
-
-<!-- ANS KEY MODAL -->
-<div id="anskey-modal">
-  <div id="anskey-modal-inner">
-    <h3>📝 Cevap Anahtarı</h3>
-    <div id="anskey-list"></div>
-    <div class="modal-btns" style="margin-top:12px;">
-      <button style="background:var(--bg);color:var(--t2);flex:1;border:none;border-radius:12px;padding:13px;font-weight:700;cursor:pointer;" onclick="closeAnkeyModal()">Tamam</button>
-    </div>
-  </div>
-</div>
-
-<button id="fab" onclick="goSettings()">⚙️ (<span id="fab-count">0</span>)</button>
+<button class="ses-toggle" id="sesBtn" onclick="sesToggle()">🔇</button>
 
 <script>
-/* ── PDF.js yükle ── */
-(function(){
-  const s=document.createElement('script');
-  s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-  s.onload=()=>{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';};
-  document.head.appendChild(s);
-})();
-(function(){
-  const s=document.createElement('script');
-  s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-  document.head.appendChild(s);
-})();
+// ============================================
+// PDF.js DEĞİŞKENLERİ
+// ============================================
+let pdfDoc = null;
+let pdfCurrentPage = 1;
+let pdfTotalPages = 0;
+let pdfScale = 1.5;
+let pdfBaseScale = 1.5;
+let pdfSelecting = false;
+let pdfStartX = 0, pdfStartY = 0, pdfCurX = 0, pdfCurY = 0;
 
-/* ── IndexedDB Motor (localStorage yerine, sınırsız alan) ── */
-const TFDB={
-  dbName:'TestForgeDB',ver:2,
-  open(){
-    return new Promise((res,rej)=>{
-      const r=indexedDB.open(this.dbName,this.ver);
-      r.onupgradeneeded=e=>{
-        const db=e.target.result;
-        if(!db.objectStoreNames.contains('tests')) db.createObjectStore('tests',{keyPath:'key'});
-      };
-      r.onsuccess=e=>res(e.target.result);
-      r.onerror=e=>rej(e.target.error);
-    });
-  },
-  async save(item){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('tests','readwrite');tx.objectStore('tests').put(item);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});},
-  async getAll(){const db=await this.open();return new Promise((res,rej)=>{const r=db.transaction('tests','readonly').objectStore('tests').getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});},
-  async delete(key){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('tests','readwrite');tx.objectStore('tests').delete(key);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});},
-  async clearAll(){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('tests','readwrite');tx.objectStore('tests').clear();tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}
-};
+const pdfCanvas = document.getElementById('pdf-render-canvas');
+const pdfSelCanvas = document.getElementById('pdf-select-canvas');
+const pdfSelBox = document.getElementById('pdf-sel-box');
+const pdfCtx = pdfCanvas.getContext('2d');
 
-/* ── State ── */
-let pdfDoc=null,currentPage=1,totalPages=0;
-let currentScale=1,baseScale=1;
-let isSelectMode=true,selecting=false;
-let startX=0,startY=0,curX=0,curY=0;
-let selectedQuestions=[],renderTask=null;
-let pinching=false,pinchStartDist=0,pinchStartScale=1;
-let currentHtml='';
-let answerKey={};
-let cropImg=null,cropSelX=0,cropSelY=0,cropSelW=0,cropSelH=0;
-let cropPendingFiles=[];
-let prvScale=1;
+// ============================================
+// PDF YÜKLEME VE GÖRÜNTÜLEME
+// ============================================
+async function dosyaYukle(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  if (file.type === 'application/pdf') {
+    await pdfYukle(file);
+    return;
+  }
+  
+  if (file.type.startsWith('image/')) {
+    resimYukle(file);
+    return;
+  }
+  
+  alert('Desteklenmeyen dosya formatı. Lütfen PDF veya JPG/PNG seçin.');
+}
 
-const pdfCanvas=document.getElementById('pdf-canvas');
-const selCanvas=document.getElementById('select-canvas');
-const selBox=document.getElementById('sel-box');
-const ctx=pdfCanvas.getContext('2d');
-
-/* ── Tab & Screen ── */
-function switchTab(tab){
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
-  if(tab==='upload'){
-    if(pdfDoc||selectedQuestions.length>0) showViewer();
-    else showScreen('upload-screen');
-  } else if(tab==='library'){
-    showScreen('library-screen');
+async function pdfYukle(file) {
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    pdfDoc = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+    pdfTotalPages = pdfDoc.numPages;
+    pdfCurrentPage = 1;
+    
+    // İlk sayfayı render et
+    const page = await pdfDoc.getPage(1);
+    const viewport = page.getViewport({scale: 1});
+    pdfBaseScale = (window.innerWidth - 32) / viewport.width;
+    pdfScale = pdfBaseScale;
+    
+    document.getElementById('pdf-viewer').classList.add('active');
+    await pdfRenderPage(pdfCurrentPage);
+    
+  } catch (e) {
+    alert('PDF yüklenirken hata: ' + e.message);
+    console.error(e);
   }
 }
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='';});
-  const el=document.getElementById(id);
-  el.classList.add('active');
-  if(id==='viewer-screen') el.style.display='flex';
-  if(id==='photo-crop-screen') el.style.display='flex';
-  if(id==='preview-screen') el.style.display='flex';
-  const isV=id==='viewer-screen';
-  document.getElementById('fab').style.display=(isV&&selectedQuestions.length>0)?'flex':'none';
-}
-function showUpload(){document.getElementById('tab-upload').classList.add('active');document.getElementById('tab-library').classList.remove('active');showScreen('upload-screen');}
-function showViewer(){showScreen('viewer-screen');}
-function showSettings(){showScreen('settings-screen');}
-function showPreview(){showScreen('preview-screen');}
-function goSettings(){
-  if(!selectedQuestions.length)return;
-  document.getElementById('f-date').value=new Date().toLocaleDateString('tr-TR');
-  if(document.getElementById('f-subject').value) document.getElementById('sm-subject').value=document.getElementById('f-subject').value;
-  if(document.getElementById('f-topic').value) document.getElementById('sm-topic').value=document.getElementById('f-topic').value;
-  // Puan başlatma: f-point değeri varsa uygula, yoksa 100/n
-  const ptVal=parseInt(document.getElementById('f-point').value)||0;
-  const autoP=Math.round(100/Math.max(selectedQuestions.length,1));
-  selectedQuestions.forEach(q=>{if(!q.point) q.point=ptVal||autoP;});
-  buildMatrix();
-  showSettings();
-}
-function startNew(){selectedQuestions=[];answerKey={};pdfDoc=null;updateQList();showScreen('upload-screen');}
 
-/* ── PDF Load ── */
-async function loadPDF(input){
-  const file=input.files[0];if(!file)return;
-  document.getElementById('loading-bar').style.display='block';
-  document.getElementById('loading-text').textContent='PDF okunuyor...';
-  try{
-    const ab=await file.arrayBuffer();
-    if(typeof pdfjsLib==='undefined') await new Promise(r=>setTimeout(r,1500));
-    pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
-    totalPages=pdfDoc.numPages;currentPage=1;
-    const page=await pdfDoc.getPage(1);
-    const vp0=page.getViewport({scale:1});
-    baseScale=(window.innerWidth-16)/vp0.width;
-    currentScale=baseScale;
-    document.getElementById('loading-bar').style.display='none';
-    showViewer();
-    await renderPage(currentPage);
-  }catch(e){document.getElementById('loading-text').textContent='Hata: '+e.message;}
-  input.value='';
+async function pdfRenderPage(num) {
+  if (!pdfDoc) return;
+  
+  const page = await pdfDoc.getPage(num);
+  const dpr = Math.max(window.devicePixelRatio || 2, 2);
+  const viewport = page.getViewport({scale: pdfScale * dpr});
+  
+  pdfCanvas.width = viewport.width;
+  pdfCanvas.height = viewport.height;
+  pdfCanvas.style.width = (viewport.width / dpr) + 'px';
+  pdfCanvas.style.height = (viewport.height / dpr) + 'px';
+  
+  pdfSelCanvas.width = viewport.width;
+  pdfSelCanvas.height = viewport.height;
+  pdfSelCanvas.style.width = (viewport.width / dpr) + 'px';
+  pdfSelCanvas.style.height = (viewport.height / dpr) + 'px';
+  
+  await page.render({
+    canvasContext: pdfCtx,
+    viewport: viewport
+  }).promise;
+  
+  document.getElementById('pdf-page-info').textContent = num + ' / ' + pdfTotalPages;
+  document.getElementById('pdf-btn-prev').disabled = num <= 1;
+  document.getElementById('pdf-btn-next').disabled = num >= pdfTotalPages;
 }
 
-/* ── Photo Crop ── */
-function loadPhotos(input){
-  cropPendingFiles=Array.from(input.files);
-  if(!cropPendingFiles.length)return;
-  input.value='';
-  showNextCrop();
+function pdfPrevPage() {
+  if (pdfCurrentPage > 1) {
+    pdfCurrentPage--;
+    pdfRenderPage(pdfCurrentPage);
+  }
 }
-function showNextCrop(){
-  if(!cropPendingFiles.length){updateQList();if(!pdfDoc)goSettings();else showViewer();return;}
-  const file=cropPendingFiles.shift();
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const img=document.getElementById('crop-img');
-    img.onload=()=>{
-      const cc=document.getElementById('crop-canvas');
-      cc.style.width=img.offsetWidth+'px';cc.style.height=img.offsetHeight+'px';
-      cc.width=img.naturalWidth;cc.height=img.naturalHeight;
-    };
-    img.src=e.target.result;
-    cropSelX=cropSelY=cropSelW=cropSelH=0;
-    document.getElementById('crop-sel-box').style.display='none';
-    showScreen('photo-crop-screen');
+
+function pdfNextPage() {
+  if (pdfCurrentPage < pdfTotalPages) {
+    pdfCurrentPage++;
+    pdfRenderPage(pdfCurrentPage);
+  }
+}
+
+function pdfZoomIn() {
+  pdfScale = Math.min(pdfScale * 1.1, pdfBaseScale * 5);
+  pdfRenderPage(pdfCurrentPage);
+}
+
+function pdfZoomOut() {
+  pdfScale = Math.max(pdfScale / 1.1, pdfBaseScale * 0.3);
+  pdfRenderPage(pdfCurrentPage);
+}
+
+function pdfZoomReset() {
+  pdfScale = pdfBaseScale;
+  pdfRenderPage(pdfCurrentPage);
+}
+
+function pdfKapat() {
+  pdfDoc = null;
+  document.getElementById('pdf-viewer').classList.remove('active');
+  document.getElementById('dosya-input').value = '';
+}
+
+// ============================================
+// PDF ÜZERİNDE SEÇİM (Soru Kırpma)
+// ============================================
+pdfSelCanvas.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  pdfSelecting = true;
+  const pos = pdfGetPos(e);
+  pdfStartX = pdfCurX = pos.x;
+  pdfStartY = pdfCurY = pos.y;
+  pdfSelBox.style.cssText = 'display:block;left:' + pos.rx + 'px;top:' + pos.ry + 'px;width:0;height:0;';
+}, {passive: false});
+
+pdfSelCanvas.addEventListener('touchmove', function(e) {
+  if (!pdfSelecting) return;
+  e.preventDefault();
+  const pos = pdfGetPos(e);
+  pdfCurX = pos.x;
+  pdfCurY = pos.y;
+  pdfSelBox.style.left = Math.min(pdfStartX, pdfCurX) + 'px';
+  pdfSelBox.style.top = Math.min(pdfStartY, pdfCurY) + 'px';
+  pdfSelBox.style.width = Math.abs(pdfCurX - pdfStartX) + 'px';
+  pdfSelBox.style.height = Math.abs(pdfCurY - pdfStartY) + 'px';
+}, {passive: false});
+
+pdfSelCanvas.addEventListener('touchend', function(e) {
+  if (!pdfSelecting) return;
+  pdfSelecting = false;
+  pdfSelBox.style.display = 'none';
+  pdfCropSelection();
+});
+
+// Mouse desteği
+pdfSelCanvas.addEventListener('mousedown', function(e) {
+  pdfSelecting = true;
+  const pos = pdfGetPos(e);
+  pdfStartX = pdfCurX = pos.x;
+  pdfStartY = pdfCurY = pos.y;
+  pdfSelBox.style.cssText = 'display:block;left:' + pos.rx + 'px;top:' + pos.ry + 'px;width:0;height:0;';
+});
+
+pdfSelCanvas.addEventListener('mousemove', function(e) {
+  if (!pdfSelecting) return;
+  const pos = pdfGetPos(e);
+  pdfCurX = pos.x;
+  pdfCurY = pos.y;
+  pdfSelBox.style.left = Math.min(pdfStartX, pdfCurX) + 'px';
+  pdfSelBox.style.top = Math.min(pdfStartY, pdfCurY) + 'px';
+  pdfSelBox.style.width = Math.abs(pdfCurX - pdfStartX) + 'px';
+  pdfSelBox.style.height = Math.abs(pdfCurY - pdfStartY) + 'px';
+});
+
+document.addEventListener('mouseup', function(e) {
+  if (!pdfSelecting) return;
+  pdfSelecting = false;
+  pdfSelBox.style.display = 'none';
+  pdfCropSelection();
+});
+
+function pdfGetPos(e) {
+  const r = pdfSelCanvas.getBoundingClientRect();
+  const src = e.touches ? e.touches[0] : e;
+  const rx = src.clientX - r.left;
+  const ry = src.clientY - r.top;
+  const lw = parseFloat(pdfSelCanvas.style.width) || r.width;
+  const lh = parseFloat(pdfSelCanvas.style.height) || r.height;
+  return {
+    x: rx * (lw / r.width),
+    y: ry * (lh / r.height),
+    rx: rx,
+    ry: ry
+  };
+}
+
+function pdfCropSelection() {
+  const x = Math.min(pdfStartX, pdfCurX);
+  const y = Math.min(pdfStartY, pdfCurY);
+  const w = Math.abs(pdfCurX - pdfStartX);
+  const h = Math.abs(pdfCurY - pdfStartY);
+  
+  if (w < 20 || h < 20) return;
+  
+  const dpr = Math.max(window.devicePixelRatio || 2, 2);
+  const tmp = document.createElement('canvas');
+  tmp.width = Math.round(w * dpr);
+  tmp.height = Math.round(h * dpr);
+  tmp.getContext('2d').drawImage(
+    pdfCanvas,
+    Math.round(x * dpr), Math.round(y * dpr),
+    Math.round(w * dpr), Math.round(h * dpr),
+    0, 0,
+    Math.round(w * dpr), Math.round(h * dpr)
+  );
+  
+  yuklenenResimBase64 = tmp.toDataURL('image/jpeg', 0.85);
+  yuklenenDosyaTipi = 'pdf';
+  
+  // Önizleme göster
+  document.getElementById('resim-onizleme').style.display = 'block';
+  document.getElementById('onizleme-img').src = yuklenenResimBase64;
+  
+  // PDF viewer'ı gizle
+  pdfKapat();
+  
+  alert('✓ PDF\'den soru seçildi! Şimdi şıkları ve doğru cevabı girin.');
+}
+
+// ============================================
+// RESİM YÜKLEME (Galeri)
+// ============================================
+function resimYukle(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    yuklenenResimBase64 = e.target.result;
+    yuklenenDosyaTipi = 'galeri';
+    
+    document.getElementById('resim-onizleme').style.display = 'block';
+    document.getElementById('onizleme-img').src = yuklenenResimBase64;
+    document.getElementById('kirpma-araclari').style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
-function confirmCrop(){
-  const img=document.getElementById('crop-img');
-  if(cropSelW<10||cropSelH<10){
-    selectedQuestions.push({dataUrl:img.src,pageNum:'foto',w:img.naturalWidth,h:img.naturalHeight});
-  } else {
-    const scaleX=img.naturalWidth/img.offsetWidth;
-    const scaleY=img.naturalHeight/img.offsetHeight;
-    const tmp=document.createElement('canvas');
-    tmp.width=Math.round(cropSelW*scaleX);tmp.height=Math.round(cropSelH*scaleY);
-    tmp.getContext('2d').drawImage(img,Math.round(cropSelX*scaleX),Math.round(cropSelY*scaleY),tmp.width,tmp.height,0,0,tmp.width,tmp.height);
-    selectedQuestions.push({dataUrl:tmp.toDataURL('image/jpeg',0.85),pageNum:'foto',w:tmp.width,h:tmp.height});
+
+function resimKaldir() {
+  yuklenenResimBase64 = null;
+  yuklenenDosyaTipi = null;
+  document.getElementById('resim-onizleme').style.display = 'none';
+  document.getElementById('kirpma-araclari').style.display = 'none';
+  document.getElementById('dosya-input').value = '';
+}
+
+function kirpmaIptal() {
+  resimKaldir();
+}
+
+function kirpmaOnayla() {
+  document.getElementById('kirpma-araclari').style.display = 'none';
+  alert('Resim soru olarak kaydedildi. Şimdi şıkları ve doğru cevabı girin.');
+}
+
+// ============================================
+// SORU HAVUZU (Her konuda 40+ soru - 5 şık)
+// ============================================
+const soruHavuzu = {
+  'atom': [
+    { soru: "1s orbitali en fazla kaç elektron alabilir?", siklar: ["2", "6", "10", "14", "8"], cevap: 0, zorluk: "kolay" },
+    { soru: "Aşağıdaki elementlerden hangisi alkali metaldir?", siklar: ["Mg", "Na", "Al", "Si", "Cl"], cevap: 1, zorluk: "kolay" },
+    { soru: "3. periyotta kaç element vardır?", siklar: ["8", "18", "32", "2", "10"], cevap: 0, zorluk: "kolay" },
+    { soru: "p orbitalinin şekli nedir?", siklar: ["Küresel", "Dumbbell", "Klover", "Dairesel", "Elips"], cevap: 1, zorluk: "kolay" },
+    { soru: "Elektron konfigürasyonu 1s² 2s² 2p⁶ 3s² 3p⁴ olan element hangisidir?", siklar: ["Sülfür", "Fosfor", "Silisyum", "Klor", "Argon"], cevap: 0, zorluk: "kolay" },
+    { soru: "Atom numarası 20 olan element hangisidir?", siklar: ["K", "Ca", "Sc", "Ti", "V"], cevap: 1, zorluk: "kolay" },
+    { soru: "Noble gazlar hangi grup numarasındadır?", siklar: ["1A", "7A", "8A", "2A", "3A"], cevap: 2, zorluk: "kolay" },
+    { soru: "İyonlaşma enerjisi periyotta soldan sağa doğru nasıl değişir?", siklar: ["Artar", "Azalır", "Değişmez", "Önce artar sonra azalır", "İki kez artar"], cevap: 0, zorluk: "kolay" },
+    { soru: "d orbitalleri kaç tanedir?", siklar: ["3", "5", "7", "1", "9"], cevap: 1, zorluk: "kolay" },
+    { soru: "Hidrojen atomunun elektron konfigürasyonu nedir?", siklar: ["1s¹", "1s²", "2s¹", "2p¹", "1p¹"], cevap: 0, zorluk: "kolay" },
+    { soru: "Aşağıdaki elementlerden hangisinin elektron afinitesi en büyüktür?", siklar: ["Na", "Cl", "Ar", "K", "Ca"], cevap: 1, zorluk: "orta" },
+    { soru: "4. periyodun son elementi olan Kr'nin elektron konfigürasyonu nedir?", siklar: ["[Ar] 3d¹⁰ 4s² 4p⁶", "[Ar] 4s² 3d¹⁰ 4p⁶", "[Ar] 4s² 4p⁶", "[Ar] 3d¹⁰ 4p⁶", "[Ar] 4p⁶"], cevap: 1, zorluk: "orta" },
+    { soru: "Elektronegatiflik değeri en yüksek olan element hangisidir?", siklar: ["O", "F", "Cl", "N", "Ne"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki iyonlardan hangisi izoelektroniktir Ar ile?", siklar: ["K⁺", "Ca²⁺", "Cl⁻", "Hepsii", "S²⁻"], cevap: 3, zorluk: "orta" },
+    { soru: "3d orbitalleri dolduktan sonra hangi orbital doldurulur?", siklar: ["4s", "4p", "3p", "4d", "5s"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki çiftlerden hangisi izotopdur?", siklar: ["¹⁴C ve ¹⁴N", "¹²C ve ¹⁴C", "²³Na ve ²³Mg", "⁴⁰Ar ve ⁴⁰Ca", "¹⁶O ve ¹⁸O"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir atomun değerlik elektron sayısı 5 ise, bu atom hangi grupta olabilir?", siklar: ["3A", "5A", "7A", "2A", "4A"], cevap: 1, zorluk: "orta" },
+    { soru: "Pauli dışlama ilkesine göre aynı orbitaldeki iki elektronun spinleri nasıl olmalıdır?", siklar: ["Aynı yönlü", "Zıt yönlü", "Önemli değil", "Daima +1/2", "Daima -1/2"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki elementlerden hangisi geçiş metalidir?", siklar: ["Al", "Fe", "Ca", "K", "Mg"], cevap: 1, zorluk: "orta" },
+    { soru: "n=3, l=2 kuantum sayılarına sahip orbital kaç elektron alabilir?", siklar: ["2", "6", "10", "14", "18"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki elementlerden hangisinin atomik yarıçapı en küçüktür?", siklar: ["Li", "Be", "B", "C", "N"], cevap: 3, zorluk: "orta" },
+    { soru: "Hund kuralına göre, p orbitalleri yarım dolu olduğunda elektronlar nasıl yerleşir?", siklar: ["Aynı yönde spinli", "Zıt yönde spinli", "Rastgele", "Çiftlenmiş", "Hepsi aynı orbitalde"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki iyonlardan hangisi paramanyetiktir?", siklar: ["Zn²⁺", "Cu⁺", "Fe²⁺", "Sc³⁺", "Ti⁴⁺"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir elementin 2. iyonlaşma enerjisi, 1. iyonlaşma enerjisinden genellikle nasıldır?", siklar: ["Daha küçük", "Daha büyük", "Eşit", "İlişkisiz", "Yarısı"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki elementlerden hangisi aktinidtir?", siklar: ["La", "Ac", "Ce", "Th", "Pr"], cevap: 3, zorluk: "orta" },
+    { soru: "Cr elementinin elektron konfigürasyonu nedir? (Anomali)", siklar: ["[Ar] 3d⁴ 4s²", "[Ar] 3d⁵ 4s¹", "[Ar] 3d⁶ 4s⁰", "[Ar] 3d³ 4s²", "[Ar] 3d⁴ 4s¹"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki element çiftlerinden hangisinin metalik karakteri daha fazladır?", siklar: ["Na/K", "Mg/Ca", "K/Ca", "Al/Si", "Na/Mg"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir atomun n=4, l=3 kuantum sayılarına sahip elektronları kaç tanedir (maksimum)?", siklar: ["2", "6", "10", "14", "18"], cevap: 3, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisinin 1. iyonlaşma enerjisi beklenenden daha düşüktür? (Anomali)", siklar: ["Be", "B", "C", "N", "O"], cevap: 1, zorluk: "zor" },
+    { soru: "Cu⁺ iyonunun elektron konfigürasyonu nedir?", siklar: ["[Ar] 3d⁹", "[Ar] 3d¹⁰", "[Ar] 3d⁸ 4s¹", "[Ar] 3d⁹ 4s²", "[Ar] 3d⁸"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisinin elektron konfigürasyonunda yarım dolu d orbitali vardır?", siklar: ["Ti", "V", "Cr", "Mn", "Fe"], cevap: 2, zorluk: "zor" },
+    { soru: "Slater kuralına göre, 3s elektronu için S (kalkanlama sabiti) değeri yaklaşık kaçtır?", siklar: ["0,35", "0,85", "1,00", "1,20", "0,50"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisinin 2. iyonlaşma enerjisi en büyüktür?", siklar: ["Na", "Mg", "Al", "Si", "P"], cevap: 0, zorluk: "zor" },
+    { soru: "f orbitallerinin sayısı kaçtır ve her biri kaç elektron alır?", siklar: ["3, 2", "5, 2", "7, 2", "5, 6", "7, 6"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisinin elektron konfigürasyonu beklenenden farklıdır? (Anomali)", siklar: ["Fe", "Cu", "Zn", "Ni", "Co"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir atomun n=3 enerji seviyesinde toplam kaç orbital vardır?", siklar: ["3", "4", "9", "18", "27"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisinin iyonik yarıçapı en küçüktür?", siklar: ["O²⁻", "F⁻", "Na⁺", "Mg²⁺", "Al³⁺"], cevap: 4, zorluk: "zor" },
+    { soru: "Aufbau prensibine göre 5s orbitali 4d orbitalinden önce mi sonra mı dolar?", siklar: ["Önce", "Sonra", "Aynı anda", "Değişken", "Önce 4p sonra 5s"], cevap: 0, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisinin elektron konfigürasyonu [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶ şeklindedir?", siklar: ["Rn", "At", "Po", "Bi", "Pb"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir atomun son elektronu n=4, l=2, m=+2, s=+1/2 kuantum sayılarına sahipse, bu atom hangi elementtir?", siklar: ["Ti", "V", "Cr", "Mn", "Fe"], cevap: 1, zorluk: "zor" }
+  ],
+  
+  'mol': [
+    { soru: "1 mol H₂O kaç gramdır? (H:1, O:16)", siklar: ["16", "17", "18", "20", "15"], cevap: 2, zorluk: "kolay" },
+    { soru: "STP şartlarında 1 mol gazın hacmi kaç litredir?", siklar: ["22,4", "24", "1", "12", "44,8"], cevap: 0, zorluk: "kolay" },
+    { soru: "0,5 mol NaCl'te kaç mol Cl⁻ iyonu vardır?", siklar: ["0,25", "0,5", "1", "2", "0,1"], cevap: 1, zorluk: "kolay" },
+    { soru: "Avogadro sayısı kaçtır?", siklar: ["6,022×10²³", "6,022×10²²", "6,022×10²⁴", "6,022×10²¹", "6,022×10²⁰"], cevap: 0, zorluk: "kolay" },
+    { soru: "12 g karbon kaç mol karbondur?", siklar: ["0,5", "1", "2", "12", "0,25"], cevap: 1, zorluk: "kolay" },
+    { soru: "1 mol CO₂ kaç mol O atomu içerir?", siklar: ["1", "2", "3", "0,5", "4"], cevap: 1, zorluk: "kolay" },
+    { soru: "NaOH'in molar kütlesi kaç g/mol'dür? (Na:23, O:16, H:1)", siklar: ["38", "39", "40", "41", "42"], cevap: 2, zorluk: "kolay" },
+    { soru: "0,1 mol H₂SO₄ kaç mol H⁺ iyonu verir?", siklar: ["0,1", "0,2", "0,3", "0,4", "0,05"], cevap: 1, zorluk: "kolay" },
+    { soru: "22,4 L O₂ gazı STP'de kaç mol'dür?", siklar: ["0,5", "1", "2", "0,25", "1,5"], cevap: 1, zorluk: "kolay" },
+    { soru: "1 mol H₂O kaç tane H atomu içerir?", siklar: ["6,022×10²³", "1,204×10²⁴", "3,011×10²³", "2", "3,011×10²⁴"], cevap: 1, zorluk: "kolay" },
+    { soru: "2,8 g N₂ gazı kaç mol'dür? (N:14)", siklar: ["0,1", "0,2", "0,5", "1", "0,05"], cevap: 0, zorluk: "orta" },
+    { soru: "0,2 M 500 mL NaCl çözeltisinde kaç mol NaCl vardır?", siklar: ["0,1", "0,2", "0,5", "1", "0,05"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki gazlardan hangisi STP'de 11,2 L hacim kaplar?", siklar: ["8 g He", "16 g O₂", "22 g CO₂", "14 g N₂", "32 g O₂"], cevap: 1, zorluk: "orta" },
+    { soru: "C₃H₈'in yanma reaksiyonunda 1 mol C₃H₈ için kaç mol O₂ gerekir?", siklar: ["3", "4", "5", "10", "7"], cevap: 2, zorluk: "orta" },
+    { soru: "%20'lik 200 g NaCl çözeltisinde kaç g NaCl vardır?", siklar: ["20", "30", "40", "50", "60"], cevap: 2, zorluk: "orta" },
+    { soru: "0,5 M 200 mL HCl çözeltisi ile 0,2 M 500 mL NaOH çözeltisi tam nötrleşir mi?", siklar: ["Evet, tam nötrleşir", "HCl fazla", "NaOH fazla", "Veriler yetersiz", "Hiçbiri"], cevap: 0, zorluk: "orta" },
+    { soru: "Al₂(SO₄)₃'te Al³⁺ ve SO₄²⁻ iyonlarının mol oranı kaçtır?", siklar: ["1:1", "2:3", "3:2", "1:3", "3:1"], cevap: 1, zorluk: "orta" },
+    { soru: "5,6 g CO gazı kaç mol'dür? (C:12, O:16)", siklar: ["0,1", "0,2", "0,5", "1", "0,25"], cevap: 1, zorluk: "orta" },
+    { soru: "0,1 mol CaCl₂ çözeltisinde kaç mol Cl⁻ iyonu vardır?", siklar: ["0,1", "0,2", "0,3", "0,4", "0,05"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisi en yüksek derişime sahiptir?", siklar: ["0,5 M 100 mL", "0,2 M 250 mL", "0,1 M 500 mL", "Hepsi aynı", "0,3 M 50 mL"], cevap: 0, zorluk: "orta" },
+    { soru: "H₂ + Cl₂ → 2HCl reaksiyonunda 2 mol H₂ ile 3 mol Cl₂ reaksiyona girerse, hangi reaktan fazla kalır?", siklar: ["H₂", "Cl₂", "Hiçbiri", "Veriler yetersiz", "Her ikisi de"], cevap: 1, zorluk: "orta" },
+    { soru: "0,25 mol CaCO₃ kaç g'dır? (Ca:40, C:12, O:16)", siklar: ["20", "25", "30", "35", "40"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki gazlardan hangisi 44,8 L hacim kaplar? (STP)", siklar: ["4 g H₂", "32 g O₂", "44 g CO₂", "28 g N₂", "16 g CH₄"], cevap: 1, zorluk: "orta" },
+    { soru: "0,1 M 100 mL NaOH çözeltisini 0,5 M yapmak için kaç mL su buharlaştırılmalıdır?", siklar: ["60", "70", "80", "90", "100"], cevap: 2, zorluk: "orta" },
+    { soru: "Fe₂O₃ + 3CO → 2Fe + 3CO₂ reaksiyonunda 160 g Fe₂O₃ için kaç mol CO gerekir?", siklar: ["1", "2", "3", "6", "4,5"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisinde en fazla Cl⁻ iyonu vardır?", siklar: ["0,1 M 100 mL NaCl", "0,05 M 200 mL CaCl₂", "0,2 M 50 mL AlCl₃", "0,1 M 100 mL MgCl₂", "0,1 M 50 mL FeCl₃"], cevap: 2, zorluk: "zor" },
+    { soru: "2SO₂ + O₂ → 2SO₃ reaksiyonunda 64 g SO₂ ve 32 g O₂ reaksiyona girerse, kaç g SO₃ oluşur?", siklar: ["64", "80", "96", "128", "112"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir hidrokarbon 8,8 g CO₂ ve 5,4 g H₂O veriyor. Bileşik kaç mol'dür?", siklar: ["0,1", "0,2", "0,3", "0,4", "0,5"], cevap: 0, zorluk: "zor" },
+    { soru: "0,1 M 100 mL H₂SO₄ ile 0,2 M 100 mL NaOH karıştırılırsa, son çözeltinin pH'ı yaklaşık kaç olur?", siklar: ["1", "7", "13", "2", "11"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki elementlerden hangisi 11,2 L hacimde (STP) en fazla atom sayısı içerir?", siklar: ["He", "Ne", "Ar", "Hepsi aynı", "Kr"], cevap: 0, zorluk: "zor" },
+    { soru: "C₆H₁₂O₆'in molar kütlesi 180 g/mol'dür. 9 g C₆H₁₂O₆ kaç mol C atomu içerir?", siklar: ["0,05", "0,1", "0,3", "0,6", "0,9"], cevap: 2, zorluk: "zor" },
+    { soru: "0,2 M 250 mL Na₂CO₃ çözeltisinde kaç tane Na⁺ iyonu vardır?", siklar: ["3,01×10²²", "6,02×10²²", "3,01×10²³", "6,02×10²³", "1,20×10²³"], cevap: 1, zorluk: "zor" },
+    { soru: "NH₄NO₃'in çözünmesiyle oluşan çözeltide, NH₄⁺ ve NO₃⁻ iyonlarının derişimleri eşit midir?", siklar: ["Evet, her zaman", "Hayır, NH₄⁺ daha fazla", "Hayır, NO₃⁻ daha fazla", "Sıcaklığa bağlı", "pH'a bağlı"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir gaz karışımı 2 mol He, 1 mol Ne ve 1 mol Ar içeriyor. Toplam basınç 4 atm ise, He'nin parsiyel basıncı kaç atm'dir?", siklar: ["1", "1,5", "2", "2,5", "3"], cevap: 2, zorluk: "zor" },
+    { soru: "CaC₂ + 2H₂O → C₂H₂ + Ca(OH)₂ reaksiyonunda 64 g CaC₂ için kaç g C₂H₂ oluşur?", siklar: ["13", "26", "52", "65", "32"], cevap: 1, zorluk: "zor" },
+    { soru: "0,01 M 100 mL AgNO₃ ile 0,01 M 100 mL NaCl karıştırılırsa, kaç mol AgCl çöker?", siklar: ["0,001", "0,002", "0,005", "0,01", "0,0005"], cevap: 0, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisi 0,1 M NaCl çözeltisiyle izotoniktir?", siklar: ["0,05 M CaCl₂", "0,1 M C₆H₁₂O₆", "0,2 M Ure", "0,033 M AlCl₃", "0,1 M KCl"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir amino asit (C₂H₅NO₂) 7,5 g alınıyor. Bu amino asit kaç mol N atomu içerir?", siklar: ["0,05", "0,1", "0,2", "0,25", "0,15"], cevap: 1, zorluk: "zor" },
+    { soru: "2KClO₃ → 2KCl + 3O₂ reaksiyonunda 24,5 g KClO₃ tamamen ayrışırsa, kaç L O₂ oluşur? (STP)", siklar: ["3,36", "6,72", "10,08", "13,44", "16,8"], cevap: 1, zorluk: "zor" },
+    { soru: "0,1 M 50 mL HCl, 0,2 M 25 mL NaOH ve 0,1 M 25 mL KOH ile karıştırılırsa, son çözelti nedir?", siklar: ["Nötr", "Asidik", "Bazik", "Tampon", "Veriler yetersiz"], cevap: 1, zorluk: "zor" }
+  ],
+  
+  'gaz': [
+    { soru: "İdeal gaz denklemi nedir?", siklar: ["PV=nRT", "P=dgh", "E=mc²", "F=ma", "V=kT"], cevap: 0, zorluk: "kolay" },
+    { soru: "Bir gazın basıncı artırılırsa, hacmi nasıl değişir? (Sıcaklık sabit)", siklar: ["Artar", "Azalır", "Değişmez", "Önce artar sonra azalır", "Karesel artar"], cevap: 1, zorluk: "kolay" },
+    { soru: "Charles yasasına göre, sabit basınçta gazın hacmi sıcaklıkla nasıl değişir?", siklar: ["Ters orantılı", "Doğru orantılı", "Değişmez", "Karesel", "Kübik"], cevap: 1, zorluk: "kolay" },
+    { soru: "STP'de 1 mol gazın hacmi kaç litredir?", siklar: ["22,4", "24", "1", "12", "44,8"], cevap: 0, zorluk: "kolay" },
+    { soru: "Gay-Lussac yasasına göre, sabit hacimde gazın basıncı sıcaklıkla nasıl değişir?", siklar: ["Ters orantılı", "Doğru orantılı", "Değişmez", "Karesel", "Logaritmik"], cevap: 1, zorluk: "kolay" },
+    { soru: "Bir gazın sıcaklığı Kelvin cinsinden ikiye katlanırsa, hacmi (sabit basınçta) ne olur?", siklar: ["Yarıya iner", "İkiye katlanır", "Değişmez", "Dörde katlanır", "Üçe katlanır"], cevap: 1, zorluk: "kolay" },
+    { soru: "Aşağıdaki gazlardan hangisi ideal gaz davranışına en yakındır?", siklar: ["He", "CO₂", "H₂O", "NH₃", "SO₂"], cevap: 0, zorluk: "kolay" },
+    { soru: "Bir gazın mol sayısı artırılırsa, basıncı (sabit T ve V) nasıl değişir?", siklar: ["Artar", "Azalır", "Değişmez", "Önce artar", "Önce azalır"], cevap: 0, zorluk: "kolay" },
+    { soru: "Dalton yasası neyi ifade eder?", siklar: ["Gaz karışımlarının basıncı", "Gazların hızları", "Gazların yoğunlukları", "Gazların sıcaklıkları", "Gazların hacimleri"], cevap: 0, zorluk: "kolay" },
+    { soru: "0°C kaç Kelvin'dir?", siklar: ["0", "100", "273", "373", "273,15"], cevap: 2, zorluk: "kolay" },
+    { soru: "Aynı sıcaklık ve basınçta, eşit hacimdeki iki farklı gazın mol sayıları nasıldır?", siklar: ["Farklı", "Eşit", "Kütleyle orantılı", "Yoğunlukla orantılı", "Atom sayısıyla orantılı"], cevap: 1, zorluk: "orta" },
+    { soru: "Graham difüzyon yasasına göre, gazların difüzyon hızları hangi özellikle ters orantılıdır?", siklar: ["Sıcaklık", "Basınç", "Molar kütlenin karekökü", "Hacim", "Yoğunluk"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir gazın basıncı 2 atm, hacmi 4 L ve sıcaklığı 300 K ise, kaç mol gaz vardır? (R=0,082)", siklar: ["0,1", "0,2", "0,3", "0,4", "0,5"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki gazlardan hangisi en yavaş difüze olur?", siklar: ["H₂", "He", "O₂", "CO₂", "N₂"], cevap: 3, zorluk: "orta" },
+    { soru: "Sabit sıcaklıkta bir gazın basıncı 2 atm'den 4 atm'ye çıkarılırsa, hacmi ne olur? (Başlangıç hacmi 8 L)", siklar: ["2 L", "4 L", "8 L", "16 L", "1 L"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir gazın sıcaklığı 27°C'den 127°C'ye çıkarılırsa, basıncı (sabit hacimde) kaç katına çıkar?", siklar: ["1,33", "2", "4", "1,5", "1,2"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki koşullardan hangisinde gazlar ideal davranıştan en uzaktadır?", siklar: ["Yüksek T, düşük P", "Düşük T, yüksek P", "Yüksek T, yüksek P", "Düşük T, düşük P", "Oda sıcaklığı, 1 atm"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir balon 25°C'de 2 L hacme sahiptir. Sıcaklık 50°C'ye çıkarılırsa (sabit basınçta), yeni hacim kaç L olur?", siklar: ["2,17", "3", "4", "1", "2,5"], cevap: 0, zorluk: "orta" },
+    { soru: "Van der Waals denkleminde 'a' sabiti neyi ifade eder?", siklar: ["Molekül hacmi", "Moleküller arası çekim kuvveti", "Molekül kütlesi", "Sıcaklık", "Basınç"], cevap: 1, zorluk: "orta" },
+    { soru: "Aynı sıcaklıkta, He ve O₂ gazlarının ortalama kinetik enerjileri nasıldır?", siklar: ["He > O₂", "He < O₂", "He = O₂", "Karşılaştırılamaz", "He >> O₂"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir gazın sıcaklığı 200 K'den 400 K'ye çıkarılırsa, kök ortalama hızı kaç katına çıkar?", siklar: ["√2", "2", "4", "1", "√3"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki gazlardan hangisinin ortalama kinetik enerjisi en yüksektir? (Aynı sıcaklıkta)", siklar: ["He", "Ne", "Ar", "Hepsi eşit", "Kr"], cevap: 3, zorluk: "orta" },
+    { soru: "Bir gazın basıncı 1 atm, hacmi 22,4 L ve sıcaklığı 273 K ise, bu gaz kaç mol'dür?", siklar: ["0,5", "1", "2", "Veriler yetersiz", "0,25"], cevap: 1, zorluk: "orta" },
+    { soru: "Gazların yoğunlukları hangi koşullarda artar?", siklar: ["Basınç artar, sıcaklık azalır", "Basınç azalır, sıcaklık artar", "Her ikisi de artar", "Her ikisi de azalır", "Sadece basınç artar"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki gazlardan hangisinin Van der Waals 'a' sabiti en büyüktür?", siklar: ["He", "Ne", "Ar", "Kr", "Xe"], cevap: 4, zorluk: "orta" },
+    { soru: "Bir gaz karışımı 2 mol He ve 3 mol Ne içeriyor. Toplam basınç 5 atm ise, Ne'nin parsiyel basıncı kaç atm'dir?", siklar: ["2", "2,5", "3", "3,5", "4"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir gazın basıncı 2 atm, hacmi 3 L ve sıcaklığı 300 K. Gazın mol sayısı 0,25 mol ise, R değeri kaç olur?", siklar: ["0,08", "0,082", "0,084", "0,086", "0,09"], cevap: 0, zorluk: "zor" },
+    { soru: "Aşağıdaki gazlardan hangisinin ortalama kare hızı en yüksektir? (Aynı sıcaklıkta)", siklar: ["H₂", "He", "N₂", "O₂", "CO₂"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir gazın sıcaklığı 300 K'den 600 K'ye çıkarılırsa, çarpışma frekansı kaç katına çıkar?", siklar: ["√2", "2", "2√2", "4", "√3"], cevap: 0, zorluk: "zor" },
+    { soru: "Van der Waals denklemi: (P + an²/V²)(V-nb) = nRT. 'b' sabiti için aşağıdaki ifadelerden hangisi doğrudur?", siklar: ["Hepsii için aynı", "Küçük moleküller için büyük", "Büyük moleküller için büyük", "Sıcaklığa bağlı", "Basınca bağlı"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir gazın basıncı 4 atm, hacmi 5 L. Sıcaklık sabit tutularak hacim 10 L'ye çıkarılırsa, yeni basınç kaç atm olur?", siklar: ["1", "2", "3", "4", "0,5"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki gazlardan hangisi en yüksek kritik sıcaklığa sahiptir?", siklar: ["H₂", "N₂", "O₂", "CO₂", "He"], cevap: 3, zorluk: "zor" },
+    { soru: "Bir gazın sıcaklığı 27°C, basıncı 2 atm ve yoğunluğu 2 g/L. Gazın molar kütlesi kaç g/mol'dür? (R=0,082)", siklar: ["24,6", "25", "30", "32", "28"], cevap: 0, zorluk: "zor" },
+    { soru: "Graham yasasına göre, H₂ ve O₂ gazlarının difüzyon hızları oranı kaçtır? (H:1, O:16)", siklar: ["1:4", "2:1", "4:1", "1:2", "1:1"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir gazın basıncı 1 atm, hacmi 2 L ve sıcaklığı 273 K. Gaz 2 atm basınç ve 546 K sıcaklığa getirilirse, yeni hacim kaç L olur?", siklar: ["1", "2", "3", "4", "0,5"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki gazlardan hangisinin ideal gaz davranışından sapması en fazladır?", siklar: ["He (300 K, 1 atm)", "N₂ (300 K, 1 atm)", "CO₂ (300 K, 10 atm)", "H₂ (300 K, 10 atm)", "O₂ (300 K, 1 atm)"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir gazın sıcaklığı 200 K'den 800 K'ye çıkarılırsa, ortalama kare hızı kaç katına çıkar?", siklar: ["2", "4", "√2", "2√2", "√3"], cevap: 0, zorluk: "zor" },
+    { soru: "Maxwell-Boltzmann dağılımına göre, bir gazın sıcaklığı artırılırsa hız dağılımı nasıl değişir?", siklar: ["Daralır, tepe yüksekler", "Genişler, tepe düşer", "Değişmez", "Sadece kayar", "Daralır, tepe düşer"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir gazın basıncı 3 atm, hacmi 4 L ve sıcaklığı 400 K. Gazın mol sayısı 0,5 mol ise, gazın molar kütlesi 32 g/mol ise, yoğunluğu kaç g/L'dir?", siklar: ["2", "3", "4", "5", "6"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki koşullardan hangisinde gerçek gazlar ideal gaz denklemini en iyi sağlar?", siklar: ["Yüksek P, düşük T", "Düşük P, yüksek T", "Yüksek P, yüksek T", "Düşük P, düşük T", "Oda koşulları"], cevap: 1, zorluk: "zor" }
+  ],
+  
+  'cozelti': [
+    { soru: "0,1 M NaCl çözeltisinin derişimi kaç mol/L'dir?", siklar: ["0,01", "0,1", "1", "10", "0,001"], cevap: 1, zorluk: "kolay" },
+    { soru: "%10'luk NaCl çözeltisi 100 g'de kaç g NaCl içerir?", siklar: ["1", "5", "10", "20", "15"], cevap: 2, zorluk: "kolay" },
+    { soru: "Molarite nedir?", siklar: ["Mol/kütüle", "Mol/hacim", "Kütle/hacim", "Hacim/kütle", "Mol/basınç"], cevap: 1, zorluk: "kolay" },
+    { soru: "0,5 M 200 mL çözeltide kaç mol çözünmüş madde vardır?", siklar: ["0,1", "0,2", "0,5", "1", "0,05"], cevap: 0, zorluk: "kolay" },
+    { soru: "Molalite nedir?", siklar: ["Mol/L", "Mol/kg çözücü", "g/L", "mol/g", "kg/mol"], cevap: 1, zorluk: "kolay" },
+    { soru: "Aşağıdaki çözeltilerden hangisi elektrolit çözeltisidir?", siklar: ["Şeker suyu", "Tuzlu su", "Benzin", "Alkol suyu", "Zeytinyağı"], cevap: 1, zorluk: "kolay" },
+    { soru: "Çözünürlük genellikle sıcaklıkla nasıl değişir?", siklar: ["Azalır", "Artar", "Değişmez", "Önce artar sonra azalır", "Sadece gazlar için artar"], cevap: 1, zorluk: "kolay" },
+    { soru: "Doymuş çözelti nedir?", siklar: ["Çok çözünen", "Denge halindeki", "Hiç çözünmeyen", "Sürekli karışan", "Aşırı çözünen"], cevap: 1, zorluk: "kolay" },
+    { soru: "0,1 mol NaCl 500 mL su içinde çözülürse, molarite kaç olur?", siklar: ["0,05", "0,1", "0,2", "0,5", "0,01"], cevap: 2, zorluk: "kolay" },
+    { soru: "Aşağıdaki maddelerden hangisi suda daha iyi çözünür?", siklar: ["NaCl", "C₆H₁₄", "I₂", "C₆H₆", "CCl₄"], cevap: 0, zorluk: "kolay" },
+    { soru: "0,2 M 100 mL HCl ile 0,1 M 200 mL NaOH karıştırılırsa, son çözelti nedir?", siklar: ["Nötr", "Asidik", "Bazik", "Tampon", "Veriler yetersiz"], cevap: 1, zorluk: "orta" },
+    { soru: "20 g NaOH 80 g suda çözülürse, çözeltinin kütlece yüzde derişimi kaçtır?", siklar: ["15", "20", "25", "30", "16"], cevap: 1, zorluk: "orta" },
+    { soru: "0,1 M 50 mL NaCl çözeltisi 0,2 M 50 mL NaCl çözeltisiyle karıştırılırsa, son derişim kaç olur?", siklar: ["0,1", "0,15", "0,2", "0,3", "0,25"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisi en yüksek buhar basıncına sahiptir?", siklar: ["0,1 M NaCl", "0,1 M C₆H₁₂O₆", "0,2 M NaCl", "0,05 M CaCl₂", "0,1 M MgCl₂"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir çözeltinin donma noktası düşüklüğü hangi özellikle doğru orantılıdır?", siklar: ["Çözünenin molar kütlesi", "Çözünenin molalitesi", "Çözücünün molar kütlesi", "Sıcaklık", "Basınç"], cevap: 1, zorluk: "orta" },
+    { soru: "0,1 molal glikoz çözeltisinin donma noktası kaç °C'dir? (Kf=1,86 °C/m)", siklar: ["-0,186", "-0,372", "-1,86", "-3,72", "-0,093"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin kaynama noktası en yüksektir?", siklar: ["0,1 M NaCl", "0,1 M C₆H₁₂O₆", "0,2 M NaCl", "0,1 M CaCl₂", "0,05 M AlCl₃"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir çözeltinin osmotik basıncı hangi faktörle doğru orantılıdır?", siklar: ["Sıcaklık", "Hacim", "Basınç", "Yoğunluk", "pH"], cevap: 0, zorluk: "orta" },
+    { soru: "0,1 M NaCl ve 0,1 M C₆H₁₂O₆ çözeltileri aynı sıcaklıkta ise, hangisinin osmotik basıncı daha yüksektir?", siklar: ["NaCl", "C₆H₁₂O₆", "Eşit", "Karşılaştırılamaz", "Veriler yetersiz"], cevap: 0, zorluk: "orta" },
+    { soru: "Bir çözeltinin pH'ı 3 ise, [H⁺] derişimi kaç M'dir?", siklar: ["10⁻³", "10⁻¹¹", "3", "10³", "10⁻⁴"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisi izotonik değildir? (0,9% NaCl ile)", siklar: ["5% Glikoz", "0,3 M Ure", "0,15 M NaCl", "0,1 M CaCl₂", "0,2 M NaCl"], cevap: 3, zorluk: "orta" },
+    { soru: "Henry yasasına göre, bir gazın çözünürlüğü basınçla nasıl değişir?", siklar: ["Ters orantılı", "Doğru orantılı", "Değişmez", "Karesel", "Logaritmik"], cevap: 1, zorluk: "orta" },
+    { soru: "0,2 M 100 mL NaOH çözeltisini 0,5 M yapmak için kaç g NaOH eklenmelidir? (NaOH:40 g/mol)", siklar: ["0,8", "1,2", "1,6", "2,0", "2,4"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir çözeltinin donma noktası -0,93°C ise, molalitesi kaçtır? (Kf=1,86 °C/m, i=1)", siklar: ["0,25", "0,5", "0,75", "1,0", "0,1"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin iletkenliği en yüksektir?", siklar: ["0,1 M C₆H₁₂O₆", "0,1 M CH₃COOH", "0,1 M NaCl", "0,1 M NH₃", "0,1 M C₂H₅OH"], cevap: 2, zorluk: "orta" },
+    { soru: "0,1 M 100 mL AgNO₃ ile 0,1 M 100 mL NaCl karıştırılırsa, çözeltide kalan [Ag⁺] kaç M olur? (Ksp(AgCl)=1,8×10⁻¹⁰)", siklar: ["0", "1,8×10⁻¹⁰", "1,34×10⁻⁵", "0,05", "1,8×10⁻⁵"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir çözelti 0,1 M NaCl ve 0,1 M MgCl₂ içeriyor. Çözeltinin iyonik şiddeti kaçtır?", siklar: ["0,2", "0,3", "0,4", "0,6", "0,5"], cevap: 2, zorluk: "zor" },
+    { soru: "0,01 M HA zayıf asidinin pH'ı 4 ise, Ka değeri kaçtır?", siklar: ["10⁻⁴", "10⁻⁶", "10⁻⁸", "10⁻¹⁰", "10⁻⁵"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir çözeltinin buhar basıncı 20 mmHg, saf çözücünün buhar basıncı 25 mmHg ise, çözeltinin mol kesri kaçtır?", siklar: ["0,2", "0,25", "0,75", "0,8", "0,5"], cevap: 0, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin donma noktası en düşüktür?", siklar: ["0,1 M NaCl", "0,1 M MgCl₂", "0,1 M AlCl₃", "0,1 M C₆H₁₂O₆", "0,05 M Na₂SO₄"], cevap: 2, zorluk: "zor" },
+    { soru: "0,1 M NH₃ çözeltisinin pH'ı yaklaşık kaçtır? (Kb=1,8×10⁻⁵)", siklar: ["9", "10", "11", "12", "8"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir çözelti 0,1 M Na₂SO₄ ve 0,1 M NaCl içeriyor. [Na⁺] derişimi kaç M'dir?", siklar: ["0,2", "0,3", "0,4", "0,5", "0,35"], cevap: 1, zorluk: "zor" },
+    { soru: "0,01 M Ca(OH)₂ çözeltisinin pH'ı kaçtır?", siklar: ["10", "11", "12", "13", "12,3"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin osmotik basıncı en yüksektir?", siklar: ["0,1 M NaCl", "0,1 M CaCl₂", "0,2 M C₆H₁₂O₆", "0,05 M Al₂(SO₄)₃", "0,15 M NaCl"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir tampon çözelti 0,1 M CH₃COOH ve 0,1 M CH₃COONa içeriyor. pH yaklaşık kaçtır? (pKa=4,76)", siklar: ["3,76", "4,76", "5,76", "6,76", "4,5"], cevap: 1, zorluk: "zor" },
+    { soru: "0,1 M 50 mL HCl ile 0,1 M 25 mL NaOH karıştırılırsa, pH kaç olur?", siklar: ["1", "1,3", "1,48", "2", "1,5"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir çözeltinin kaynama noktası 100,52°C ise, molalitesi kaçtır? (Kb=0,52 °C/m, i=1)", siklar: ["0,5", "1", "1,5", "2", "0,25"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin pH'ı en düşüktür?", siklar: ["0,1 M HCl", "0,1 M H₂SO₄", "0,1 M CH₃COOH", "0,1 M NH₄Cl", "0,1 M HNO₃"], cevap: 1, zorluk: "zor" },
+    { soru: "0,01 M Na₂CO₃ çözeltisinin pH'ı yaklaşık kaçtır? (H₂CO₃: pKa1=6,35, pKa2=10,33)", siklar: ["8,3", "9,3", "10,3", "11,3", "12"], cevap: 3, zorluk: "zor" },
+    { soru: "Bir çözelti 0,1 M HF (Ka=6,6×10⁻⁴) ve 0,2 M NaF içeriyor. pH yaklaşık kaçtır?", siklar: ["2,5", "3,0", "3,5", "4,0", "3,2"], cevap: 2, zorluk: "zor" }
+  ],
+  
+  'denge': [
+    { soru: "Le Chatelier prensibine göre, dengeye etki uygulanırsa sistem ne yapar?", siklar: ["Etkiyi güçlendirir", "Etkiyi zayıflatır", "Değişmez", "Bozulur", "Hızlanır"], cevap: 1, zorluk: "kolay" },
+    { soru: "N₂ + 3H₂ ⇌ 2NH₃ + ısı' da sıcaklık artırılırsa denge hangi yöne kayar?", siklar: ["Ürünler", "Girenler", "Değişmez", "Önce ürünlere", "Hızlanır"], cevap: 1, zorluk: "kolay" },
+    { soru: "Denge sabiti Kc nedir?", siklar: ["Ürün/giren oranı", "Denge derişimlerinin oranı", "Hız sabiti", "Sıcaklık sabiti", "Basınç sabiti"], cevap: 1, zorluk: "kolay" },
+    { soru: "Bir denge reaksiyonunda katalizör neyi değiştirir?", siklar: ["Denge konumunu", "Denge sabitini", "Dengeye ulaşma hızını", "Ürün miktarını", "Sıcaklığı"], cevap: 2, zorluk: "kolay" },
+    { soru: "H₂ + I₂ ⇌ 2HI reaksiyonunda basınç artırılırsa denge nasıl etkilenir?", siklar: ["Ürünlere kayar", "Girenlere kayar", "Değişmez", "Bozulur", "Hızlanır"], cevap: 2, zorluk: "kolay" },
+    { soru: "A + B ⇌ C + D reaksiyonunda C ürünü uzaklaştırılırsa denge hangi yöne kayar?", siklar: ["Girenler", "Ürünler", "Değişmez", "Bozulur", "Hızlanır"], cevap: 1, zorluk: "kolay" },
+    { soru: "Denge sabiti Kc yalnızca hangi faktöre bağlıdır?", siklar: ["Basınç", "Sıcaklık", "Konsantrasyon", "Katalizör", "Hacim"], cevap: 1, zorluk: "kolay" },
+    { soru: "2SO₂ + O₂ ⇌ 2SO₃ reaksiyonunda hacim azaltılırsa denge hangi yöne kayar?", siklar: ["Girenler (3 mol)", "Ürünler (2 mol)", "Değişmez", "Bozulur", "Hızlanır"], cevap: 1, zorluk: "kolay" },
+    { soru: "Denge reaksiyonunda ürün derişimleri artırılırsa Qc ve Kc arasındaki ilişki nasıldır?", siklar: ["Qc < Kc", "Qc = Kc", "Qc > Kc", "Karşılaştırılamaz", "Qc = 0"], cevap: 2, zorluk: "kolay" },
+    { soru: "Endotermik bir reaksiyonda sıcaklık artırılırsa Kc nasıl değişir?", siklar: ["Artar", "Azalır", "Değişmez", "Önce artar", "Önce azalır"], cevap: 0, zorluk: "kolay" },
+    { soru: "N₂O₄ ⇌ 2NO₂ reaksiyonunda Kc=4. Denge anında [N₂O₄]=0,5 M ise, [NO₂] kaç M'dir?", siklar: ["1", "2", "√2", "2√2", "4"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisinde basınç değişimi dengeyi etkilemez?", siklar: ["N₂ + 3H₂ ⇌ 2NH₃", "H₂ + I₂ ⇌ 2HI", "2SO₂ + O₂ ⇌ 2SO₃", "N₂O₄ ⇌ 2NO₂", "PCl₅ ⇌ PCl₃ + Cl₂"], cevap: 1, zorluk: "orta" },
+    { soru: "PCl₅ ⇌ PCl₃ + Cl₂ reaksiyonunda Kp ve Kc arasındaki ilişki nedir?", siklar: ["Kp=Kc", "Kp=Kc(RT)", "Kp=Kc(RT)⁻¹", "Kp=Kc(RT)²", "Kp=Kc(RT)³"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir denge reaksiyonunda Qc=2 ve Kc=4 ise, denge hangi yöne kayar?", siklar: ["Girenler", "Ürünler", "Dengededir", "Bozulur", "Hızlanır"], cevap: 1, zorluk: "orta" },
+    { soru: "CaCO₃(s) ⇌ CaO(s) + CO₂(g) reaksiyonunda Kc ifadesi nedir?", siklar: ["[CaO][CO₂]/[CaCO₃]", "[CO₂]", "[CaO]/[CaCO₃]", "1/[CO₂]", "Kp=Kc"], cevap: 1, zorluk: "orta" },
+    { soru: "N₂ + 3H₂ ⇌ 2NH₃ reaksiyonunda Kc=0,5. Denge anında [N₂]=1, [H₂]=2 ise, [NH₃] kaçtır?", siklar: ["1", "2", "√2", "2√2", "4"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir reaksiyonun ΔH<0 ve ΔS<0 ise, yüksek sıcaklıkta denge hangi yöndedir?", siklar: ["Ürünler", "Girenler", "Sıcaklığa bağlı", "Her zaman ürünler", "Dengede"], cevap: 1, zorluk: "orta" },
+    { soru: "2A + B ⇌ C reaksiyonunda [A] iki katına çıkarılırsa, reaksiyon hızı kaç katına çıkar?", siklar: ["2", "4", "6", "8", "3"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisinde Kp=Kc'dir?", siklar: ["N₂ + 3H₂ ⇌ 2NH₃", "H₂ + I₂ ⇌ 2HI", "2SO₂ + O₂ ⇌ 2SO₃", "PCl₅ ⇌ PCl₃ + Cl₂", "N₂O₄ ⇌ 2NO₂"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir denge reaksiyonunda katalizör eklenirse, ürün/giren oranı zamanla nasıl değişir?", siklar: ["Artar", "Azalır", "Değişmez", "Önce artar sonra azalır", "Hızlanır"], cevap: 2, zorluk: "orta" },
+    { soru: "N₂O₄ ⇌ 2NO₂ reaksiyonunda renk derinliği NO₂ derişimiyle orantılıdır. Sıcaklık artırılırsa renk nasıl değişir? (Endotermik)", siklar: ["Açılır", "Koyulaşır", "Değişmez", "Önce açılır", "Önce koyulaşır"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir denge reaksiyonunda ürün derişimi artırılırsa, yeni denge kurulduğunda ürün derişimi başlangıçtan nasıldır?", siklar: ["Daha düşük", "Daha yüksek", "Eşit", "Karşılaştırılamaz", "Sıfır"], cevap: 1, zorluk: "orta" },
+    { soru: "Haber-Bosch prosesinde NH₃ verimi nasıl artırılır?", siklar: ["Yüksek T, düşük P", "Düşük T, yüksek P", "Yüksek T, yüksek P", "Düşük T, düşük P", "Oda koşulları"], cevap: 1, zorluk: "orta" },
+    { soru: "A + 2B ⇌ C reaksiyonunda Kc=4. Denge anında [A]=1, [C]=4 ise, [B] kaçtır?", siklar: ["0,5", "1", "2", "4", "0,25"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir denge reaksiyonunda sıcaklık artırılırsa Kc azalıyorsa, reaksiyonun entalpisi nasıldır?", siklar: ["ΔH>0", "ΔH<0", "ΔH=0", "Belirsiz", "ΔH=RT"], cevap: 1, zorluk: "orta" },
+    { soru: "N₂ + 3H₂ ⇌ 2NH₃ reaksiyonunda başlangıçta 1 mol N₂ ve 3 mol H₂ var. Denge anında 0,5 mol NH₃ oluşmuşsa, H₂'nin denge derişimi (V=1L) kaçtır?", siklar: ["1,5", "2,0", "2,25", "2,5", "3,0"], cevap: 2, zorluk: "zor" },
+    { soru: "2A ⇌ B + C reaksiyonunda Kc=0,25. Başlangıçta sadece A var ve [A]₀=2 M. Denge anında [B] kaç M'dir?", siklar: ["0,25", "0,5", "0,67", "1,0", "0,4"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir denge reaksiyonunda ΔG° = -RT ln Kc. Kc=10 ve T=298 K ise, ΔG° yaklaşık kaç kJ/mol'dür?", siklar: ["-2,3", "-5,7", "-11,4", "-23", "-34"], cevap: 1, zorluk: "zor" },
+    { soru: "PCl₅(g) ⇌ PCl₃(g) + Cl₂(g) reaksiyonunda başlangıçta 2 mol PCl₅ var. Denge anında toplam basınç başlangıç basıncının 1,5 katı ise, PCl₅'in ayrışma yüzdesi kaçtır?", siklar: ["25", "33", "50", "67", "75"], cevap: 2, zorluk: "zor" },
+    { soru: "N₂O₄ ⇌ 2NO₂ reaksiyonunda 298 K'de Kp=0,113. Aynı sıcaklıkta Kc kaçtır?", siklar: ["0,0046", "0,046", "0,46", "4,6", "0,01"], cevap: 0, zorluk: "zor" },
+    { soru: "A + B ⇌ C reaksiyonunda başlangıçta [A]=[B]=1 M. Denge anında [C]=0,6 M ise, Kc kaçtır?", siklar: ["1,5", "2,25", "3,75", "6,0", "4,5"], cevap: 2, zorluk: "zor" },
+    { soru: "2SO₂ + O₂ ⇌ 2SO₃ reaksiyonunda Kc=100. Denge anında [SO₂]=0,1 ve [O₂]=0,2 ise, [SO₃] kaçtır?", siklar: ["1", "2", "√2", "2√5", "√5"], cevap: 3, zorluk: "zor" },
+    { soru: "Bir denge reaksiyonunda sıcaklık artırıldığında Kc artıyor ve renk koyulaşıyor. Reaksiyon hakkında ne söylenebilir?", siklar: ["Endotermik, ürün renkli", "Ekzotermik, ürün renkli", "Endotermik, giren renkli", "Ekzotermik, giren renkli", "Renk değişmez"], cevap: 0, zorluk: "zor" },
+    { soru: "CO + H₂O ⇌ CO₂ + H₂ reaksiyonunda Kc=1. Başlangıçta [CO]=[H₂O]=2 M. Denge anında [CO₂] kaç M'dir?", siklar: ["0,5", "1", "1,5", "2", "0,8"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir denge reaksiyonunda basınç artırıldığında ürün verimi artıyor. Reaksiyon hakkında ne söylenebilir?", siklar: ["Δn(gaz)>0", "Δn(gaz)<0", "Δn(gaz)=0", "Sıvı fazlı", "Katı fazlı"], cevap: 1, zorluk: "zor" },
+    { soru: "NH₄HS(s) ⇌ NH₃(g) + H₂S(g) reaksiyonunda 298 K'de toplam basınç 0,8 atm ise, Kp kaçtır?", siklar: ["0,08", "0,16", "0,32", "0,64", "0,4"], cevap: 1, zorluk: "zor" },
+    { soru: "A + 2B ⇌ 2C reaksiyonunda Kc=4. Denge anında [A]=0,5, [B]=1 ise, [C] kaçtır?", siklar: ["1", "√2", "2", "2√2", "√3"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir denge reaksiyonunda inert gaz eklenirse (sabit hacimde), denge nasıl etkilenir?", siklar: ["Ürünlere kayar", "Girenlere kayar", "Değişmez", "Bozulur", "Hızlanır"], cevap: 2, zorluk: "zor" },
+    { soru: "N₂ + 3H₂ ⇌ 2NH₃ reaksiyonunda başlangıçta 2 mol N₂ ve 6 mol H₂ var. Denge anında NH₃ mol sayısı 2 ise, N₂'nin dönüşüm yüzdesi kaçtır?", siklar: ["25", "33", "50", "67", "75"], cevap: 2, zorluk: "zor" },
+    { soru: "2NO₂ ⇌ N₂O₄ reaksiyonunda başlangıçta 2 mol NO₂ var. Denge anında toplam mol 1,5 ise, Kc (V=1L) kaçtır?", siklar: ["0,5", "1", "2", "4", "0,25"], cevap: 1, zorluk: "zor" }
+  ],
+  
+  'asitbaz': [
+    { soru: "pH = 7 olan çözelti nedir?", siklar: ["Asidik", "Bazik", "Nötr", "Tampon", "Zayıf asit"], cevap: 2, zorluk: "kolay" },
+    { soru: "HCl'in su içindeki iyonlaşma denklemi nedir?", siklar: ["HCl→H⁺+Cl⁻", "HCl+H₂O→H₃O⁺+Cl⁻", "HCl→H₂+Cl₂", "HCl+NaOH→NaCl+H₂O", "HCl→H⁺+Cl⁻+H₂O"], cevap: 1, zorluk: "kolay" },
+    { soru: "pH + pOH = ?", siklar: ["7", "10", "14", "1", "Kw"], cevap: 2, zorluk: "kolay" },
+    { soru: "Aşağıdaki maddelerden hangisi güçlü asittir?", siklar: ["CH₃COOH", "HCl", "NH₃", "H₂O", "H₂CO₃"], cevap: 1, zorluk: "kolay" },
+    { soru: "NaOH çözeltisinin pH'ı genellikle kaçtır?", siklar: ["1-3", "5-7", "7-9", "12-14", "9-11"], cevap: 3, zorluk: "kolay" },
+    { soru: "Bir çözeltinin [H⁺]=10⁻³ M ise, pH'ı kaçtır?", siklar: ["3", "7", "11", "14", "2"], cevap: 0, zorluk: "kolay" },
+    { soru: "Aşağıdaki çiftlerden hangisi konjuge asit-baz çiftidir?", siklar: ["HCl-NaOH", "H₂O-OH⁻", "NaCl-HCl", "NH₃-H₂O", "H₂SO₄-Na₂SO₄"], cevap: 1, zorluk: "kolay" },
+    { soru: "H₂SO₄ kaç protonlu asittir?", siklar: ["1", "2", "3", "4", "0"], cevap: 1, zorluk: "kolay" },
+    { soru: "Bir çözeltinin pOH'ı 5 ise, pH'ı kaçtır?", siklar: ["5", "7", "9", "14", "8"], cevap: 2, zorluk: "kolay" },
+    { soru: "Aşağıdaki maddelerden hangisi zayıf bazdır?", siklar: ["NaOH", "KOH", "NH₃", "Ca(OH)₂", "Ba(OH)₂"], cevap: 2, zorluk: "kolay" },
+    { soru: "0,1 M CH₃COOH çözeltisinin pH'ı yaklaşık kaçtır? (Ka=1,8×10⁻⁵)", siklar: ["1", "2,87", "4,76", "5", "3"], cevap: 1, zorluk: "orta" },
+    { soru: "0,01 M NaOH çözeltisinin pH'ı kaçtır?", siklar: ["10", "11", "12", "13", "14"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki asitlerden hangisinin pKa değeri en büyüktür (en zayıf asit)?", siklar: ["HCl (pKa=-7)", "CH₃COOH (pKa=4,76)", "HCN (pKa=9,2)", "H₂O (pKa=15,7)", "H₂SO₄ (pKa=-3)"], cevap: 3, zorluk: "orta" },
+    { soru: "0,1 M HCl 50 mL ile 0,1 M NaOH 25 mL karıştırılırsa, pH kaç olur?", siklar: ["1", "1,3", "1,48", "2", "1,5"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir tampon çözelti 0,1 M CH₃COOH ve 0,1 M CH₃COONa içeriyor. pH yaklaşık kaçtır?", siklar: ["3,76", "4,76", "5,76", "6,76", "4,5"], cevap: 1, zorluk: "orta" },
+    { soru: "H₂CO₃'ün konjuge bazı nedir?", siklar: ["CO₃²⁻", "HCO₃⁻", "OH⁻", "H₂O", "H₃O⁺"], cevap: 1, zorluk: "orta" },
+    { soru: "0,1 M NH₄Cl çözeltisinin pH'ı 1'den büyük mü küçük mü?", siklar: ["Büyük", "Küçük", "Eşit", "Belirsiz", "7"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki tuzlardan hangisinin çözeltisi bazik özellik gösterir?", siklar: ["NaCl", "NH₄Cl", "Na₂CO₃", "KNO₃", "Na₂SO₄"], cevap: 2, zorluk: "orta" },
+    { soru: "0,01 M H₂SO₄ çözeltisinin pH'ı yaklaşık kaçtır? (Tam iyonlaşır)", siklar: ["1,3", "1,7", "2", "2,3", "1"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir çözeltinin [H⁺]=2×10⁻⁵ M ise, pH yaklaşık kaçtır?", siklar: ["4,3", "4,7", "5", "5,3", "4,5"], cevap: 1, zorluk: "orta" },
+    { soru: "Henderson-Hasselbalch denklemi nedir?", siklar: ["pH=pKa+log([Baz]/[Asit])", "pH=pKa+log([Asit]/[Baz])", "pH=pKa-[Asit]/[Baz]", "pH=pKa+[Baz]/[Asit]", "pH=pKa-log([Baz]/[Asit])"], cevap: 0, zorluk: "orta" },
+    { soru: "0,1 M Na₂CO₃ çözeltisinin pH'ı yaklaşık kaçtır? (H₂CO₃ pKa2=10,33)", siklar: ["8,3", "9,3", "10,3", "11,3", "12"], cevap: 3, zorluk: "orta" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin pH'ı en düşüktür?", siklar: ["0,1 M HCl", "0,1 M H₂SO₄", "0,1 M CH₃COOH", "0,1 M NH₄Cl", "0,1 M HNO₃"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir zayıf asidin pH'ı, aynı derişimdeki güçlü asidin pH'ından nasıldır?", siklar: ["Daha düşük", "Daha yüksek", "Eşit", "Karşılaştırılamaz", "Aynı"], cevap: 1, zorluk: "orta" },
+    { soru: "0,1 M HF (Ka=6,6×10⁻⁴) ve 0,2 M NaF tamponunun pH'ı yaklaşık kaçtır?", siklar: ["2,5", "3,0", "3,5", "4,0", "3,2"], cevap: 2, zorluk: "orta" },
+    { soru: "0,1 M HA zayıf asidinin pH'ı 3 ise, Ka değeri kaçtır?", siklar: ["10⁻³", "10⁻⁵", "10⁻⁶", "10⁻⁷", "10⁻⁴"], cevap: 1, zorluk: "zor" },
+    { soru: "0,01 M H₂S çözeltisinin [S²⁻] derişimi yaklaşık kaçtır? (Ka1=10⁻⁷, Ka2=10⁻¹⁹)", siklar: ["10⁻⁷", "10⁻¹³", "10⁻¹⁹", "10⁻²⁶", "10⁻¹⁴"], cevap: 2, zorluk: "zor" },
+    { soru: "0,1 M NH₃ (Kb=1,8×10⁻⁵) ve 0,1 M NH₄Cl tamponunun pH'ı kaçtır?", siklar: ["9,26", "9,56", "9,86", "10,26", "9,0"], cevap: 0, zorluk: "zor" },
+    { soru: "0,1 M Na₂CO₃ çözeltisinde [CO₃²⁻]/[HCO₃⁻] oranı yaklaşık kaçtır? (H₂CO₃ pKa2=10,33, pH≈11,3)", siklar: ["0,1", "1", "10", "100", "0,01"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir çözelti 0,1 M CH₃COOH (Ka=1,8×10⁻⁵) ve 0,05 M NaOH içeriyor. pH yaklaşık kaçtır?", siklar: ["4,14", "4,44", "4,76", "5,06", "4,5"], cevap: 1, zorluk: "zor" },
+    { soru: "0,01 M H₃PO₄ çözeltisinin [H⁺] yaklaşık kaçtır? (Ka1=7,5×10⁻³)", siklar: ["10⁻²", "1,7×10⁻²", "2,5×10⁻²", "5×10⁻³", "3×10⁻²"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin pH'ı tampon bölgededir? (Asidin pKa=5)", siklar: ["0,1 M asit", "0,1 M asit + 0,1 M tuz", "0,1 M baz", "0,1 M tuz", "0,1 M asit + 0,01 M tuz"], cevap: 1, zorluk: "zor" },
+    { soru: "0,1 M NaHCO₃ çözeltisinin pH'ı yaklaşık kaçtır? (H₂CO₃ pKa1=6,35, pKa2=10,33)", siklar: ["6,35", "8,34", "10,33", "7,00", "9,0"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir zayıf asidin %1 iyonlaşması için Ka değeri yaklaşık kaç olmalıdır? (Ca=0,1 M)", siklar: ["10⁻³", "10⁻⁵", "10⁻⁷", "10⁻⁹", "10⁻⁴"], cevap: 1, zorluk: "zor" },
+    { soru: "0,1 M HCl 20 mL ile 0,1 M NH₃ 20 mL karıştırılırsa, pH yaklaşık kaçtır? (NH₄⁺ Ka=5,6×10⁻¹⁰)", siklar: ["3", "4,5", "5,1", "6", "5,5"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin tampon kapasitesi en yüksektir?", siklar: ["0,01 M asit + 0,01 M tuz", "0,1 M asit + 0,1 M tuz", "0,5 M asit + 0,5 M tuz", "1 M asit + 0,01 M tuz", "0,2 M asit + 0,2 M tuz"], cevap: 2, zorluk: "zor" },
+    { soru: "0,01 M Ca(OH)₂ çözeltisinin pOH'ı kaçtır?", siklar: ["1", "1,3", "1,7", "2", "1,5"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir çözelti 0,1 M CH₃COOH ve 0,2 M CH₃COONa içeriyor. 0,01 mol NaOH eklendikten sonra pH yaklaşık kaçtır?", siklar: ["4,6", "4,76", "4,9", "5,1", "4,5"], cevap: 2, zorluk: "zor" },
+    { soru: "0,1 M Na₂HPO₄ çözeltisinin pH'ı yaklaşık kaçtır? (H₃PO₄ pKa2=7,2, pKa3=12,3)", siklar: ["7,2", "9,75", "12,3", "6,5", "10"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki çözeltilerden hangisinin pH'ı en yüksektir?", siklar: ["0,1 M Na₂CO₃", "0,1 M NaHCO₃", "0,1 M H₂CO₃", "0,1 M NaCl", "0,1 M Na₂SO₄"], cevap: 0, zorluk: "zor" }
+  ],
+  
+  'elektro': [
+    { soru: "Elektrolizde hangi elektrot pozitif yüklüdür?", siklar: ["Katot", "Anot", "Her ikisi", "Hiçbiri", "Elektrolit"], cevap: 1, zorluk: "kolay" },
+    { soru: "Standart hidrojen elektrotunun potansiyeli kaç volt'tur?", siklar: ["0,00", "1,00", "-1,00", "2,00", "1,23"], cevap: 0, zorluk: "kolay" },
+    { soru: "Elektrolizde katotta ne olur?", siklar: ["Yükseltgenme", "İndirgenme", "Çözünme", "Buharlaşma", "Yanık"], cevap: 1, zorluk: "kolay" },
+    { soru: "Bir galvanik hücrede elektronlar hangi yönde akar?", siklar: ["Katottan anoda", "Anottan katota", "Her iki yönde", "Akım yok", "Elektrolitten"], cevap: 1, zorluk: "kolay" },
+    { soru: "Standart indirgenme potansiyeli en yüksek olan metal en kolay ne yapar?", siklar: ["Yükseltgenir", "İndirgenir", "Çözünür", "Buharlaşır", "Paslanır"], cevap: 1, zorluk: "kolay" },
+    { soru: "Elektrolizde anotta ne olur?", siklar: ["İndirgenme", "Yükseltgenme", "Çökelti oluşumu", "Gaz açığa çıkması", "Nötralleşme"], cevap: 1, zorluk: "kolay" },
+    { soru: "Faraday yasasına göre, 1 mol elektron kaç Coulomb'dur?", siklar: ["96485", "1", "6,022×10²³", "1,6×10⁻¹⁹", "96500"], cevap: 0, zorluk: "kolay" },
+    { soru: "Zn + Cu²⁺ → Zn²⁺ + Cu reaksiyonunda hangi metal yükseltgenir?", siklar: ["Zn", "Cu", "Her ikisi", "Hiçbiri", "Fe"], cevap: 0, zorluk: "kolay" },
+    { soru: "Standart koşullarda, E° değeri pozitif olan reaksiyon ne tür bir reaksiyondur?", siklar: ["Kendiliğinden", "Kendiliğinden olmayan", "Dengede", "Bilinmiyor", "Ekzotermik"], cevap: 0, zorluk: "kolay" },
+    { soru: "Elektrolizde suyun ayrışmasıyla katotta hangi gaz açığa çıkar?", siklar: ["O₂", "H₂", "Cl₂", "CO₂", "N₂"], cevap: 1, zorluk: "kolay" },
+    { soru: "Zn²⁺/Zn: -0,76 V ve Cu²⁺/Cu: +0,34 V. Zn-Cu pilinin standart EMK'sı kaçtır?", siklar: ["0,42", "1,10", "1,42", "1,76", "0,76"], cevap: 1, zorluk: "orta" },
+    { soru: "1 Faraday elektrik, CuSO₄ çözeltisinden kaç mol Cu²⁺ indirger?", siklar: ["0,5", "1", "2", "0,25", "1,5"], cevap: 0, zorluk: "orta" },
+    { soru: "Aşağıdaki metallerden hangisi en kolay yükseltgenir?", siklar: ["Ag", "Cu", "Zn", "Fe", "Au"], cevap: 2, zorluk: "orta" },
+    { soru: "Elektrolizde 2 A akım 965 saniye uygulanırsa, kaç Faraday elektrik geçer?", siklar: ["0,01", "0,02", "0,05", "0,1", "0,005"], cevap: 1, zorluk: "orta" },
+    { soru: "Nernst denklemi neyi ifade eder?", siklar: ["Standart potansiyel", "Konsantrasyona bağlı potansiyel", "Sıcaklığa bağlı potansiyel", "Basınca bağlı potansiyel", "Hıza bağlı potansiyel"], cevap: 1, zorluk: "orta" },
+    { soru: "Fe³⁺ + e⁻ → Fe²⁺ (E°=0,77 V) ve Fe²⁺ + 2e⁻ → Fe (E°=-0,44 V). Fe³⁺/Fe için E° kaçtır?", siklar: ["0,33", "0,11", "-0,04", "-0,11", "0,22"], cevap: 2, zorluk: "orta" },
+    { soru: "Elektrolizde 1 A akım 9650 saniye uygulanırsa, AgNO₃ çözeltisinden kaç g Ag çöker? (Ag:108)", siklar: ["5,4", "10,8", "21,6", "43,2", "54"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki pillerden hangisinde E° en büyüktür?", siklar: ["Zn-Cu", "Mg-Zn", "Cu-Ag", "Mg-Cu", "Zn-Fe"], cevap: 3, zorluk: "orta" },
+    { soru: "Elektrolizde NaCl eriyiği kullanılırsa, anotta hangi gaz açığa çıkar?", siklar: ["H₂", "O₂", "Cl₂", "Na", "N₂"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir pilin E° değeri sıfırdan küçükse, reaksiyon hangi yönde ilerler?", siklar: ["Kendiliğinden ilerler", "Ters yönde ilerler", "Dengededir", "Bilinmiyor", "Hızlanır"], cevap: 1, zorluk: "orta" },
+    { soru: "Korozyon hangi tür bir reaksiyondur?", siklar: ["İndirgenme", "Yükseltgenme", "Nötralleşme", "Hidroliz", "Kondensasyon"], cevap: 1, zorluk: "orta" },
+    { soru: "Elektrolizde Al₂O₃ eriyiğinden 27 g Al elde etmek için kaç Coulomb elektrik gerekir? (Al:27)", siklar: ["96500", "193000", "289500", "386000", "482500"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki metallerden hangisi pasivleşme gösterir?", siklar: ["Fe", "Zn", "Al", "Mg", "Cu"], cevap: 2, zorluk: "orta" },
+    { soru: "Bir pilin standart potansiyeli 25°C'de 1,0 V ise, 50°C'de potansiyeli nasıl değişir?", siklar: ["Artar", "Azalır", "Değişmez", "Belirsiz", "Sıfırlanır"], cevap: 3, zorluk: "orta" },
+    { soru: "Elektrolizde CuSO₄ çözeltisinden 3,2 g Cu çökmesi için kaç mol elektron gerekir? (Cu:64)", siklar: ["0,05", "0,1", "0,2", "0,4", "0,15"], cevap: 1, zorluk: "orta" },
+    { soru: "Bir elektroliz hücresinde 2 A akım 4825 saniye uygulanıyor. Çözeltide hem Cu²⁺ hem Ag⁺ var. Hangi metal önce çöker?", siklar: ["Cu", "Ag", "Her ikisi birden", "Hiçbiri", "Veriler yetersiz"], cevap: 1, zorluk: "zor" },
+    { soru: "Zn + 2Ag⁺ → Zn²⁺ + 2Ag reaksiyonunun E° değeri kaçtır? (Zn²⁺/Zn: -0,76 V, Ag⁺/Ag: +0,80 V)", siklar: ["1,46", "1,56", "1,66", "1,76", "1,36"], cevap: 1, zorluk: "zor" },
+    { soru: "Elektrolizde 0,5 A akım 19300 saniye uygulanırsa, Al₂O₃'ten kaç g Al elde edilir? (Al:27)", siklar: ["0,9", "1,8", "2,7", "3,6", "4,5"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir pilin E°=1,5 V ve n=2. ΔG° kaç kJ/mol'dür?", siklar: ["-144,8", "-289,6", "-434,4", "-579,2", "-217,3"], cevap: 1, zorluk: "zor" },
+    { soru: "Nernst denklemi: E = E° - (RT/nF) ln Q. 25°C'de (RT/F) ln10 değeri yaklaşık kaçtır?", siklar: ["0,0257", "0,0592", "0,118", "0,236", "0,0148"], cevap: 1, zorluk: "zor" },
+    { soru: "Elektrolizde 1 L 0,1 M CuSO₄ çözeltisinden tüm Cu²⁺'leri çöktürmek için kaç Coulomb gerekir?", siklar: ["4825", "9650", "19300", "38600", "28950"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki çiftlerden hangisi galvanik pil oluşturamaz?", siklar: ["Zn-Cu", "Ag-Au", "Fe-Fe²⁺", "Mg-Al", "Cu-Ag"], cevap: 2, zorluk: "zor" },
+    { soru: "Bir pilin E° değeri 1,0 V ve reaksiyonun entropisi pozitif. Sıcaklık artırılırsa E nasıl değişir?", siklar: ["Artar", "Azalır", "Değişmez", "Belirsiz", "Sıfırlanır"], cevap: 0, zorluk: "zor" },
+    { soru: "Elektrolizde 2 A akım 9650 s uygulanırsa, hem Cu²⁺ hem Ni²⁺ içeren çözeltiden toplam kaç g metal çöker? (Cu:64, Ni:59)", siklar: ["3,2", "6,4", "9,6", "12,8", "16"], cevap: 1, zorluk: "zor" },
+    { soru: "Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O (E°=1,33 V). Bu yarı reaksiyonun standart potansiyelini pH=3'te hesaplayın.", siklar: ["0,92", "1,04", "1,16", "1,28", "1,0"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir elektroliz hücresinde 5 A akım 1930 saniye uygulanıyor. Çözeltide Fe²⁺ ve Fe³⁺ var. Hangi iyon önce indirgenir?", siklar: ["Fe²⁺", "Fe³⁺", "Her ikisi birden", "Hiçbiri", "Veriler yetersiz"], cevap: 1, zorluk: "zor" },
+    { soru: "Elektrolizde 0,1 M NaCl çözeltisi kullanılırsa, anotta O₂ mi Cl₂ mi açığa çıkar?", siklar: ["O₂", "Cl₂", "Her ikisi", "Na", "H₂"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir pilin E°=2,0 V, n=2 ve T=298 K. E=1,9 V ise, reaksiyonun Q değeri yaklaşık kaçtır?", siklar: ["0,1", "1", "10", "100", "1000"], cevap: 2, zorluk: "zor" },
+    { soru: "Elektrolizde 1 A akım 96500 s uygulanırsa, CrCl₃ çözeltisinden kaç g Cr çöker? (Cr:52)", siklar: ["8,67", "17,33", "26,0", "34,67", "13,0"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisinin E° değeri en büyüktür?", siklar: ["Li⁺ + e⁻ → Li", "K⁺ + e⁻ → K", "Na⁺ + e⁻ → Na", "Cs⁺ + e⁻ → Cs", "Rb⁺ + e⁻ → Rb"], cevap: 3, zorluk: "zor" }
+  ],
+  
+  'organik': [
+    { soru: "CH₃-CH₂-OH hangi fonksiyonel gruba aittir?", siklar: ["Aldehit", "Keton", "Alkol", "Eter", "Ester"], cevap: 2, zorluk: "kolay" },
+    { soru: "Metan'ın IUPAC adı nedir?", siklar: ["Metan", "Etan", "Propan", "Bütan", "Pentan"], cevap: 0, zorluk: "kolay" },
+    { soru: "Benzene bağlı olan fonksiyonel grubun adı nedir?", siklar: ["Fenil", "Benzil", "Tolil", "Ksilil", "Ariil"], cevap: 0, zorluk: "kolay" },
+    { soru: "Aşağıdaki bileşiklerden hangisi alkan'dır?", siklar: ["C₂H₄", "C₂H₆", "C₂H₂", "C₆H₆", "C₃H₆"], cevap: 1, zorluk: "kolay" },
+    { soru: "Alkenlerin genel formülü nedir?", siklar: ["CₙH₂ₙ₊₂", "CₙH₂ₙ", "CₙH₂ₙ₋₂", "CₙHₙ", "CₙH₂ₙ₊₁"], cevap: 1, zorluk: "kolay" },
+    { soru: "Aşağıdaki maddelerden hangisi aromatik bileşiktir?", siklar: ["Cyclohexane", "Benzene", "Hexane", "Cyclohexene", "Cyclopentane"], cevap: 1, zorluk: "kolay" },
+    { soru: "CH₃COOH hangi fonksiyonel gruba sahiptir?", siklar: ["Alkol", "Aldehit", "Karbonik asit", "Karboksilik asit", "Ester"], cevap: 3, zorluk: "kolay" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi hidrojenasyon reaksiyonudur?", siklar: ["Alkan → Alken", "Alken → Alkan", "Alkol → Aldehit", "Aldehit → Karboksilik asit", "Ester → Alkol"], cevap: 1, zorluk: "kolay" },
+    { soru: "Etanol'ün oksidasyonuyla ne oluşur?", siklar: ["Etan", "Etanal", "Etanik asit", "Eten", "Etanol"], cevap: 1, zorluk: "kolay" },
+    { soru: "Aşağıdaki bileşiklerden hangisi izomerdir?", siklar: ["Metan-Etan", "Propan-Butan", "n-Butan-izobutan", "Eten-Etan", "Propen-Propan"], cevap: 2, zorluk: "kolay" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi eliminasyon reaksiyonudur?", siklar: ["Alken + H₂ → Alkan", "Alkol → Alken + H₂O", "Alkan + Cl₂ → Kloroalkan", "Aldehit + Ag⁺ → Karboksilik asit", "Keton + H₂ → Alkol"], cevap: 1, zorluk: "orta" },
+    { soru: "SN1 reaksiyon mekanizmasında hızı belirleyen adım nedir?", siklar: ["Nükleofilin saldırısı", "Karboniyum iyonu oluşumu", "Ayrılma", "Yeniden düzenlenme", "Proton transferi"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki karboniyum iyonlarından hangisi en kararlıdır?", siklar: ["Metil", "1°", "2°", "3°", "Ariil"], cevap: 3, zorluk: "orta" },
+    { soru: "Markovnikov kuralına göre, asimetrik alkenlere H-X ekleme sonucu hangi ürün oluşur?", siklar: ["X daha az hidrojenli karbona bağlanır", "X daha çok hidrojenli karbona bağlanır", "Rastgele", "Her iki ürün eşit", "X orta karbona bağlanır"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki bileşiklerden hangisi en kolay nükleofilik aromatik substitusyon yapar?", siklar: ["Klorobenzene", "p-Nitroklorobenzene", "Toluene", "Aniline", "Fenol"], cevap: 1, zorluk: "orta" },
+    { soru: "Grignard reaktifi (RMgX) hangi tür reaksiyonlarda kullanılır?", siklar: ["Oksidasyon", "İndirgenme", "Karbon-karbon bağ oluşumu", "Hidroliz", "Eliminasyon"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki aldehitlerden hangisi en kolay nükleofilik saldırıya uğrar?", siklar: ["Formaldehit", "Asetaldehit", "Benzaldehit", "Aseton", "Propionaldehit"], cevap: 0, zorluk: "orta" },
+    { soru: "Diels-Alder reaksiyonu hangi tür bir reaksiyondur?", siklar: ["[2+2] Sikloaddisyon", "[4+2] Sikloaddisyon", "Elektrosiclik", "Sigmatropik", "[3+2] Sikloaddisyon"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki bileşiklerden hangisi en kolay enolize olur?", siklar: ["Asetaldehit", "Aseton", "Dietilketon", "Asetofenon", "Benzaldehit"], cevap: 0, zorluk: "orta" },
+    { soru: "E1 ve E2 reaksiyonları arasındaki temel fark nedir?", siklar: ["Sıcaklık", "Basınç", "Mekanizmada adım sayısı", "Katalizör", "Çözücü"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki reaktiflerden hangisi alkeni epoksit'e çevirir?", siklar: ["KMnO₄", "O₃", "mCPBA", "H₂/Pd", "HBr"], cevap: 2, zorluk: "orta" },
+    { soru: "Friedel-Crafts alkilasyonunda hangi tür katalizör kullanılır?", siklar: ["Asit", "Baz", "Lewis asidi (AlCl₃)", "Metal", "Redüktan"], cevap: 2, zorluk: "orta" },
+    { soru: "Aşağıdaki bileşiklerden hangisi en kolay okside olur?", siklar: ["1° Alkol", "2° Alkol", "3° Alkol", "Eter", "Ester"], cevap: 0, zorluk: "orta" },
+    { soru: "Wittig reaksiyonu hangi tür bileşikleri üretir?", siklar: ["Alkin", "Alken", "Alkan", "Aromatik", "Alkol"], cevap: 1, zorluk: "orta" },
+    { soru: "Aşağıdaki karboksilik asitlerden hangisi en güçlü asittir?", siklar: ["Asetik asit", "Kloroasetik asit", "Dikloroasetik asit", "Trikloroasetik asit", "Propiyonik asit"], cevap: 3, zorluk: "orta" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Hofmann eliminasyonu ile elde edilebilir?", siklar: ["En az substitüe alken", "En çok substitüe alken", "Aromatik bileşik", "Alkin", "Alkan"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir bileşik C₅H₁₀ formülüne sahip ve optik aktif. Bu bileşik hangi yapıda olabilir?", siklar: ["Cyclopentane", "1-Penten", "2-Metil-1-buten", "3-Metil-1-buten", "2-Penten"], cevap: 2, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi pinakol-pinakolon rearrangement'dır?", siklar: ["Diol → Keton", "Alkol → Alken", "Aldehit → Karboksilik asit", "Alken → Epoksit", "Keton → Alkol"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir bileşik C₄H₈O formülüne sahip ve iodoform testi pozitif. Bu bileşik hangisi olabilir?", siklar: ["Butanal", "2-Butanon", "Tetrahidrofuran", "Bütanol", "Dietil eter"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Birch reduksiyonudur?", siklar: ["Aromatik → Sikloheksen", "Alken → Alkan", "Keton → Alkol", "Alkin → Alken", "Nitril → Amin"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir bileşik C₃H₆O formülüne sahip, Tollens testi pozitif ve iodoform testi negatif. Bu bileşik nedir?", siklar: ["Aseton", "Propanal", "Alil alkol", "Propilen oksit", "Propanol"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Claisen kondensasyonudur?", siklar: ["Ester + Ester → β-Keto ester", "Aldehit + Aldehit → Aldol", "Ester + Grignard → Alkol", "Asit + Alkol → Ester", "Keton + Hidrazin → Hidrazon"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir bileşik C₆H₁₂ formülüne sahip ve ozonoliz sonucu sadece asetaldehit veriyor. Bu bileşik hangisidir?", siklar: ["Cyclohexane", "1-Hexen", "2,3-Dimetil-2-buten", "3-Hexen", "2-Hexen"], cevap: 3, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Mannich reaksiyonudur?", siklar: ["Aldehit + Amin + Aktif metilen bileşiği", "Aldehit + Alkol → Hemiasetal", "Keton + Hidrazin → Hidrazon", "Ester + Amin → Amid", "Aldehit + Grignard → Alkol"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir bileşik C₅H₁₀O formülüne sahip, 2,4-DNP testi pozitif ve iodoform testi pozitif. Bu bileşik hangisi olabilir?", siklar: ["Pentanal", "2-Pentanon", "3-Pentanon", "Cyclopentanon", "Pentanol"], cevap: 1, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Beckmann rearrangement'dır?", siklar: ["Aldoksime → Amid", "Ketoksime → Amid", "Nitril → Amin", "Amin → Nitril", "Amid → Amin"], cevap: 1, zorluk: "zor" },
+    { soru: "Bir bileşik C₇H₈ formülüne sahip ve KMnO₄ ile oksidasyon sonucu benzoik asit veriyor. Bu bileşik nedir?", siklar: ["Toluene", "Stiren", "Cycloheptatriene", "Benzil alkol", "Ksilen"], cevap: 0, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Perkin reaksiyonudur?", siklar: ["Aromatik aldehit + Anhidrit → α,β-Doğrusal asit", "Aldehit + Keton → Aldol", "Ester + Ester → β-Keto ester", "Aldehit + Amin → İmin", "Keton + Grignard → Alkol"], cevap: 0, zorluk: "zor" },
+    { soru: "Bir bileşik C₄H₆ formülüne sahip ve 1 mol H₂ ile reaksiyona girdiğinde 2 farklı ürün veriyor. Bu bileşik hangisi olabilir?", siklar: ["1,3-Butadien", "1-Bütin", "2-Bütin", "Cyclobutene", "1,2-Butadien"], cevap: 0, zorluk: "zor" },
+    { soru: "Aşağıdaki reaksiyonlardan hangisi Cannizzaro reaksiyonudur?", siklar: ["Aldehit (α-H yok) → Alkol + Asit", "Aldehit + Grignard → Alkol", "Keton + Hidrazin → Hidrazon", "Ester + Su → Asit + Alkol", "Aldehit + Aldol → Aldol"], cevap: 0, zorluk: "zor" }
+  ]
+};
+
+// ============================================
+// DEĞİŞKENLER
+// ============================================
+let aktifKonu = '';
+let seciliSoruSayisi = 10;
+let aktifSorular = [];
+let soruIndex = 0;
+let dogruSayisi = 0;
+let yanlisSayisi = 0;
+let skor = 0;
+let sesAcik = false;
+let cevaplandi = false;
+
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+// ============================================
+// SES FONKSİYONLARI
+// ============================================
+function sesToggle() {
+  sesAcik = !sesAcik;
+  const btn = document.getElementById('sesBtn');
+  btn.textContent = sesAcik ? '🔊' : '🔇';
+  btn.classList.toggle('acik', sesAcik);
+  if (sesAcik && !audioCtx) audioCtx = new AudioContext();
+}
+
+function sesCal(tip) {
+  if (!sesAcik || !audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  if (tip === 'dogru') {
+    osc.frequency.value = 880;
+    gain.gain.value = 0.1;
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+    osc.stop(audioCtx.currentTime + 0.3);
+  } else if (tip === 'yanlis') {
+    osc.frequency.value = 220;
+    gain.gain.value = 0.1;
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+    osc.stop(audioCtx.currentTime + 0.5);
+  } else if (tip === 'bitis') {
+    osc.frequency.value = 660;
+    gain.gain.value = 0.1;
+    osc.start();
+    osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.2);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+    osc.stop(audioCtx.currentTime + 0.6);
   }
-  showNextCrop();
 }
-function cancelCrop(){cropPendingFiles=[];if(pdfDoc) showViewer(); else showScreen('upload-screen');}
 
-const cropCanvas=document.getElementById('crop-canvas');
-const cropSelBox=document.getElementById('crop-sel-box');
-let cropStart={x:0,y:0};
-cropCanvas.addEventListener('touchstart',e=>{
-  e.preventDefault();
-  const r=cropCanvas.getBoundingClientRect();const t=e.touches[0];
-  cropStart={x:t.clientX-r.left,y:t.clientY-r.top};
-  cropSelX=cropStart.x;cropSelY=cropStart.y;cropSelW=0;cropSelH=0;
-  cropSelBox.style.cssText=`display:block;left:${cropStart.x}px;top:${cropStart.y}px;width:0;height:0;`;
-},{passive:false});
-cropCanvas.addEventListener('touchmove',e=>{
-  e.preventDefault();
-  const r=cropCanvas.getBoundingClientRect();const t=e.touches[0];
-  const cx=t.clientX-r.left,cy=t.clientY-r.top;
-  cropSelX=Math.min(cropStart.x,cx);cropSelY=Math.min(cropStart.y,cy);
-  cropSelW=Math.abs(cx-cropStart.x);cropSelH=Math.abs(cy-cropStart.y);
-  cropSelBox.style.left=cropSelX+'px';cropSelBox.style.top=cropSelY+'px';
-  cropSelBox.style.width=cropSelW+'px';cropSelBox.style.height=cropSelH+'px';
-},{passive:false});
-
-/* ── PDF Render ── */
-async function renderPage(num){
-  if(!pdfDoc)return;
-  if(renderTask){try{renderTask.cancel();}catch(_){} renderTask=null;}
-  const page=await pdfDoc.getPage(num);
-  const dpr=Math.max(window.devicePixelRatio||2,2);
-  const vp=page.getViewport({scale:currentScale*dpr});
-  pdfCanvas.width=vp.width;pdfCanvas.height=vp.height;
-  const dw=vp.width/dpr,dh=vp.height/dpr;
-  pdfCanvas.style.width=dw+'px';pdfCanvas.style.height=dh+'px';
-  selCanvas.width=vp.width;selCanvas.height=vp.height;
-  selCanvas.style.width=dw+'px';selCanvas.style.height=dh+'px';
-  renderTask=page.render({canvasContext:ctx,viewport:vp});
-  await renderTask.promise;renderTask=null;
-  document.getElementById('page-info').textContent=num+'/'+totalPages;
-  document.getElementById('btn-prev').disabled=num<=1;
-  document.getElementById('btn-next').disabled=num>=totalPages;
-  document.getElementById('zoom-info').textContent=Math.round(currentScale/baseScale*100)+'%';
+// ============================================
+// KONU SEÇİMİ
+// ============================================
+function konuSec(konu, btn) {
+  aktifKonu = konu;
+  document.querySelectorAll('.konu-btn').forEach(b => b.classList.remove('secili'));
+  btn.classList.add('secili');
 }
-function changePage(d){const n=currentPage+d;if(n<1||n>totalPages)return;currentPage=n;renderPage(n);}
-function zoomIn(){currentScale=Math.min(currentScale*1.08,baseScale*6);renderPage(currentPage);}
-function zoomOut(){currentScale=Math.max(currentScale/1.08,baseScale*0.3);renderPage(currentPage);}
-function zoomReset(){currentScale=baseScale;renderPage(currentPage);}
 
-/* ── Select on PDF ── */
-selCanvas.addEventListener('touchstart',e=>{
-  if(e.touches.length>=2){
-    selecting=false;selBox.style.display='none';pinching=true;
-    pinchStartDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-    pinchStartScale=currentScale;e.preventDefault();return;
+// ============================================
+// SORU SAYISI SEÇİMİ
+// ============================================
+function soruSayisiSec(sayi, btn) {
+  seciliSoruSayisi = sayi;
+  document.querySelectorAll('.soru-sayisi-btn').forEach(b => b.classList.remove('secili'));
+  btn.classList.add('secili');
+}
+
+// ============================================
+// localStorage YARDIMCI FONKSİYONLARI
+// ============================================
+function localStorageKaydet(anahtar, deger) {
+  try {
+    localStorage.setItem(anahtar, JSON.stringify(deger));
+    return true;
+  } catch (e) {
+    console.error('localStorage kaydetme hatası:', e);
+    return false;
   }
-  if(!isSelectMode)return;
-  e.preventDefault();selecting=true;
-  const p=getPos(e);startX=curX=p.cx;startY=curY=p.cy;
-  selBox.style.cssText='display:block;left:'+p.rx+'px;top:'+p.ry+'px;width:0;height:0;';
-},{passive:false});
-selCanvas.addEventListener('touchmove',e=>{
-  if(e.touches.length>=2){
-    selecting=false;selBox.style.display='none';
-    if(!pinching){pinching=true;pinchStartDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);pinchStartScale=currentScale;}
-    const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-    currentScale=Math.min(Math.max(pinchStartScale*(d/pinchStartDist),baseScale*0.3),baseScale*6);
-    document.getElementById('zoom-info').textContent=Math.round(currentScale/baseScale*100)+'%';
-    e.preventDefault();return;
+}
+
+function localStorageGetir(anahtar) {
+  try {
+    const veri = localStorage.getItem(anahtar);
+    return veri ? JSON.parse(veri) : null;
+  } catch (e) {
+    console.error('localStorage okuma hatası:', e);
+    return null;
   }
-  if(!selecting||pinching)return;
-  e.preventDefault();
-  const p=getPos(e);curX=p.cx;curY=p.cy;
-  selBox.style.left=Math.min(startX,curX)+'px';selBox.style.top=Math.min(startY,curY)+'px';
-  selBox.style.width=Math.abs(curX-startX)+'px';selBox.style.height=Math.abs(curY-startY)+'px';
-},{passive:false});
-document.addEventListener('touchend',e=>{
-  if(pinching&&(!e.touches||e.touches.length<2)){pinching=false;renderPage(currentPage);}
-  if(selecting){selecting=false;selBox.style.display='none';cropSelection();}
-});
-selCanvas.addEventListener('mousedown',e=>{if(!isSelectMode)return;selecting=true;const p=getPos(e);startX=curX=p.cx;startY=curY=p.cy;selBox.style.cssText='display:block;left:'+p.rx+'px;top:'+p.ry+'px;width:0;height:0;';});
-selCanvas.addEventListener('mousemove',e=>{if(!selecting)return;const p=getPos(e);curX=p.cx;curY=p.cy;selBox.style.left=Math.min(startX,curX)+'px';selBox.style.top=Math.min(startY,curY)+'px';selBox.style.width=Math.abs(curX-startX)+'px';selBox.style.height=Math.abs(curY-startY)+'px';});
-document.addEventListener('mouseup',e=>{if(!selecting)return;selecting=false;selBox.style.display='none';cropSelection();});
-
-function getPos(e){
-  const r=selCanvas.getBoundingClientRect();
-  const src=e.touches?e.touches[0]:e;
-  const rx=src.clientX-r.left,ry=src.clientY-r.top;
-  const lw=parseFloat(selCanvas.style.width)||r.width;
-  const lh=parseFloat(selCanvas.style.height)||r.height;
-  return{cx:rx*(lw/r.width),cy:ry*(lh/r.height),rx,ry};
-}
-function cropSelection(){
-  const x=Math.min(startX,curX),y=Math.min(startY,curY);
-  const w=Math.abs(curX-startX),h=Math.abs(curY-startY);
-  if(w<15||h<15)return;
-  const dpr=Math.max(window.devicePixelRatio||2,2);
-  const tmp=document.createElement('canvas');
-  tmp.width=Math.round(w*dpr);tmp.height=Math.round(h*dpr);
-  tmp.getContext('2d').drawImage(pdfCanvas,Math.round(x*dpr),Math.round(y*dpr),Math.round(w*dpr),Math.round(h*dpr),0,0,Math.round(w*dpr),Math.round(h*dpr));
-  selectedQuestions.push({dataUrl:tmp.toDataURL('image/jpeg',0.85),pageNum:currentPage,w,h});
-  updateQList();
-}
-function toggleMode(){
-  isSelectMode=!isSelectMode;
-  const btn=document.getElementById('btn-mode');
-  btn.textContent=isSelectMode?'✂️ Seç':'🖐 Kaydır';
-  btn.className=isSelectMode?'primary':'';
-  selCanvas.style.pointerEvents=isSelectMode?'auto':'none';
-}
-function undoLast(){if(!selectedQuestions.length)return;selectedQuestions.pop();updateQList();}
-function shuffleQuestions(){
-  if(selectedQuestions.length<2)return;
-  for(let i=selectedQuestions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[selectedQuestions[i],selectedQuestions[j]]=[selectedQuestions[j],selectedQuestions[i]];}
-  updateQList();
-  if(confirm('Sorular karıştırıldı! Test oluşturmaya devam edelim mi?')) goSettings();
-}
-function shuffleAndRegen(){
-  for(let i=selectedQuestions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[selectedQuestions[i],selectedQuestions[j]]=[selectedQuestions[j],selectedQuestions[i]];}
-  generateTest();
-}
-function updateQList(){
-  const list=document.getElementById('q-list');
-  const count=selectedQuestions.length;
-  ['q-count','q-count2','fab-count'].forEach(id=>document.getElementById(id).textContent=count);
-  document.getElementById('btn-go').disabled=count===0;
-  document.getElementById('btn-undo').disabled=count===0;
-  const isV=document.getElementById('viewer-screen').classList.contains('active');
-  document.getElementById('fab').style.display=(count>0&&isV)?'flex':'none';
-  list.innerHTML='';
-  if(count===0){list.innerHTML='<span id="q-empty">Henüz soru seçilmedi</span>';return;}
-  selectedQuestions.forEach((q,i)=>{
-    const div=document.createElement('div');div.className='q-thumb';
-    const img=document.createElement('img');img.src=q.dataUrl;
-    const btn=document.createElement('button');btn.className='del';btn.textContent='✕';
-    btn.onclick=ev=>{ev.stopPropagation();selectedQuestions.splice(i,1);updateQList();
-      if(document.getElementById('settings-screen').classList.contains('active')) buildMatrix();
-      else showViewer();
-    };
-    div.append(img,btn);list.appendChild(div);
-  });
 }
 
-/* ── Puan Matrisi ── */
-function buildMatrix(){
-  const wrap=document.getElementById('matrix-container');
-  if(!wrap)return;
-  wrap.innerHTML='';
-  selectedQuestions.forEach((q,i)=>{
-    const row=document.createElement('div');row.className='matrix-row';
-    const img=document.createElement('img');img.className='matrix-thumb';img.src=q.dataUrl;
-    const num=document.createElement('span');num.className='matrix-num';num.textContent=(i+1)+'.';
-    const inp=document.createElement('input');inp.type='number';inp.className='matrix-pt';
-    inp.value=q.point||0;inp.min=0;inp.max=100;
-    inp.oninput=()=>{q.point=parseInt(inp.value)||0;calcTotalPoints();};
-    row.append(img,num,inp);wrap.appendChild(row);
-  });
-  calcTotalPoints();
-}
-function applyGlobalPoint(){
-  const v=parseInt(document.getElementById('f-point').value);
-  if(!v||v<=0) return;
-  selectedQuestions.forEach(q=>q.point=v);
-  buildMatrix();
-}
-function calcTotalPoints(){
-  const sum=selectedQuestions.reduce((a,q)=>a+(q.point||0),0);
-  const el=document.getElementById('points-total-val');
-  if(!el)return;
-  el.textContent=sum+' / 100';
-  el.className=sum===100?'ok':'';
-}
-
-/* ── Answer Key Modal ── */
-function toggleAnkeyModal(){
-  const btn=document.getElementById('btn-anskey-toggle');
-  const hasAnswers=Object.keys(answerKey).length>0;
-  if(hasAnswers){if(confirm('Cevap anahtarını kaldırmak istiyor musunuz?')){answerKey={};btn.textContent='📝 Cevap Anahtarı';btn.style.background='#8b5cf6';}}
-  else{openAnkeyModal();}
-}
-function openAnkeyModal(){
-  const list=document.getElementById('anskey-list');list.innerHTML='';
-  selectedQuestions.forEach((_,i)=>{
-    const div=document.createElement('div');div.className='ans-item';
-    const span=document.createElement('span');span.textContent=(i+1)+'. Soru';
-    const opts=document.createElement('div');opts.className='ans-opts';
-    ['A','B','C','D','E'].forEach(opt=>{
-      const btn=document.createElement('button');
-      btn.className='ans-opt'+(answerKey[i]===opt?' selected':'');
-      btn.textContent=opt;
-      btn.onclick=()=>{answerKey[i]=opt;opts.querySelectorAll('.ans-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};
-      opts.appendChild(btn);
-    });
-    div.append(span,opts);list.appendChild(div);
-  });
-  document.getElementById('anskey-modal').classList.add('open');
-}
-function closeAnkeyModal(){
-  document.getElementById('anskey-modal').classList.remove('open');
-  const btn=document.getElementById('btn-anskey-toggle');
-  if(Object.keys(answerKey).length>0){btn.textContent='✅ Cevap Anahtarı (Kaldır)';btn.style.background='#22c55e';}
-  else{btn.textContent='📝 Cevap Anahtarı';btn.style.background='#8b5cf6';}
-}
-
-/* ══════════════════════════════════════════════
-   GENERATE TEST — HTML üretimi (yazdırmak için)
-   A4 = 210mm × 297mm, margin 12mm → iç alan 186mm × 273mm
-   96dpi → 1mm = 3.7795px
-   186mm → ~703px  273mm → ~1032px
-══════════════════════════════════════════════ */
-function generateTest(){
-  const school   = document.getElementById('f-school').value.trim();
-  const cls      = document.getElementById('f-class').value.trim();
-  const title    = document.getElementById('f-title').value.trim();
-  const subject  = document.getElementById('f-subject').value.trim();
-  const topic    = document.getElementById('f-topic').value.trim();
-  const testno   = document.getElementById('f-testno').value;
-  const teacher  = document.getElementById('f-teacher').value.trim();
-  const date     = document.getElementById('f-date').value;
-  const cols     = parseInt(document.getElementById('f-cols').value)||2;
-  const perpage  = document.getElementById('f-perpage').value;
-  const ptVal    = document.getElementById('f-point').value;
-  const pt       = ptVal ? parseInt(ptVal) : Math.round(100/Math.max(selectedQuestions.length,1));
-  const showPt   = document.getElementById('f-showpt').checked;
-  const ansKey   = document.getElementById('f-anskey').checked;
-  const solSpace = document.getElementById('f-solspace').checked;
-  const solHeightPx = parseInt(document.getElementById('f-solheight').value)||60;
-  const ansPage  = document.getElementById('f-anspage').checked;
-  const infoTbl  = document.getElementById('f-infotable').checked;
-  const showNote = document.getElementById('f-shownote').checked;
-  const showQr   = document.getElementById('f-qrcode').checked;
-
-  // Kütüphane alanlarını doldur
-  if(subject) document.getElementById('sm-subject').value=subject;
-  if(topic)   document.getElementById('sm-topic').value=topic;
-  document.getElementById('sm-title').value=testno||title||'Test';
-
-  /* ── Sayfalama ──
-     2 sütun modunda her sayfada ÇİFT sayıda soru olmalı (1,2 / 3,4 / ...)
-     auto modda: sorular yaklaşık eşit sayfalara bölünür,
-     sayfa başına düşen soru sayısı çift yapılır.
-  ── */
-  /* ── Akıllı Sayfalama: Soru görsel oranından gerçek yükseklik tahmini ── */
-  // A4 kullanılabilir: 297mm - 24mm (üst+alt margin) = 273mm
-  // İlk sayfada header ~35mm yer alıyor
-  const MM2PX = 3.7795;
-  const colWidthMm = cols===2 ? 90 : 186;
-  const solMm = solSpace ? (solHeightPx / MM2PX) : 0;
-  const ansBoxMm = ansKey ? 6 : 0;
-
-  function estQH(q){
-    // Soru görselinin sütun genişliğindeki mm yüksekliği
-    let imgH = 30; // default
-    if(q.w && q.h && q.w > 0){
-      imgH = (q.h / q.w) * colWidthMm;
-      imgH = Math.min(Math.max(imgH, 15), 120);
-    }
-    return 5 + imgH + solMm + ansBoxMm + 4; // başlık+görsel+çözüm+boşluk
+function localStorageSil(anahtar) {
+  try {
+    localStorage.removeItem(anahtar);
+    return true;
+  } catch (e) {
+    console.error('localStorage silme hatası:', e);
+    return false;
   }
+}
 
-  let qPerPage;
-  if(perpage!=='auto'){
-    qPerPage = parseInt(perpage);
-    if(cols===2 && qPerPage%2!==0) qPerPage++;
-  } else {
-    // Her sayfaya sığacak soru sayısını gerçek boyuttan hesapla
-    const headerH = infoTbl ? 38 : 20; // header mm
-    const availFirst = 273 - headerH;
-    const availRest  = 273;
-    // Greedy: ilk 'n' soruyu ilk sayfaya sığdır
-    function countFitting(questions, availMm){
-      if(cols===2){
-        // Sol ve sağ sütun ayrı ayrı
-        let leftH=0, rightH=0, count=0;
-        for(let i=0;i<questions.length;i++){
-          const h=estQH(questions[i]);
-          if(i%2===0){ leftH+=h; } else { rightH+=h; }
-          if(Math.max(leftH,rightH) > availMm) break;
-          count++;
-        }
-        // Çift sayıya yuvarla (simetri için)
-        return count%2===0 ? Math.max(2,count) : Math.max(2,count-1);
-      } else {
-        let totalH=0, count=0;
-        for(let i=0;i<questions.length;i++){
-          totalH+=estQH(questions[i]);
-          if(totalH>availMm) break;
-          count++;
-        }
-        return Math.max(1,count);
-      }
-    }
-    qPerPage = countFitting(selectedQuestions, availFirst);
-    // Tüm sayfaların dengeli olması için
-    if(qPerPage < selectedQuestions.length){
-      const remaining = selectedQuestions.length - qPerPage;
-      const qRestPage = countFitting(selectedQuestions.slice(qPerPage), availRest);
-      // Eğer sonraki sayfaya daha çok sığıyorsa ilk sayfayı biraz artır
-      if(qRestPage > qPerPage && cols===2){
-        const tryMore = qPerPage+2;
-        if(estQH(selectedQuestions[0])*tryMore/2 < availFirst) qPerPage=tryMore;
-      }
-    }
-    qPerPage = Math.max(cols===2?2:1, qPerPage);
+// ============================================
+// TEST BAŞLATMA
+// ============================================
+function baslatTest() {
+  if (!aktifKonu) {
+    alert('Lütfen bir konu seçin!');
+    return;
   }
-
-  /* ── Soru kutusu HTML (q.point varsa onu kullan) ── */
-  const qBox=(q,num)=>{
-    const qPt = q.point !== undefined ? q.point : pt;
-    return `
-<div class="q-block">
-  <div class="q-header">
-    <span>${num}. Soru</span>
-    ${showPt?`<span class="q-pt">${qPt} p</span>`:''}
-  </div>
-  <img src="${(q.dataUrl||"").trim()}" class="q-img" onerror="this.style.display='none'"/>
-  ${solSpace?`<div class="sol-space" style="min-height:${solHeightPx}px;"></div>`:''}
-  ${ansKey?`<div class="ans-box">Cevap: ___</div>`:''}
-</div>`;
+  
+  let tumSorular = [...soruHavuzu[aktifKonu]];
+  
+  let kolay = tumSorular.filter(s => s.zorluk === 'kolay');
+  let orta = tumSorular.filter(s => s.zorluk === 'orta');
+  let zor = tumSorular.filter(s => s.zorluk === 'zor');
+  
+  kolay.sort(() => Math.random() - 0.5);
+  orta.sort(() => Math.random() - 0.5);
+  zor.sort(() => Math.random() - 0.5);
+  
+  let secilecek = [];
+  let kSayi = Math.floor(seciliSoruSayisi * 0.3);
+  let oSayi = Math.floor(seciliSoruSayisi * 0.5);
+  let zSayi = seciliSoruSayisi - kSayi - oSayi;
+  
+  secilecek = [
+    ...kolay.slice(0, kSayi),
+    ...orta.slice(0, oSayi),
+    ...zor.slice(0, zSayi)
+  ];
+  
+  while (secilecek.length < seciliSoruSayisi && tumSorular.length > secilecek.length) {
+    let kalan = tumSorular.filter(s => !secilecek.includes(s));
+    if (kalan.length > 0) {
+      secilecek.push(kalan[0]);
+    } else break;
+  }
+  
+  let kaliciSorular = localStorageGetir('ronya_ozel_sorular') || [];
+  
+  aktifSorular = [...secilecek, ...kaliciSorular];
+  aktifSorular.sort(() => Math.random() - 0.5);
+  
+  soruIndex = 0;
+  dogruSayisi = 0;
+  yanlisSayisi = 0;
+  skor = 0;
+  
+  document.getElementById('konu-secimi').style.display = 'none';
+  document.getElementById('test-ekrani').style.display = 'block';
+  document.getElementById('sonuc-ekrani').style.display = 'none';
+  
+  const konuIsimleri = {
+    'atom': 'Atom ve Periyodik',
+    'mol': 'Mol ve Kimyasal',
+    'gaz': 'Gazlar',
+    'cozelti': 'Çözeltiler',
+    'denge': 'Kimyasal Denge',
+    'asitbaz': 'Asit-Baz',
+    'elektro': 'Elektrokimya',
+    'organik': 'Organik Kimya'
   };
+  document.getElementById('konu-baslik').textContent = konuIsimleri[aktifKonu];
+  
+  gosterSoru();
+}
 
-  /* ── Sayfa gruplarını oluştur ── */
-  const pages=[];
-  for(let i=0;i<selectedQuestions.length;i+=qPerPage){
-    pages.push(selectedQuestions.slice(i,i+qPerPage));
+// ============================================
+// SORU GÖSTERME
+// ============================================
+function gosterSoru() {
+  if (soruIndex >= aktifSorular.length) {
+    testiBitir();
+    return;
   }
-
-  /* ── Cevap anahtarı inline ── */
-  const buildInlineAK=(grp,offset)=>{
-    if(Object.keys(answerKey).length===0||ansPage) return '';
-    const items=grp.map((_,i)=>{const n=offset+i;const a=answerKey[n];return a?`${n+1}-${a}`:null;}).filter(Boolean);
-    if(!items.length) return '';
-    return `<div class="inline-ak">${items.join(' &nbsp;|&nbsp; ')}</div>`;
-  };
-
-  /* ── Sayfaları HTML'e dök ── */
-  let pagesHtml='';
-  let globalOffset=0;
-  pages.forEach((grp,pi)=>{
-    const pb=pi>0?'page-break-before:always;break-before:page;':'';
-    const inAK=buildInlineAK(grp,globalOffset);
-
-    if(cols===2){
-      // DİKEY sıra: 1,3,5… sol; 2,4,6… sağ
-      // Yani: sol = çift-indexler (0,2,4…), sağ = tek-indexler (1,3,5…)
-      let lH='',rH='';
-      grp.forEach((q,i)=>{
-        const num=globalOffset+i+1;
-        if(i%2===0) lH+=qBox(q,num);
-        else         rH+=qBox(q,num);
-      });
-      pagesHtml+=`
-<div class="a4-page" style="${pb}">
-  ${pi===0?buildHeader(school,cls,title,subject,topic,testno,teacher,date,infoTbl,showNote,pt,showQr):''}
-  <table class="two-col"><tr>
-    <td class="col-left">${lH}</td>
-    <td class="col-div"></td>
-    <td class="col-right">${rH}</td>
-  </tr></table>
-  ${inAK}
-  ${pi===0&&teacher?`<div class="signature">${teacher}</div>`:''}
-  <div class="pg-num">${pi+1} / ${pages.length}</div>
-</div>`;
-    } else {
-      let cH='';grp.forEach((q,i)=>{cH+=qBox(q,globalOffset+i+1);});
-      pagesHtml+=`
-<div class="a4-page" style="${pb}">
-  ${pi===0?buildHeader(school,cls,title,subject,topic,testno,teacher,date,infoTbl,showNote,pt,showQr):''}
-  ${cH}
-  ${inAK}
-  ${pi===0&&teacher?`<div class="signature">${teacher}</div>`:''}
-  <div class="pg-num">${pi+1} / ${pages.length}</div>
-</div>`;
-    }
-    globalOffset+=grp.length;
+  cevaplandi = false;
+  const soru = aktifSorular[soruIndex];
+  document.getElementById('soru-no').textContent = (soruIndex + 1) + '/' + aktifSorular.length;
+  document.getElementById('dogru-sayisi').textContent = dogruSayisi;
+  document.getElementById('yanlis-sayisi').textContent = yanlisSayisi;
+  document.getElementById('skor').textContent = skor;
+  
+  const resimEl = document.getElementById('soru-resim');
+  if (soru.resim) {
+    resimEl.src = soru.resim;
+    resimEl.style.display = 'block';
+  } else {
+    resimEl.style.display = 'none';
+  }
+  
+  document.getElementById('soru-metin').textContent = soru.soru;
+  
+  const harfler = ['A', 'B', 'C', 'D', 'E'];
+  let siklarHTML = '';
+  soru.siklar.forEach((sik, index) => {
+    siklarHTML += `<button class="sik" onclick="cevapKontrol(${index})" data-index="${index}">
+      <span class="harf">${harfler[index]}</span>
+      <span>${sik}</span>
+    </button>`;
   });
-
-  /* ── Cevap Anahtarı Sayfası ── */
-  let akPageHtml='';
-  if(ansPage){
-    const akItems=selectedQuestions.map((_,i)=>{
-      const a=answerKey[i]||'';
-      return `<div class="ak-item ${a?'ak-filled':''}">${i+1}. ${a||'__'}</div>`;
-    }).join('');
-    akPageHtml=`
-<div class="a4-page" style="page-break-before:always;">
-  <h2 style="text-align:center;font-size:14pt;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:14px;">CEVAP ANAHTARI</h2>
-  <div class="ak-grid">${akItems}</div>
-</div>`;
-  }
-
-  /* ── QR placeholder ── */
-  const qrHtml=showQr?`<div id="qr-div" style="display:inline-block;margin-top:4px;"></div><div style="font-size:7pt;color:#888;">TestForge</div>`:'';
-
-  /* ── Tam HTML ── */
-  currentHtml=`<!DOCTYPE html>
-<html lang="tr"><head><meta charset="UTF-8"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Times New Roman',Times,serif;font-size:11pt;color:#111;background:#fff;}
-.a4-page{
-  width:210mm;
-  margin:0 auto;padding:12mm 13mm;
-  position:relative;
+  document.getElementById('siklar').innerHTML = siklarHTML;
 }
-/* ── Header ── */
-.hdr{border-bottom:2px solid #000;padding-bottom:7px;margin-bottom:8px;}
-.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;}
-.hdr-school{font-size:12pt;font-weight:700;}
-.hdr-title{font-size:11pt;margin:2px 0;}
-.hdr-meta{font-size:9pt;color:#333;}
-.badge{background:#E8973A;color:#fff;border-radius:4px;padding:2px 10px;font-size:11pt;font-weight:700;white-space:nowrap;}
-.info-table{width:100%;border-collapse:collapse;margin:5px 0;font-size:9pt;}
-.info-table td{border:1px solid #000;padding:3px 7px;}
-.info-table .lb{font-weight:700;}
-.note-line{font-size:9pt;font-style:italic;color:#444;margin:3px 0 6px;}
-/* ── Soru ── */
-.q-block{page-break-inside:avoid;break-inside:avoid;margin-bottom:8px;}
-.q-header{display:flex;justify-content:space-between;font-weight:700;font-size:9pt;border-bottom:1px solid #ddd;padding-bottom:2px;margin-bottom:3px;}
-.q-pt{color:#888;}
-.q-img{width:100%;display:block;max-width:100%;}
-.sol-space{border-bottom:1px dashed #ccc;}
-.ans-box{margin-top:4px;border:1px solid #ccc;border-radius:2px;height:20px;display:flex;align-items:center;padding:0 8px;font-size:9pt;color:#aaa;}
-/* ── 2 Sütun ── */
-.two-col{width:100%;border-collapse:collapse;table-layout:fixed;}
-.two-col tr{vertical-align:top;}
-.col-left{width:48.5%;}
-.col-right{width:48.5%;}
-.col-div{width:3%;border-left:1px solid #e0e0e0;}
-/* ── Inline AK ── */
-.inline-ak{margin-top:8px;text-align:right;font-size:8.5pt;color:#555;font-weight:600;border-top:1px solid #eee;padding-top:3px;}
-/* ── AK Sayfası ── */
-.ak-grid{display:flex;flex-wrap:wrap;gap:8px;}
-.ak-item{min-width:72px;font-size:11pt;font-weight:700;border:1px solid #aaa;border-radius:3px;padding:5px 12px;text-align:center;}
-.ak-filled{background:#e8f4f8;}
-/* ── Misc ── */
-.signature{margin-top:14px;text-align:right;font-size:10pt;}
-.pg-num{position:absolute;bottom:6mm;right:12mm;font-size:8pt;color:#999;}
-@media print{
-  @page{
-    size:A4;
-    margin:12mm 13mm 8mm 13mm;
+
+// ============================================
+// CEVAP KONTROL
+// ============================================
+function cevapKontrol(secilen) {
+  if (cevaplandi) return;
+  cevaplandi = true;
+  const soru = aktifSorular[soruIndex];
+  const siklar = document.querySelectorAll('.sik');
+  
+  if (secilen === soru.cevap) {
+    dogruSayisi++;
+    skor += 10;
+    siklar[secilen].classList.add('dogru');
+    sesCal('dogru');
+  } else {
+    yanlisSayisi++;
+    siklar[secilen].classList.add('yanlis');
+    siklar[soru.cevap].classList.add('dogru');
+    sesCal('yanlis');
   }
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;}
-  .a4-page{margin:0 auto;padding:0;width:100%;page-break-inside:avoid;}
-  .pg-num{position:absolute;bottom:6mm;right:12mm;}
+  
+  document.getElementById('dogru-sayisi').textContent = dogruSayisi;
+  document.getElementById('yanlis-sayisi').textContent = yanlisSayisi;
+  document.getElementById('skor').textContent = skor;
+  
+  setTimeout(() => {
+    soruIndex++;
+    gosterSoru();
+  }, 1500);
 }
-</style></head><body>
-${pagesHtml}
-${akPageHtml}
-${showQr?`<script>
-window.addEventListener('load',function(){
-  if(typeof QRCode!=='undefined'&&document.getElementById('qr-div')){
-    new QRCode(document.getElementById('qr-div'),{text:'https://medenigklp-crypto.github.io/TestForge/',width:72,height:72});
+
+// ============================================
+// TEST BİTİRME
+// ============================================
+function testiBitir() {
+  sesCal('bitis');
+  
+  const toplamSoru = dogruSayisi + yanlisSayisi;
+  const oran = toplamSoru > 0 ? (dogruSayisi / toplamSoru) * 100 : 0;
+  
+  const kayitliSkor = localStorage.getItem('ronya_test_skor_' + aktifKonu) || '0';
+  if (skor > parseInt(kayitliSkor)) {
+    localStorage.setItem('ronya_test_skor_' + aktifKonu, skor.toString());
+  }
+  
+  document.getElementById('test-ekrani').style.display = 'none';
+  document.getElementById('sonuc-ekrani').style.display = 'block';
+  document.getElementById('sonuc-dogru').textContent = dogruSayisi;
+  document.getElementById('sonuc-yanlis').textContent = yanlisSayisi;
+  document.getElementById('sonuc-skor').textContent = skor;
+  document.getElementById('en-yuksek-skor').textContent = localStorage.getItem('ronya_test_skor_' + aktifKonu) || '0';
+  document.getElementById('basari-orani').textContent = '%' + oran.toFixed(1);
+  
+  const bar = document.getElementById('sonuc-bar');
+  bar.style.width = '0%';
+  setTimeout(() => { bar.style.width = oran + '%'; }, 100);
+  
+  bar.className = 'sonuc-bar-fill';
+  if (oran >= 80) bar.classList.add('iyi');
+  else if (oran >= 60) bar.classList.add('orta');
+  else bar.classList.add('kotu');
+  
+  if (oran >= 80) {
+    document.getElementById('sonuc-emoji').textContent = '🏆';
+    document.getElementById('sonuc-baslik').textContent = 'Mükemmel!';
+    document.getElementById('sonuc-mesaj').textContent = 'Konuyu çok iyi biliyorsun!';
+  } else if (oran >= 60) {
+    document.getElementById('sonuc-emoji').textContent = '👍';
+    document.getElementById('sonuc-baslik').textContent = 'İyi!';
+    document.getElementById('sonuc-mesaj').textContent = 'Biraz daha pratik yapabilirsin.';
+  } else {
+    document.getElementById('sonuc-emoji').textContent = '📚';
+    document.getElementById('sonuc-baslik').textContent = 'Çalışmaya Devam!';
+    document.getElementById('sonuc-mesaj').textContent = 'Konuyu tekrar etmen faydalı olacaktır.';
+  }
+}
+
+// ============================================
+// YENİ TEST
+// ============================================
+function yeniTest() {
+  document.getElementById('sonuc-ekrani').style.display = 'none';
+  document.getElementById('konu-secimi').style.display = 'block';
+  gosterEklenenSorular();
+}
+
+// ============================================
+// ÖZEL SORU EKLEME
+// ============================================
+let seciliDogruCevap = -1;
+let yuklenenResimBase64 = null;
+let yuklenenDosyaTipi = null;
+
+function dogruSec(index, btn) {
+  seciliDogruCevap = index;
+  document.querySelectorAll('.dogru-btn').forEach(b => b.classList.remove('secili'));
+  btn.classList.add('secili');
+}
+
+function soruEkle() {
+  const soruMetni = document.getElementById('ozel-soru-metni').value.trim();
+  const sikA = document.getElementById('sik-a').value.trim();
+  const sikB = document.getElementById('sik-b').value.trim();
+  const sikC = document.getElementById('sik-c').value.trim();
+  const sikD = document.getElementById('sik-d').value.trim();
+  const sikE = document.getElementById('sik-e').value.trim();
+  
+  if (!soruMetni && !yuklenenResimBase64) {
+    alert('Lütfen soru metni yazın veya bir resim yükleyin!');
+    return;
+  }
+  
+  if (!sikA || !sikB || !sikC || !sikD || !sikE) {
+    alert('Lütfen tüm 5 şıkkı doldurun!');
+    return;
+  }
+  
+  if (seciliDogruCevap === -1) {
+    alert('Lütfen doğru cevabı seçin!');
+    return;
+  }
+  
+  const yeniSoru = {
+    id: Date.now(),
+    soru: soruMetni || '(Resimli Soru)',
+    siklar: [sikA, sikB, sikC, sikD, sikE],
+    cevap: seciliDogruCevap,
+    zorluk: 'ozel',
+    resim: yuklenenResimBase64,
+    kaynak: yuklenenDosyaTipi || 'elle',
+    tarih: new Date().toLocaleDateString('tr-TR')
+  };
+  
+  let mevcutSorular = localStorageGetir('ronya_ozel_sorular') || [];
+  mevcutSorular.push(yeniSoru);
+  localStorageKaydet('ronya_ozel_sorular', mevcutSorular);
+  
+  document.getElementById('ozel-soru-metni').value = '';
+  document.getElementById('sik-a').value = '';
+  document.getElementById('sik-b').value = '';
+  document.getElementById('sik-c').value = '';
+  document.getElementById('sik-d').value = '';
+  document.getElementById('sik-e').value = '';
+  seciliDogruCevap = -1;
+  document.querySelectorAll('.dogru-btn').forEach(b => b.classList.remove('secili'));
+  resimKaldir();
+  
+  gosterEklenenSorular();
+  alert('✓ Soru başarıyla eklendi ve kalıcı olarak kaydedildi!');
+}
+
+function gosterEklenenSorular() {
+  const container = document.getElementById('eklenen-sorular');
+  const sorular = localStorageGetir('ronya_ozel_sorular') || [];
+  
+  if (sorular.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  let html = `<div class="eklenen-sorular-baslik">
+    📚 Kalıcı Sorular <span class="badge">${sorular.length}</span>
+    <span style="font-size: 11px; color: var(--tx3); font-weight: 400;">(Tarayıcı kapatılsa bile kalır)</span>
+  </div>`;
+  
+  sorular.forEach((s, i) => {
+    const kaynakTipi = s.kaynak || 'elle';
+    const kaynakClass = kaynakTipi === 'pdf' ? 'pdf' : (kaynakTipi === 'galeri' ? 'galeri' : 'elle');
+    const kaynakText = kaynakTipi === 'pdf' ? 'PDF' : (kaynakTipi === 'galeri' ? 'GALERİ' : 'ELLE');
+    
+    html += `<div class="eklenen-soru">
+      ${s.resim ? `<img src="${s.resim}" class="soru-resim" alt="Soru">` : ''}
+      <div class="soru-bilgi">
+        <div class="soru-metin-kisa">${i+1}. ${s.soru.substring(0, 50)}${s.soru.length > 50 ? '...' : ''}</div>
+        <div class="soru-kaynak">
+          <span class="kaynak-tipi ${kaynakClass}">${kaynakText}</span>
+          ${s.tarih} • Doğru: ${['A','B','C','D','E'][s.cevap]}
+        </div>
+      </div>
+      <button class="soru-sil" onclick="soruSil(${s.id})" title="Soruyu sil">✕</button>
+    </div>`;
+  });
+  
+  container.innerHTML = html;
+}
+
+function soruSil(soruId) {
+  if (!confirm('Bu soruyu silmek istediğinize emin misiniz?')) return;
+  
+  let sorular = localStorageGetir('ronya_ozel_sorular') || [];
+  sorular = sorular.filter(s => s.id !== soruId);
+  localStorageKaydet('ronya_ozel_sorular', sorular);
+  
+  gosterEklenenSorular();
+}
+
+function tumOzelSorulariSil() {
+  if (!confirm('TÜM özel soruları silmek istediğinize emin misiniz?')) return;
+  localStorageSil('ronya_ozel_sorular');
+  gosterEklenenSorular();
+  alert('Tüm özel sorular silindi.');
+}
+
+// Sayfa yüklendiğinde
+document.addEventListener('DOMContentLoaded', function() {
+  gosterEklenenSorular();
+});
+
+// ============================================
+// KLAVYE KISAYOLLARI
+// ============================================
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('test-ekrani').style.display === 'none') return;
+  const harfler = ['A', 'B', 'C', 'D', 'E'];
+  const key = e.key.toUpperCase();
+  const index = harfler.indexOf(key);
+  if (index !== -1) {
+    e.preventDefault();
+    cevapKontrol(index);
   }
 });
-<\/script>`:''}
-</body></html>`;
-
-  /* Önizlemeyi güncelle */
-  loadPreviewIframe();
-  showPreview();
-}
-
-function buildHeader(school,cls,title,subject,topic,testno,teacher,date,infoTbl,showNote,pt,showQr){
-  const qrPlaceholder=showQr?`<div style="text-align:right;margin-bottom:3px;"><div id="qr-div" style="display:inline-block;"></div></div>`:'';
-  return `<div class="hdr">
-  ${qrPlaceholder}
-  <div class="hdr-top">
-    <div>
-      ${school?`<div class="hdr-school">${school}</div>`:''}
-      ${title?`<div class="hdr-title">${title}</div>`:''}
-      <div class="hdr-meta">${subject?`<b>Ders:</b> ${subject}`:''}${topic?` &nbsp;|&nbsp; <b>Konu:</b> ${topic}`:''}${date?` &nbsp;|&nbsp; ${date}`:''}</div>
-    </div>
-    ${testno?`<span class="badge">${testno}</span>`:''}
-  </div>
-  ${infoTbl?`<table class="info-table"><tr>
-    <td class="lb" style="width:14%">AD SOYAD</td><td style="width:34%"></td>
-    <td class="lb" style="width:12%">SINIF/NO</td><td style="width:14%">${cls}</td>
-    <td class="lb" style="width:10%">PUAN</td><td></td>
-  </tr></table>`:''}
-  ${showNote?`<div class="note-line">Not: Her soru ${pt} puandır.</div>`:''}
-</div>`;
-}
-
-/* ══════════════════════════════════════════════
-   PREVIEW — iframe tabanlı A4 görünümü
-══════════════════════════════════════════════ */
-function loadPreviewIframe(){
-  const iframe=document.getElementById('preview-iframe');
-  // Blob URL kullan: srcdoc büyük base64 verisiyle donabilir
-  // Önce eski blob'u temizle
-  if(iframe._blobUrl){try{URL.revokeObjectURL(iframe._blobUrl);}catch(_){}}
-  const blob = new Blob([currentHtml],{type:'text/html;charset=utf-8'});
-  const blobUrl = URL.createObjectURL(blob);
-  iframe._blobUrl = blobUrl;
-  iframe.src = blobUrl;
-  const btn=document.getElementById('btn-print');
-  if(btn) btn.disabled=false;
-}
-
-function onIframeLoad(iframe){
-  // Blob URL ile yüklenince contentDocument erişimi bazen geç gelir
-  // Kısa bekle sonra dene, başaramazsan sayfa sayısından hesapla
-  function tryGetHeight(retries){
-    try{
-      const doc=iframe.contentDocument||iframe.contentWindow.document;
-      const h=doc.documentElement.scrollHeight||doc.body.scrollHeight||0;
-      if(h > 100){
-        iframe.style.height=h+'px';
-        const pageCount=Math.ceil(h/1122);
-        document.getElementById('prv-page-count').textContent=pageCount+' sayfa';
-        prvZoomFit();
-        return;
-      }
-    }catch(e){}
-    if(retries > 0){
-      setTimeout(()=>tryGetHeight(retries-1), 300);
-    } else {
-      // Fallback: sayfa sayısını biliyoruz, oradan hesapla
-      const pgCountEl=document.getElementById('prv-page-count');
-      const estimatedH = 2000; // en az 2000px
-      iframe.style.height=estimatedH+'px';
-      prvZoomFit();
-    }
-  }
-  tryGetHeight(5);
-}
-
-function prvZoomFit(){
-  /* iframe genişliği 210mm = ~794px; ekran genişliğine sığdır */
-  const wrap=document.getElementById('preview-iframe-wrap');
-  const wrapW=wrap.clientWidth-20; // 10px padding her taraf
-  const iframeNaturalW=794; // 210mm @ 96dpi
-  prvScale=Math.max(0.3,Math.min(1,wrapW/iframeNaturalW));
-  applyPrvScale();
-}
-
-function prvZoom(delta){
-  prvScale=Math.max(0.3,Math.min(2,prvScale+delta));
-  applyPrvScale();
-}
-
-function applyPrvScale(){
-  const iframe=document.getElementById('preview-iframe');
-  iframe.style.transform=`scale(${prvScale})`;
-  iframe.style.transformOrigin='top left';
-  // Wrapper'ın scroll içeriği için gerçek boyutu ayarla
-  const scaledW=794*prvScale;
-  const scaledH=(parseFloat(iframe.style.height)||2000)*prvScale;
-  const wrap=document.getElementById('preview-iframe-wrap');
-  // Iframe'in kapladığı alan için spacer
-  iframe.style.marginRight=(scaledW-794)+'px';
-  wrap.style.minHeight=scaledH+20+'px';
-  document.getElementById('prv-zoom-val').textContent=Math.round(prvScale*100)+'%';
-}
-
-/* ── Print ── */
-function doPrint(){
-  try{
-    const blob = new Blob([currentHtml], {type:'text/html;charset=utf-8'});
-    const blobUrl = URL.createObjectURL(blob);
-    const win = window.open(blobUrl, '_blank');
-    if(win){
-      setTimeout(()=>{
-        try{win.print();}catch(e){}
-        setTimeout(()=>URL.revokeObjectURL(blobUrl), 60000);
-      }, 1000);
-      // 💡 Safari'de footer URL'yi gizlemek için:
-      // Yazdır paneli açılınca "Seçenekler" → "Üstbilgi ve Altbilgi" kapatın
-    } else {
-      URL.revokeObjectURL(blobUrl);
-      _downloadHtml();
-    }
-  }catch(e){
-    _downloadHtml();
-  }
-}
-
-function _downloadHtml(){
-  // Fallback: dosyayı indir, kullanıcı açıp yazdırsın
-  try{
-    const blob = new Blob([currentHtml], {type:'text/html;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'TestForge-' + Date.now() + '.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url), 10000);
-    setTimeout(()=>alert('📥 Dosya indirildi!\n\nAçıp Yazdır (⌘P) ile yazdırın.'), 500);
-  }catch(e2){alert('Hata: '+e2.message);}
-}
-
-/* ── Share ── */
-async function shareTest(){
-  try{
-    const blob=new Blob([currentHtml],{type:'text/html'});
-    const file=new File([blob],'test.html',{type:'text/html'});
-    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-      await navigator.share({title:'Test Kağıdı',files:[file]});
-    } else if(navigator.share){
-      await navigator.share({title:'Test Kağıdı',text:'TestForge ile oluşturuldu',url:'https://medenigklp-crypto.github.io/TestForge/'});
-    } else {
-      doPrint();
-    }
-  }catch(e){if(e.name!=='AbortError') doPrint();}
-}
-
-/* ── Save Modal ── */
-function openSaveModal(){document.getElementById('save-modal').classList.add('open');}
-function closeSaveModal(){document.getElementById('save-modal').classList.remove('open');}
-async function saveToLibrary(){
-  const subject=document.getElementById('sm-subject').value.trim()||'Genel';
-  const topic=document.getElementById('sm-topic').value.trim()||'Konu';
-  const title=document.getElementById('sm-title').value.trim()||'Test';
-  const key='lib_'+Date.now();
-  const item={key,subject,topic,title,date:new Date().toLocaleDateString('tr-TR'),html:currentHtml};
-  try{
-    await TFDB.save(item);
-    closeSaveModal();alert('✅ "'+title+'" kaydedildi!');
-  }catch(e){alert('Kayıt hatası: '+e.message);}
-}
-
-/* ── Library ── */
-function renderLibrary(items, search){
-  const content=document.getElementById('lib-content');
-  if(!items.length){content.innerHTML='<div id="lib-empty">Henüz kayıtlı test yok.<br/>Test oluşturup 💾 Kaydet ile ekleyin.</div>';return;}
-  const filtered=items.filter(v=>!search||v.subject.toLowerCase().includes(search)||v.topic.toLowerCase().includes(search)||v.title.toLowerCase().includes(search));
-  if(!filtered.length){content.innerHTML='<div id="lib-empty">Sonuç bulunamadı.</div>';return;}
-  const grouped={};
-  filtered.forEach(v=>{if(!grouped[v.subject])grouped[v.subject]={};if(!grouped[v.subject][v.topic])grouped[v.subject][v.topic]=[];grouped[v.subject][v.topic].push(v);});
-  let html='';
-  Object.keys(grouped).sort().forEach(subj=>{
-    html+=`<div class="subject-block"><div class="subject-header">📘 ${subj} <span>${Object.values(grouped[subj]).flat().length}</span></div><div class="subject-body">`;
-    Object.keys(grouped[subj]).sort().forEach(top=>{
-      const tests=grouped[subj][top];
-      html+=`<div><div class="topic-header">📌 ${top} <span>${tests.length}</span></div>`;
-      tests.sort((a,b)=>a.title.localeCompare(b.title)).forEach(t=>{
-        html+=`<div class="test-item"><div class="test-item-info"><div class="test-item-title">${t.title}</div><div class="test-item-meta">${t.date}</div></div>
-          <div class="test-item-btns">
-            <button class="btn-open" onclick="openLibTest('${t.key}')">📖 Aç</button>
-            <button class="btn-export" onclick="exportLibTest('${t.key}')">⬇️</button>
-            <button class="btn-del" onclick="delLibTest('${t.key}')">🗑️</button>
-          </div></div>`;
-      });
-      html+=`</div>`;
-    });
-    html+=`</div></div>`;
-  });
-  content.innerHTML=html;
-}
-async function loadLibrary(){
-  const search=(document.getElementById('lib-search').value||'').toLowerCase();
-  const content=document.getElementById('lib-content');
-  if(!search) content.innerHTML='<div style="text-align:center;padding:20px;color:var(--t3);">⏳ Yükleniyor...</div>';
-  try{
-    const items=await TFDB.getAll();
-    renderLibrary(items,search);
-  }catch(e){
-    // IndexedDB başarısız olursa localStorage fallback dene
-    try{
-      const items=[];
-      for(let i=0;i<localStorage.length;i++){
-        const k=localStorage.key(i);
-        if(k&&k.startsWith('lib_')){
-          try{const v=JSON.parse(localStorage.getItem(k));if(v)items.push(v);}catch(_){}
-        }
-      }
-      renderLibrary(items,search);
-    }catch(e2){
-      content.innerHTML='<div id="lib-empty">Kütüphane yüklenemedi.<br/><small>'+e.message+'</small></div>';
-    }
-  }
-}
-async function openLibTest(key){
-  try{
-    const items=await TFDB.getAll();
-    const item=items.find(v=>v.key===key);
-    if(!item)return;
-    currentHtml=item.html;loadPreviewIframe();showPreview();
-    document.getElementById('tab-upload').classList.add('active');
-    document.getElementById('tab-library').classList.remove('active');
-  }catch(e){alert('Test açılamadı.');}
-}
-async function exportLibTest(key){
-  try{
-    const items=await TFDB.getAll();
-    const item=items.find(v=>v.key===key);
-    if(!item)return;
-    const blob=new Blob([item.html],{type:'text/html'});const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');a.href=url;a.download=(item.title||'test')+'.html';
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url),5000);
-  }catch(e){alert('Dışa aktarma başarısız.');}
-}
-async function delLibTest(key){
-  if(!confirm('Bu testi silmek istiyor musunuz?'))return;
-  await TFDB.delete(key);loadLibrary();
-}
-async function clearStorage(){
-  if(!confirm('Tüm veriler silinecek. Emin misiniz?'))return;
-  await TFDB.clearAll();alert('✅ Temizlendi!');loadLibrary();
-}
-
-if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(regs=>{regs.forEach(reg=>reg.unregister());});}
 </script>
 </body>
 </html>
